@@ -1,0 +1,53 @@
+﻿@model BookApp.Models.AddBookViewModel
+
+@{
+    ViewData["Title"] = "Add book";
+}
+
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/AddBook.css" asp-append-version="true" />
+    <script src="https://kit.fontawesome.com/de6521028c.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    @*Add book title*@
+
+    @using (Html.BeginForm("AddBookTitle", "AddBook", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="BookInformation">
+            <h1 class="AddTitle">Add book title</h1>
+
+            @Html.TextBoxFor(model => model.Title, new { id = "AddBookTitle", placeholder = "Enter book title...", @class = "TitleInput" })
+
+            @*<input type="text" class="TitleInput" id="AddTitle" placeholder="Enter book title..."/>*@
+
+            @* Add author *@
+            <h1 class="AddAuthor">Add author name</h1>
+            <input type="text" class="AuthorInput" id="AddAuthor" placeholder="Enter author name..." />
+
+            @* Add category *@
+
+            <h1 class="AddCategory">Add category</h1>
+            <div class="dropdown">
+                <label for="category-options"></label>
+                <button class="fa-solid fa-plus"></button>
+                <select name="category-options" id="category-options">
+                    <option value="SelectCategory">Select a category</option>
+                    <option value="WantToRead">Want to read</option>
+                    <option value="CurrentlyReading">Currently reading</option>
+                    <option value="Read">Read</option>
+                </select>
+
+            </div>
+
+
+        </div>
+
+        <button type="submit" class="AddBookButton">Add book</button>
+    }
+
+</body>
+</html>
