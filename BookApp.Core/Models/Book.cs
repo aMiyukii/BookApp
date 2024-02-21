@@ -1,6 +1,6 @@
-﻿namespace BookApp.Core
+﻿namespace BookApp.Core.Models
 {
-    public class Class1
+    public class Book
     {
 
     }

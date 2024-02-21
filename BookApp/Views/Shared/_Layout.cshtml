@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BookApp.styles.css" asp-append-version="true" />
+    <script src="https://kit.fontawesome.com/de6521028c.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -20,25 +21,39 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Your library</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="AddBook" asp-action="Index">Add book</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="AddCategory" asp-action="Index">Add category</a>
                         </li>
                     </ul>
+                    <form class="d-flex">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input class="searchbar" type="search" placeholder="Search book" aria-label="Search">
+                    </form>
                 </div>
             </div>
         </nav>
+
+        <p class="title">@ViewData["Title"]</p>
+
     </header>
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
+
+
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - BookApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - BookApp
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
