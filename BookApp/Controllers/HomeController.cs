@@ -1,4 +1,6 @@
-﻿using BookApp.Models;
+﻿using BookApp.Core.DTO;
+using BookApp.Data;
+using BookApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

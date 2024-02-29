@@ -1,4 +1,4 @@
-﻿@model BookApp.Models.AddBookViewModel
+﻿@model BookApp.Models.BookViewModel
 
 @{
     ViewData["Title"] = "Add book";
@@ -19,8 +19,9 @@
 
         <div class="BookInformation">
             <h1 class="AddTitle">Add book title</h1>
+            <input type="text" class="TitleInput" id="TitleInput" placeholder="Enter book title..." />
 
-            @Html.TextBoxFor(model => model.Title, new { id = "AddBookTitle", placeholder = "Enter book title...", @class = "TitleInput" })
+            @*@Html.TextBoxFor(model => model.Title, new { id = "AddBookTitle", placeholder = "Enter book title...", @class = "TitleInput" })*@
 
             @*<input type="text" class="TitleInput" id="AddTitle" placeholder="Enter book title..."/>*@
 

@@ -2,7 +2,7 @@
 
 namespace DAL
 {
-    public class DatabaseConnetion
+    public class DatabaseConnection
     {
         private SqlConnection connection;
 
@@ -14,9 +14,10 @@ namespace DAL
 
                 connection.Open();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new InvalidOperationException("Connection not working");
+                Console.WriteLine("Error opening connection: " + ex.Message);
+                throw new InvalidOperationException("Connection not working", ex);
             }
         }
 

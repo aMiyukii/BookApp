@@ -1,4 +1,8 @@
-﻿@{
+﻿@using BookApp.Core.Models
+@model List<Book>
+
+
+@{
     ViewData["Title"] = "Your library";
 }
 
@@ -8,7 +12,22 @@
 </head>
 
 <body>
-
+    <h2 class="Book-List">Book List</h2>
+    @if (Model != null && Model.Count > 0)
+    {
+        <div>
+            @foreach (var book in Model)
+            {
+                <div class="book-item">
+                    <strong>Book title:</strong> @book.Title<br />
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>No books available.</p>
+    }
 </body>
 </html>
 

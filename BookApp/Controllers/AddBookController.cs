@@ -2,11 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using BookApp.Core.Models;
+using BookApp.Data;
+using BookApp.Core.DTO;
 
 namespace BookApp.Controllers
 {
     public class AddBookController : Controller
     {
+
         public IActionResult Index()
         {
             return View();
@@ -14,13 +17,9 @@ namespace BookApp.Controllers
 
 
         [HttpPost]
-        public IActionResult AddBookTitle(AddBookViewModel addBookViewModel)
+        public IActionResult AddBookTitle(BookViewModel BookViewModel)
         {
-            var book = new Book
-            {
-                Title = addBookViewModel.Title
-            };
-
+           
             return RedirectToAction("Index", "Home");
         }
     }
