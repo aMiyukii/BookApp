@@ -1,7 +1,7 @@
 ﻿@model BookApp.Models.BookViewModel
 
 @{
-    ViewData["Title"] = "Add book";
+    ViewData["Title"] = "Add book to library";
 }
 
 <html>
@@ -11,25 +11,11 @@
 </head>
 
 <body>
-    @*Add book title*@
 
-    @using (Html.BeginForm("AddBookTitle", "AddBook", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="BookInformation">
-            <h1 class="AddTitle">Add book title</h1>
-            <input type="text" class="TitleInput" id="TitleInput" placeholder="Enter book title..." />
-
-            @*@Html.TextBoxFor(model => model.Title, new { id = "AddBookTitle", placeholder = "Enter book title...", @class = "TitleInput" })*@
-
-            @*<input type="text" class="TitleInput" id="AddTitle" placeholder="Enter book title..."/>*@
-
-            @* Add author *@
-            <h1 class="AddAuthor">Add author name</h1>
-            <input type="text" class="AuthorInput" id="AddAuthor" placeholder="Enter author name..." />
-
-            @* Add category *@
+    <form class="d-flex">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input class="searchbar" type="search" placeholder="Search book" aria-label="Search">
+    </form>
 
             <h1 class="AddCategory">Add category</h1>
             <div class="dropdown">
@@ -41,14 +27,9 @@
                     <option value="CurrentlyReading">Currently reading</option>
                     <option value="Read">Read</option>
                 </select>
-
             </div>
 
-
-        </div>
-
         <button type="submit" class="AddBookButton">Add book</button>
-    }
 
 </body>
 </html>

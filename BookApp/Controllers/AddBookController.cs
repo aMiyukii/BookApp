@@ -20,6 +20,8 @@ namespace BookApp.Controllers
         public IActionResult AddBookTitle(BookViewModel BookViewModel)
         {
            
+
+
             return RedirectToAction("Index", "Home");
         }
     }
