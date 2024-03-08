@@ -27,6 +27,18 @@ body {
     background-color: lime;
 }
 
+.NameInput {
+    border-radius: 10px;
+    border: 0px;
+    width: 15%;
+    height: 39px;
+    box-shadow: 0 0 10px rgba(0, 42, 43, 0.2);
+    margin-top: 10px;
+    padding-left: 2%;
+    margin-left: 8.6%;
+}
+
+
 .AddCategoryButton {
     margin-top: 2%;
     margin-left: 10.2%;
