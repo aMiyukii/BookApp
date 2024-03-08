@@ -15,7 +15,7 @@ body {
     display: flex;
 }
 .searchbar {
-    width: 14%;
+    width: 40%;
     height: 35px;
     padding: 0 5% 0 2%;
     border: 1px solid #002a2b;
@@ -30,8 +30,8 @@ body {
     text-align: left;
     outline: none;
     padding-left: 35px;
+    margin-top: -8%;
     margin-left: 80%;
-    margin-top: -50px;
     position: relative;
 }
 
