@@ -12,46 +12,32 @@ body {
 .CategoryName {
     font-size: 18px;
     font-weight: 400;
-    margin-left: 200px;
+    margin-left: 9%;
     color: #002A2B;
-    margin-top: 60px;
+    margin-top: 57px;
 }
 
 .input-container {
-    margin-left: 290px;
+    margin-left: 20%;
     border-radius: 10px;
     padding: 10px;
     text-align: left;
-    margin-bottom: 10px;
 }
 .grid-item_add{
     background-color: lime;
 }
 
-.NameInput {
-    border-radius: 10px;
-    border: 0px;
-    top: 250px;
-    left: 168px;
-    width: 265px;
-    height: 39px;
-    box-shadow: 0 0 10px rgba(0, 42, 43, 0.1);
-    margin-top: 10px;
-    padding-left: 10px;
-    margin-left: 200px;
-}
-
 .AddCategoryButton {
-    margin-top: 75px;
-    margin-left: 230px;
-    width: 177px;
+    margin-top: 2%;
+    margin-left: 10.2%;
+    width: 8.5%;
     height: 40px;
     background-color: #efeff6;
     border-radius: 8px;
     border-color: transparent;
 }
 
-.card {
+/*.card {
     top: 250px;
     left: 832px;
     width: 375px;
@@ -60,3 +46,4 @@ body {
     border-radius: 12px;
     box-shadow: 0px 2px 10px rgba(3,3,3,0.1);
 }
+*/
