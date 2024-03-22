@@ -15,9 +15,9 @@ body {
     display: flex;
 }
 .searchbar {
-    width: 40%;
-    height: 35px;
-    padding: 0 5% 0 2%;
+    width: 20rem;
+    height: 2.5rem;
+    padding: 0 1% 0 2%;
     border: 1px solid #002a2b;
     box-sizing: border-box;
     border-radius: 100px;
@@ -29,19 +29,19 @@ body {
     line-height: 18px;
     text-align: left;
     outline: none;
-    padding-left: 35px;
-    margin-top: -8%;
-    margin-left: 80%;
-    position: relative;
+    margin-left: 95rem;
+    margin-top: -4rem;
+    position: absolute;
 }
 
-.fa-magnifying-glass {
+.fa-magnifying-glass:before {
     position: absolute;
-    left: 5px;
-    top: 50%;
     transform: translateY(-50%);
     color: #002a2b;
     cursor: pointer;
+    margin-left: 60.2rem;
+    margin-top: -0.4rem;
+    z-index: 1;
 }
 
 
@@ -70,7 +70,8 @@ body {
     line-height: 20px;
     position: absolute;
     margin-left: 8.5%;
-    padding-top: 0px
+    margin-top: 1.2rem;
+    padding-top: 0px;
 }
 
     .dropdown select {
@@ -113,7 +114,7 @@ body {
 }
 
 .AddBookButton {
-    margin-top: 19%;
+    margin-top: 8rem;
     margin-left: 38%;
     width: 25%;
     height: 40px;
