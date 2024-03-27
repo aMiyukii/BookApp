@@ -1,4 +1,4 @@
-﻿@model BookApp.Models.BookViewModel
+﻿@model List<BookApp.Core.Models.Book>
 
 @{
     ViewData["Title"] = "Add book to library";
@@ -17,18 +17,38 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input class="searchbar" type="search" placeholder="Search book" aria-label="Search">
             </form>
-        
+
             <h1 class="AddCategory">Add category</h1>
             <div class="dropdown">
                 <label for="category-options"></label>
-                <button class="fa-solid fa-plus"></button>
+                <i class="fa-solid fa-square-plus"></i>
+                <div class="dropdownClone" id="dropdownContainer">
                 <select name="category-options" id="category-options">
                     <option value="SelectCategory">Select a category</option>
                     <option value="WantToRead">Want to read</option>
                     <option value="CurrentlyReading">Currently reading</option>
                     <option value="Read">Read</option>
                 </select>
+                </div>
             </div>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const addButton = document.querySelector('.fa-square-plus');
+
+                    addButton.addEventListener('click', function () {
+                        const dropdownContainer = document.getElementById('dropdownContainer');
+                        const clonedDropdown = dropdownContainer.cloneNode(true);
+                        const newContainer = document.createElement('div');
+                        newContainer.classList.add('dropdownClone');
+                        newContainer.appendChild(clonedDropdown);
+                        dropdownContainer.parentNode.appendChild(newContainer);
+                    });
+                });
+            </script>
+
+
+
+
 
         <button type="submit" class="AddBookButton">Add book</button>
         </div>
@@ -36,299 +56,20 @@
 @*             code needs to be added with list of excisting books 
                 Temporary placeholders
 *@
-            
-                <div class="BookList">
-                <div class="grid-item3">
-                    <div class="BookImage">
-                    <img src="~/Images/HarryPotterAndThePhilosophersStone_JK_Rowling.png" alt="book cover" class="BookImage" />
-                    </div>
-                    <div class="BookTitle">
-                        <p>Book Title</p>
-                    </div>
-                    <div class="BookAuthor">
-                        <p>Author</p>
-                    </div>
-                </div>
 
+            <div class="BookList">
+                @foreach (var book in Model)
+                {
                     <div class="grid-item3">
-                    <div class="BookImage">
-                    <img src="~/Images/HarryPotterAndThePrisonerOfAskaban_JK_Rowling.png" alt="book cover" class="BookImage" />
-                    </div>
-                    <div class="BookTitle">
-                        <p>Book Title</p>
-                    </div>
-                    <div class="BookAuthor">
-                        <p>Author</p>
-                    </div>
-                </div>
-
-                        <div class="grid-item3">
-                          <div class="BookImage">
-                        <img src="~/Images/TheWitcherTheLastWish_Andrzej_Sapkowski.png" alt="book cover" class="BookImage" />
-                        </div>
                         <div class="BookTitle">
-                            <p>Book Title</p>
+                            <p>@book.Title</p>
                         </div>
                         <div class="BookAuthor">
-                            <p>Author</p>
-                        </div>
-                </div>
-
-                                <div class="grid-item3">
-                        <div class="BookImage">
-                        <img src="~/Images/TheWitcherBloodOfElves_Andrzej_Sapkowski.png" alt="book cover" class="BookImage" />
-                        </div>
-                        <div class="BookTitle">
-                            <p>Book Title</p>
-                        </div>
-                        <div class="BookAuthor">
-                            <p>Author</p>
-                        </div>
-                </div>
-
-                <div class="grid-item3">
-                    <div class="BookImage">
-                        <img src="~/Images/HarryPotterAndThePhilosophersStone_JK_Rowling.png" alt="book cover" class="BookImage" />
-                    </div>
-                    <div class="BookTitle">
-                        <p>Book Title</p>
-                    </div>
-                    <div class="BookAuthor">
-                        <p>Author</p>
-                    </div>
-                </div>
-
-                <div class="grid-item3">
-                    <div class="BookImage">
-                        <img src="~/Images/HarryPotterAndThePrisonerOfAskaban_JK_Rowling.png" alt="book cover" class="BookImage" />
-                    </div>
-                    <div class="BookTitle">
-                        <p>Book Title</p>
-                    </div>
-                    <div class="BookAuthor">
-                        <p>Author</p>
-                    </div>
-                </div>
-
-                <div class="grid-item3">
-                    <div class="BookImage">
-                        <img src="~/Images/TheWitcherTheLastWish_Andrzej_Sapkowski.png" alt="book cover" class="BookImage" />
-                    </div>
-                    <div class="BookTitle">
-                        <p>Book Title</p>
-                    </div>
-                    <div class="BookAuthor">
-                        <p>Author</p>
-                    </div>
-                </div>
-
-                <div class="grid-item3">
-                    <div class="BookImage">
-                        <img src="~/Images/TheWitcherBloodOfElves_Andrzej_Sapkowski.png" alt="book cover" class="BookImage" />
-                    </div>
-                    <div class="BookTitle">
-                        <p>Book Title</p>
-                    </div>
-                    <div class="BookAuthor">
-                        <p>Author</p>
-                    </div>
-                </div>
-
-
-                <div class="BookList">
-                    <div class="grid-item3">
-                        <div class="BookImage">
-                            <img src="~/Images/HarryPotterAndThePhilosophersStone_JK_Rowling.png" alt="book cover" class="BookImage" />
-                        </div>
-                        <div class="BookTitle">
-                            <p>Book Title</p>
-                        </div>
-                        <div class="BookAuthor">
-                            <p>Author</p>
+                            <p>@book.Author</p>
                         </div>
                     </div>
-
-                    <div class="grid-item3">
-                        <div class="BookImage">
-                            <img src="~/Images/HarryPotterAndThePrisonerOfAskaban_JK_Rowling.png" alt="book cover" class="BookImage" />
-                        </div>
-                        <div class="BookTitle">
-                            <p>Book Title</p>
-                        </div>
-                        <div class="BookAuthor">
-                            <p>Author</p>
-                        </div>
-                    </div>
-
-                    <div class="grid-item3">
-                        <div class="BookImage">
-                            <img src="~/Images/TheWitcherTheLastWish_Andrzej_Sapkowski.png" alt="book cover" class="BookImage" />
-                        </div>
-                        <div class="BookTitle">
-                            <p>Book Title</p>
-                        </div>
-                        <div class="BookAuthor">
-                            <p>Author</p>
-                        </div>
-                    </div>
-
-                    <div class="grid-item3">
-                        <div class="BookImage">
-                            <img src="~/Images/TheWitcherBloodOfElves_Andrzej_Sapkowski.png" alt="book cover" class="BookImage" />
-                        </div>
-                        <div class="BookTitle">
-                            <p>Book Title</p>
-                        </div>
-                        <div class="BookAuthor">
-                            <p>Author</p>
-                        </div>
-                    </div>
-
-                    <div class="grid-item3">
-                        <div class="BookImage">
-                            <img src="~/Images/HarryPotterAndThePhilosophersStone_JK_Rowling.png" alt="book cover" class="BookImage" />
-                        </div>
-                        <div class="BookTitle">
-                            <p>Book Title</p>
-                        </div>
-                        <div class="BookAuthor">
-                            <p>Author</p>
-                        </div>
-                    </div>
-
-                    <div class="grid-item3">
-                        <div class="BookImage">
-                            <img src="~/Images/HarryPotterAndThePrisonerOfAskaban_JK_Rowling.png" alt="book cover" class="BookImage" />
-                        </div>
-                        <div class="BookTitle">
-                            <p>Book Title</p>
-                        </div>
-                        <div class="BookAuthor">
-                            <p>Author</p>
-                        </div>
-                    </div>
-
-                    <div class="grid-item3">
-                        <div class="BookImage">
-                            <img src="~/Images/TheWitcherTheLastWish_Andrzej_Sapkowski.png" alt="book cover" class="BookImage" />
-                        </div>
-                        <div class="BookTitle">
-                            <p>Book Title</p>
-                        </div>
-                        <div class="BookAuthor">
-                            <p>Author</p>
-                        </div>
-                    </div>
-
-                    <div class="grid-item3">
-                        <div class="BookImage">
-                            <img src="~/Images/TheWitcherBloodOfElves_Andrzej_Sapkowski.png" alt="book cover" class="BookImage" />
-                        </div>
-                        <div class="BookTitle">
-                            <p>Book Title</p>
-                        </div>
-                        <div class="BookAuthor">
-                            <p>Author</p>
-                        </div>
-                    </div>
-
-                    <div class="BookList">
-                        <div class="grid-item3">
-                            <div class="BookImage">
-                                <img src="~/Images/HarryPotterAndThePhilosophersStone_JK_Rowling.png" alt="book cover" class="BookImage" />
-                            </div>
-                            <div class="BookTitle">
-                                <p>Book Title</p>
-                            </div>
-                            <div class="BookAuthor">
-                                <p>Author</p>
-                            </div>
-                        </div>
-
-                        <div class="grid-item3">
-                            <div class="BookImage">
-                                <img src="~/Images/HarryPotterAndThePrisonerOfAskaban_JK_Rowling.png" alt="book cover" class="BookImage" />
-                            </div>
-                            <div class="BookTitle">
-                                <p>Book Title</p>
-                            </div>
-                            <div class="BookAuthor">
-                                <p>Author</p>
-                            </div>
-                        </div>
-
-                        <div class="grid-item3">
-                            <div class="BookImage">
-                                <img src="~/Images/TheWitcherTheLastWish_Andrzej_Sapkowski.png" alt="book cover" class="BookImage" />
-                            </div>
-                            <div class="BookTitle">
-                                <p>Book Title</p>
-                            </div>
-                            <div class="BookAuthor">
-                                <p>Author</p>
-                            </div>
-                        </div>
-
-                        <div class="grid-item3">
-                            <div class="BookImage">
-                                <img src="~/Images/TheWitcherBloodOfElves_Andrzej_Sapkowski.png" alt="book cover" class="BookImage" />
-                            </div>
-                            <div class="BookTitle">
-                                <p>Book Title</p>
-                            </div>
-                            <div class="BookAuthor">
-                                <p>Author</p>
-                            </div>
-                        </div>
-
-                        <div class="grid-item3">
-                            <div class="BookImage">
-                                <img src="~/Images/HarryPotterAndThePhilosophersStone_JK_Rowling.png" alt="book cover" class="BookImage" />
-                            </div>
-                            <div class="BookTitle">
-                                <p>Book Title</p>
-                            </div>
-                            <div class="BookAuthor">
-                                <p>Author</p>
-                            </div>
-                        </div>
-
-                        <div class="grid-item3">
-                            <div class="BookImage">
-                                <img src="~/Images/HarryPotterAndThePrisonerOfAskaban_JK_Rowling.png" alt="book cover" class="BookImage" />
-                            </div>
-                            <div class="BookTitle">
-                                <p>Book Title</p>
-                            </div>
-                            <div class="BookAuthor">
-                                <p>Author</p>
-                            </div>
-                        </div>
-
-                        <div class="grid-item3">
-                            <div class="BookImage">
-                                <img src="~/Images/TheWitcherTheLastWish_Andrzej_Sapkowski.png" alt="book cover" class="BookImage" />
-                            </div>
-                            <div class="BookTitle">
-                                <p>Book Title</p>
-                            </div>
-                            <div class="BookAuthor">
-                                <p>Author</p>
-                            </div>
-                        </div>
-
-                        <div class="grid-item3">
-                            <div class="BookImage">
-                                <img src="~/Images/TheWitcherBloodOfElves_Andrzej_Sapkowski.png" alt="book cover" class="BookImage" />
-                            </div>
-                            <div class="BookTitle">
-                                <p>Book Title</p>
-                            </div>
-                            <div class="BookAuthor">
-                                <p>Author</p>
-                            </div>
-                        </div>
-                </div>
+                }
+            </div>
 
             </div>
         </div>

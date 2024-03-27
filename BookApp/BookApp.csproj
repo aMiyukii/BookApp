@@ -7,11 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BookApp.Core\BookApp.Core.csproj" />
+    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Images\" />
+    <ProjectReference Include="..\BookApp.Core\BookApp.Core.csproj" />
+    <ProjectReference Include="..\BookApp.Data\BookApp.Data.csproj" />
   </ItemGroup>
 
 </Project>

@@ -9,20 +9,20 @@ namespace BookApp.Controllers
 {
     public class AddBookController : Controller
     {
+        private readonly BookDTO _bookDTO;
+
+
+        public AddBookController()
+        {
+            _bookDTO = new BookDTO();
+        }
 
         public IActionResult Index()
         {
-            return View();
+            var books = _bookDTO.GetAllBooks();
+            Console.WriteLine($"Number of books retrieved: {books.Count}");
+            return View(books);
         }
 
-
-        [HttpPost]
-        public IActionResult AddBookTitle(BookViewModel BookViewModel)
-        {
-           
-
-
-            return RedirectToAction("Index", "Home");
-        }
     }
 }

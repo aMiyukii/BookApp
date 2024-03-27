@@ -39,8 +39,8 @@ body {
     transform: translateY(-50%);
     color: #002a2b;
     cursor: pointer;
-    margin-left: 60.2rem;
-    margin-top: -0.4rem;
+    margin-left: 96rem;
+    margin-top: -2.7rem;
     z-index: 1;
 }
 
@@ -56,7 +56,7 @@ body {
 .dropdown {
     cursor: pointer;
     top: 16.7%;
-    width: 11.4%;
+    width: 14rem;
     height: 41px;
     padding: 0px 8px;
     border: 0;
@@ -68,15 +68,15 @@ body {
     font-size: 16px;
     font-family: "Poppins";
     line-height: 20px;
-    position: absolute;
-    margin-left: 8.5%;
-    margin-top: 1.2rem;
+    position: relative;
+    margin-left: 8rem;
+    margin-top: -2.5rem;
     padding-top: 0px;
 }
 
     .dropdown select {
-        position: absolute;
-        top: 27%;
+        position: relative;
+        top: -0.5rem;
         width: 100%;
         border: 0;
         outline: none;
@@ -87,7 +87,7 @@ body {
 
     .dropdown::after {
         content: '';
-        position: absolute;
+        position: relative;
         top: 0;
         left: 0;
         width: 100%;
@@ -105,17 +105,16 @@ body {
         line-height: 16px;
     }
 
-.fa-solid, .fas {
-    border-color: transparent;
-    background: transparent;
-    color: #002A2B;
-    margin-left: 106%;
-    margin-top: -7%;
+.fa-square-plus{
+    position: absolute;
+    font-size: 20px;
+    margin-left: 14rem;
+    margin-top: 0.7rem;
 }
 
 .AddBookButton {
-    margin-top: 8rem;
-    margin-left: 38%;
+    margin-top: 7rem;
+    margin-left: 9.8rem;
     width: 25%;
     height: 40px;
     background-color: #efeff6;
