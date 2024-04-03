@@ -11,7 +11,7 @@ using static System.Net.Mime.MediaTypeNames;
 namespace BookApp.Data
 {
     public class BookRepository
-    { 
+    {
         public int Id { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
@@ -20,7 +20,7 @@ namespace BookApp.Data
         public string Image { get; set; }
 
 
-    public BookRepository(int id, string title, string author, string genre, string serie, string image)
+        public BookRepository(int id, string title, string author, string genre, string serie, string image)
     {
         Id = id;
         Title = title;
@@ -38,7 +38,6 @@ namespace BookApp.Data
             Image = image;
         }
 
-
         public static List<BookRepository> GetBooksFromDatabase()
         {
             List<BookRepository> books = new List<BookRepository>();
@@ -49,7 +48,7 @@ namespace BookApp.Data
             {
                 using (SqlConnection connection = dbConnection.GetSqlConnection())
                 {
-                    string selectQuery = "SELECT id, title, author FROM dbo.book";
+                    string selectQuery = "SELECT id, title, author, image FROM dbo.book";
 
                     using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
                     {
@@ -57,10 +56,11 @@ namespace BookApp.Data
                         {
                             while (reader.Read())
                             {
-                                int id = reader.IsDBNull(reader.GetOrdinal("id")) ? 0 : reader.GetInt32(reader.GetOrdinal("id"));
-                                string title = reader.IsDBNull(reader.GetOrdinal("title")) ? null : reader.GetString(reader.GetOrdinal("title"));
-                                string author = reader.IsDBNull(reader.GetOrdinal("author")) ? null : reader.GetString(reader.GetOrdinal("author"));
-                                string image = reader.IsDBNull(reader.GetOrdinal("image")) ? null : reader.GetString(reader.GetOrdinal("image"));
+                                int id = Convert.ToInt32(reader["id"]);
+                                string title = reader["title"].ToString();
+                                string author = reader["author"].ToString();
+                                string image = reader["image"].ToString();
+
 
                                 BookRepository book = new BookRepository(id, title, author, image);
                                 books.Add(book);

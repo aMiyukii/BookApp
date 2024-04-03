@@ -6,23 +6,28 @@
     ViewData["Title"] = "Your library";
 }
 
+
+<!DOCTYPE html>
 <html>
 <head>
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
 </head>
-
 <body>
     <h2 class="Book-List">Book List</h2>
-    @if (Model != null && Model.Count > 0)
+
+    @if (ViewBag.ChosenBooks != null && ViewBag.ChosenBooks.Count > 0)
     {
-        <div>
-            @foreach (var book in Model)
-            {
-                <div class="book-item">
-                    @* <strong>Book title:</strong> @book.Title<br /> *@
+        foreach (var chosenBook in ViewBag.ChosenBooks)
+        {
+            <div class="chosen-book">
+                <img src="~/Images/@chosenBook.ImageUrl" class="book-image-chosen" />
+                <div class="book-details-chosen">
+                    <h3 class="book-title-chosen">@chosenBook.Title</h3>
+                    <p class="book-author-chosen">@chosenBook.Author</p>
                 </div>
-            }
-        </div>
+            </div>
+        }
     }
     else
     {
@@ -30,4 +35,3 @@
     }
 </body>
 </html>
-

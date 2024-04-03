@@ -25,12 +25,15 @@ namespace BookApp.Core.DTO
                     Author = bookData.Author,
                     Image = bookData.Image,
                 };
-                
 
                 books.Add(book);
             }
 
             return books;
         }
+
+
+
     }
 }
+

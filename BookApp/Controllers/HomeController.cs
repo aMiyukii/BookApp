@@ -15,8 +15,13 @@ namespace BookApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        [HttpGet("/")]
+        public IActionResult Index(string chosenBookId, string chosenBookTitle, string chosenBookAuthor)
         {
+            ViewBag.ChosenBookId = chosenBookId;
+            ViewBag.ChosenBookTitle = chosenBookTitle;
+            ViewBag.ChosenBookAuthor = chosenBookAuthor;
+
             return View();
         }
 

@@ -17,6 +17,7 @@ namespace BookApp.Controllers
             _bookDTO = new BookDTO();
         }
 
+        [HttpGet("/addbook")]
         public IActionResult Index()
         {
             var books = _bookDTO.GetAllBooks();
@@ -24,5 +25,10 @@ namespace BookApp.Controllers
             return View(books);
         }
 
+        [HttpPost("/Home/Index")]
+        public ActionResult SaveBook(string chosenBookId)
+        {
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
