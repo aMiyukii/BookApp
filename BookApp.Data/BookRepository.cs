@@ -7,43 +7,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
+using BookApp.Core.DTO;
+using BookApp.Core.Models;
 
 namespace BookApp.Data
 {
     public class BookRepository
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Author { get; set; }
-        public string Genre { get; set; }
-        public string Serie { get; set; }
-        public string Image { get; set; }
-
-
-        public BookRepository(int id, string title, string author, string genre, string serie, string image)
-    {
-        Id = id;
-        Title = title;
-        Author = author;
-        Genre = genre;
-        Serie = serie;
-        Image = image;
-    }
-
-        public BookRepository(int id, string title, string author, string image)
+        public List<BookDTO> GetAll()
         {
-            Id = id;
-            Title = title;
-            Author = author;
-            Image = image;
-        }
-
-        public static List<BookRepository> GetBooksFromDatabase()
-        {
-            List<BookRepository> books = new List<BookRepository>();
+            BookDTO bookDTO = new BookDTO();
+            
+            List<BookDTO> books = new List<BookDTO>();
             DatabaseConnection dbConnection = new DatabaseConnection();
             dbConnection.OpenConnection();
-
+            
             try
             {
                 using (SqlConnection connection = dbConnection.GetSqlConnection())
@@ -61,8 +39,7 @@ namespace BookApp.Data
                                 string author = reader["author"].ToString();
                                 string image = reader["image"].ToString();
 
-
-                                BookRepository book = new BookRepository(id, title, author, image);
+                                BookDTO book = new BookDTO(id, title, author, image);
                                 books.Add(book);
                             }
                         }
@@ -79,10 +56,6 @@ namespace BookApp.Data
             }
 
             return books;
-        }
-
+        } 
     }
 }
-
-
-

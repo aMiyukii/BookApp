@@ -9,9 +9,12 @@
         public string Serie { get; set; }
         public string Image { get; set; }
 
+        //methodes bijdoen (gedrag)
+
         public Book()
         {
 
         }
+
     }
 }
