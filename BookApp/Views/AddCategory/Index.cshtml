@@ -52,14 +52,13 @@
 
     </div>
     
-    <!-- Edit Category Popup -->
     <div id="editCategoryModal" class="modal">
-        <div class="modal-content">
+        <div class="modalContent">
             <span class="close" onclick="closeEditPopup()">&times;</span>
             <h2>Edit Category</h2>
             <input type="hidden" id="editCategoryId">
-            <input type="text" id="editedCategoryName">
-            <button onclick="saveEditedCategory()">Save</button>
+            <input type="text" id="editedCategoryName" class="editCategoryInput">
+            <button onclick="saveEditedCategory()" class="saveButton">Save</button>
         </div>
     </div>
 

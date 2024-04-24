@@ -61,10 +61,8 @@ namespace BookApp.Controllers
         [HttpPost]
         public ActionResult UpdateCategoryName(int id, string name)
         {
-            // Update the category name in the database using the id
             categoryRepository.UpdateCategoryName(id, name);
 
-            // Return success response
             return Json(new { success = true, message = "Category updated successfully" });
         }
 
