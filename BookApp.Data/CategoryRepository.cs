@@ -123,4 +123,36 @@
                 }
             }
 
+            public void UpdateCategoryName(int id, string name)
+            {
+                DatabaseConnection dbConnection = new DatabaseConnection();
+                dbConnection.OpenConnection();
+
+                try
+                {
+                    using (SqlConnection connection = dbConnection.GetSqlConnection())
+                    {
+                        string updateQuery = "UPDATE dbo.category SET name = @name WHERE id = @id";
+
+                        using (SqlCommand cmd = new SqlCommand(updateQuery, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@name", name);
+                            cmd.Parameters.AddWithValue("@id", id);
+
+                            cmd.ExecuteNonQuery();
+                            Console.WriteLine("Category name updated successfully.");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    dbConnection.CloseConnection();
+                }
+            }
+
+
     }

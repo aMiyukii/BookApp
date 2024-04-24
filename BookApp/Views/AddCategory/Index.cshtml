@@ -37,12 +37,11 @@
             <p class="categorytype">Your Categories</p>
             @foreach (var categoryDTO in Model.Categories.Where(c => c.IsStandard == false))
             {
-                <p class="categoryNames">@categoryDTO.Name</p>
+                <p id="categoryName_@categoryDTO.Id" class="categoryNames">@categoryDTO.Name</p>
                 <div class="Icons">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                    <i class="fa-solid fa-trash-can" onclick="deleteCategory(@categoryDTO.Id)"></i>
+                    <i class="fa-solid fa-pen-to-square" onclick="openEditPopup('@categoryDTO.Id', '@categoryDTO.Name')"></i>
+                    <i class="fa-solid fa-trash-can" onclick="deleteCategory('@categoryDTO.Id')"></i>
                 </div>
-
                 <hr class="line">
             }
         }
@@ -53,7 +52,53 @@
 
     </div>
     
+    <!-- Edit Category Popup -->
+    <div id="editCategoryModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditPopup()">&times;</span>
+            <h2>Edit Category</h2>
+            <input type="hidden" id="editCategoryId">
+            <input type="text" id="editedCategoryName">
+            <button onclick="saveEditedCategory()">Save</button>
+        </div>
+    </div>
+
     <script>
+        function openEditPopup(categoryId, categoryName) {
+            document.getElementById('editCategoryId').value = categoryId;
+            document.getElementById('editedCategoryName').value = categoryName;
+            document.getElementById('editCategoryModal').style.display = 'block';
+        }
+
+        function closeEditPopup() {
+            document.getElementById('editCategoryModal').style.display = 'none';
+        }
+
+        // Save Edited Category
+        function saveEditedCategory() {
+            var categoryId = document.getElementById('editCategoryId').value;
+            var editedCategoryName = document.getElementById('editedCategoryName').value;
+
+            $.ajax({
+                url: '@Url.Action("UpdateCategoryName", "AddCategory")',
+                type: 'POST',
+                data: { id: categoryId, name: editedCategoryName },
+                success: function (result) {
+                    if (result.success) {
+                        closeEditPopup();
+                        location.reload();
+                    } else {
+                        alert(result.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert('An error occurred while updating the category.');
+                }
+            });
+        }
+        
+        // Delete Category
         function deleteCategory(categoryId) {
             if (confirm('Are you sure you want to delete this category?')) {
                 $.ajax({
@@ -61,7 +106,11 @@
                     type: 'POST',
                     data: { id: categoryId },
                     success: function (result) {
-                        location.reload();
+                        if (result.success) {
+                            location.reload();
+                        } else {
+                            alert(result.message);
+                        }
                     },
                     error: function (xhr, status, error) {
                         console.error(xhr.responseText);
@@ -71,6 +120,5 @@
             }
         }
     </script>
-
-    </body>
+</body>
 </html>
