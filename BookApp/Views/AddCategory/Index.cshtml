@@ -1,4 +1,5 @@
-﻿@{
+﻿@model BookApp.Models.CategoryViewModel
+@{
     ViewData["Title"] = "Add category";
 }
 
@@ -8,13 +9,31 @@
 </head>
 
 <body>
+    @using (Html.BeginForm("AddCategoryName", "AddCategory", FormMethod.Post))
+    {
+        <div class="CategoryInformation">
+            <h1 class="CategoryName">Add category name</h1>
+            @Html.AntiForgeryToken()
+            @Html.TextBoxFor(model => model.Name, new { id = "AddPatternName", placeholder = "Enter category name..." })
+        </div>
 
-    <div class="CategoryInformation">
-        <h1 class="CategoryName">Add category name</h1>
-
-        <input type="text" class="NameInput" id="AddTitle" placeholder="Enter category name..." />
+        <button type="submit" class="AddCategoryButton">Add category</button>
+    }
+    
+    <div class="Categories">
+        @if (Model.Categories != null)
+        {
+            @foreach (var categoryDTO in Model.Categories)
+            {
+                <p>@categoryDTO.Name</p>
+            }
+        }
+        else
+        {
+            <p>No categories available</p>
+        }
     </div>
 
-    <button action="submit" class="AddCategoryButton">Add category</button>
+
 </body>
 </html>

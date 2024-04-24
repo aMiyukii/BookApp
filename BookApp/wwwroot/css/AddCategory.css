@@ -27,7 +27,7 @@ body {
     background-color: lime;
 }
 
-.NameInput {
+#AddPatternName {
     border-radius: 10px;
     border: 0px;
     width: 15%;
@@ -49,13 +49,13 @@ body {
     border-color: transparent;
 }
 
-/*.card {
-    top: 250px;
-    left: 832px;
-    width: 375px;
-    height: 426px;
+.Categories {
     background-color: #fafafa;
     border-radius: 12px;
     box-shadow: 0px 2px 10px rgba(3,3,3,0.1);
+    width: 30%;
+    height: 600px;
+    max-height: 600px;
+    margin-top: -8%;
+    margin-left: 60%;
 }
-*/
