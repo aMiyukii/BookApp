@@ -12,11 +12,15 @@ namespace BookApp.Core.DTO
         public string Name { get; set; }
         public bool IsStandard { get; set; }
 
-        public CategoryDTO()
+        public CategoryDTO() { }
+
+        // Constructor with parameters
+        public CategoryDTO(int id, string name, bool isStandard)
         {
-
+            Id = id;
+            Name = name;
+            IsStandard = isStandard;
         }
-
-        public CategoryDTO(int id, string name) { Id = id ; Name = name; }
     }
 }
+
