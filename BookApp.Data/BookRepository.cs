@@ -12,32 +12,6 @@ namespace BookApp.Data
 {
     public class BookRepository
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Author { get; set; }
-        public string Genre { get; set; }
-        public string Serie { get; set; }
-        public string Image { get; set; }
-
-
-        public BookRepository(int id, string title, string author, string genre, string serie, string image)
-    {
-        Id = id;
-        Title = title;
-        Author = author;
-        Genre = genre;
-        Serie = serie;
-        Image = image;
-    }
-
-        public BookRepository(int id, string title, string author, string image)
-        {
-            Id = id;
-            Title = title;
-            Author = author;
-            Image = image;
-        }
-
         public static List<BookRepository> GetBooksFromDatabase()
         {
             List<BookRepository> books = new List<BookRepository>();
@@ -80,7 +54,6 @@ namespace BookApp.Data
 
             return books;
         }
-
     }
 }
 

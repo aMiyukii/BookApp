@@ -3,8 +3,8 @@
     @{
         ViewData["Title"] = "Add book to library";
     }
-   
-    <html>
+
+<html>
     <head>
         <link rel="stylesheet" href="~/css/AddBook.css" asp-append-version="true" />
         <script src="https://kit.fontawesome.com/de6521028c.js" crossorigin="anonymous"></script>
@@ -51,11 +51,11 @@
                     });
                 </script>
 
-                @using (Html.BeginForm("SaveBook", "AddBook", FormMethod.Post))
-                {
-                <input type="hidden" id="chosenBookId" name="chosenBookId" value="" />
-                    <button type="submit" class="AddBookButton">Add book</button>
 
+            @using (Html.BeginForm("SaveCopy", "AddBook", FormMethod.Post))
+            {
+                <input type="hidden" id="chosenBookId" name="chosenBookId" value="id" />
+                    <button type="submit" class="AddBookButton">Add book</button>
                 }
 
         
@@ -85,26 +85,26 @@
                     var clickedElement = event.target.closest('.grid-item3');
                     if (clickedElement) {
                         var title = clickedElement.querySelector('.BookTitle p').textContent;
-                        var author = clickedElement.querySelector('.BookAuthor p').textContent;
-                        displayChosenBook(title, author);
+                        var author = clickedElement.querySelector('.BookAuthor p').textContent; var id = clickedElement.dataset.bookId;
+                    displayChosenBook(title, author, id);
                     }
                 }
 
-            function displayChosenBook(title, author, id) {
-                var chosenBookTitle = document.getElementById('chosenTitle');
-                var chosenBookAuthor = document.getElementById('chosenAuthor');
-                var chosenBookImage = document.querySelector('.bookImagechosen');
-                var chosenBookIdInput = document.getElementById('chosenBookId');
+                function displayChosenBook(title, author, id) {
+                    var chosenBookTitle = document.getElementById('chosenTitle');
+                    var chosenBookAuthor = document.getElementById('chosenAuthor');
+                    var chosenBookImage = document.querySelector('.bookImagechosen');
+                    var chosenBookIdInput = document.getElementById('chosenBookId');
 
-                chosenBookTitle.textContent = title;
-                chosenBookAuthor.textContent = author;
-                chosenBookIdInput.value = id;
+                    chosenBookTitle.textContent = title;
+                    chosenBookAuthor.textContent = author;
+                    chosenBookIdInput.value = id;
 
-                if (title !== "" && author !== "") {
-                    chosenBookImage.style.display = "block";
-                } else {
-                    chosenBookImage.style.display = "none";
-                }
+                    if (title !== "" && author !== "") {
+                        chosenBookImage.style.display = "block";
+                    } else {
+                        chosenBookImage.style.display = "none";
+                    }
             }
 
             </script>

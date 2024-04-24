@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookApp.Core.Models
+namespace BookApp.Core.DTO
 {
-    public class Category
+    public class CategoryDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public bool IsStandard { get; set; }
 
-        public Category() { }
+        public CategoryDTO() { }
 
-        public Category(int id, string name)
+        public CategoryDTO(int id, string name)
         {
             Id = id;
             Name = name;

@@ -10,30 +10,24 @@ namespace BookApp.Core.DTO
 {
     public class BookDTO
     {
-        public List<Book> GetAllBooks()
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public string Genre { get; set; }
+        public string Serie { get; set; }
+        public string Image { get; set; }
+
+        public BookDTO() { }
+
+        public BookDTO(int id) { Id = id; }
+
+        public BookDTO(int id, string title, string author, string image)
         {
-            List<Book> books = new List<Book>();
-
-            List<BookRepository> bookDataList = BookRepository.GetBooksFromDatabase();
-
-            foreach (var bookData in bookDataList)
-            {
-                Book book = new Book
-                {
-                    Id = bookData.Id,
-                    Title = bookData.Title,
-                    Author = bookData.Author,
-                    Image = bookData.Image,
-                };
-
-                books.Add(book);
-            }
-
-            return books;
+            Id = id;
+            Title = title;
+            Author = author;
+            Image = image;
         }
-
-
-
     }
 }
 

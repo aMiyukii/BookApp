@@ -26,8 +26,15 @@ namespace BookApp.Controllers
         }
 
         [HttpPost("/Home/Index")]
-        public ActionResult SaveBook(string chosenBookId)
+        public ActionResult SaveCopy(string chosenBookId)
         {
+            var bookDTO = new BookDTO();
+
+            if (!string.IsNullOrEmpty(chosenBookId))
+            {
+                Console.WriteLine($"Book chosen title: {bookDTO.Title}");
+            }
+
             return RedirectToAction("Index", "Home");
         }
     }

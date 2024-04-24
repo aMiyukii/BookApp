@@ -35,5 +35,13 @@ namespace DAL
                 connection.Close();
             }
         }
+
+        public void UploadData(SqlCommand uploadCommand)
+        {
+            connection.Open();
+            uploadCommand.Connection = connection;
+            uploadCommand.ExecuteNonQuery();
+            connection.Close();
+        }
     }
 }

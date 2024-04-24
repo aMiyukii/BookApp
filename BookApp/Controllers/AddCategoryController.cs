@@ -8,5 +8,11 @@ namespace BookApp.Controllers
         {
             return View();
         }
+
+        public ActionResult AddCategory()
+        {
+
+            return View();
+        }
     }
 }
