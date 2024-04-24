@@ -93,4 +93,34 @@
             }
 
 
+            public void DeleteCategory(int id)
+            {
+                DatabaseConnection dbConnection = new DatabaseConnection();
+                dbConnection.OpenConnection();
+
+                try
+                {
+                    using (SqlConnection connection = dbConnection.GetSqlConnection())
+                    {
+                        string deleteQuery = "DELETE FROM dbo.category WHERE id = @id";
+
+                        using (SqlCommand cmd = new SqlCommand(deleteQuery, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@id", id);
+
+                            cmd.ExecuteNonQuery();
+                            Console.WriteLine("Category deleted successfully.");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    dbConnection.CloseConnection();
+                }
+            }
+
     }

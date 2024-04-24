@@ -50,6 +50,14 @@ namespace BookApp.Controllers
 
             return View("Index");
         }
+            
+        [HttpPost]
+        public ActionResult DeleteCategory(int id)
+        {
+            categoryRepository.DeleteCategory(id);
+            return Json(new { success = true, message = "Category deleted successfully" });
+        }
+
 
 
     }

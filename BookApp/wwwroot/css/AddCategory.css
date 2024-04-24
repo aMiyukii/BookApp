@@ -59,3 +59,38 @@ body {
     margin-top: -8%;
     margin-left: 60%;
 }
+
+.categoryNames{
+    margin-left: 1%;
+}
+
+.categorytype{
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 1%;
+}
+
+.Icons{
+    position: absolute;
+    margin-top: -2.1%;
+    margin-left: 26%;
+}
+
+.line{
+    width: 97%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.fa-trash-can{
+    margin-left: 70%;
+    margin-top: 0.2em;
+    position: absolute;
+}
+
+.fa-pen-to-square:hover{
+    color: #73B3CE;
+}
+
+.fa-trash-can:hover {
+    color: red;
+}
