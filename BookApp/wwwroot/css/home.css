@@ -2,5 +2,37 @@
 
 
 body {
-    font-family: "Poppins", sans-serif;
+    color: #030303;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10%, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.grid-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+
+.BookImage img {
+    width: 100%;
+    height: auto;
+}
+
+.BookTitle{
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.BookAuthor{
+    margin-top: -1EM;
+    font-size: 14px;
 }

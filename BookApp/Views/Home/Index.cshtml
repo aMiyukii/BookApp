@@ -9,14 +9,24 @@
 <head>
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h2 class="Book-List">Book List</h2>
-    <ul>
+    <div class="grid-container">
         @foreach (var book in Model.Books)
         {
-            <li>@book.Title - @book.Author</li>
+            <div class="grid-item">
+                <div class="BookImage">
+                    <img src="~/Images/HarryPotterAndThePrisonerOfAskaban_JK_Rowling.png" class="BookImage"/>
+                </div>
+                <div class="BookTitle">
+                    <p>@book.Title</p>
+                </div>
+                <div class="BookAuthor">
+                    <p>@book.Author</p>
+                </div>
+            </div>
         }
-    </ul>
+    </div>
 </body>
 </html>

@@ -11,11 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9ddb3a06-5db6-4567-a199-9c738edfdec0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Data/BookRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Data/BookRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp/Controllers/AddBookController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Controllers/AddBookController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Controllers/HomeController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp/Views/AddBook/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Views/AddBook/Index.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BookApp/Views/Home/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Views/Home/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/wwwroot/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/wwwroot/css/home.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +46,7 @@
     ".NET Launch Settings Profile.BookApp: http.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "saveBook__Database",
+    "git-widget-placeholder": "Book-CRUD",
     "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
