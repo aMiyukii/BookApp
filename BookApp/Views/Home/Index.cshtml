@@ -1,11 +1,8 @@
-﻿@using BookApp.Core.Models
-@model List<Book>
-
+﻿@model BookApp.Models.LibraryViewModel
 
 @{
-    ViewData["Title"] = "Your library";
+    ViewData["Title"] = "Your Library";
 }
-
 
 <!DOCTYPE html>
 <html>
@@ -15,23 +12,11 @@
 </head>
 <body>
     <h2 class="Book-List">Book List</h2>
-
-    @if (ViewBag.ChosenBooks != null && ViewBag.ChosenBooks.Count > 0)
-    {
-        foreach (var chosenBook in ViewBag.ChosenBooks)
+    <ul>
+        @foreach (var book in Model.Books)
         {
-            <div class="chosen-book">
-                <img src="~/Images/@chosenBook.ImageUrl" class="book-image-chosen" />
-                <div class="book-details-chosen">
-                    <h3 class="book-title-chosen">@chosenBook.Title</h3>
-                    <p class="book-author-chosen">@chosenBook.Author</p>
-                </div>
-            </div>
+            <li>@book.Title - @book.Author</li>
         }
-    }
-    else
-    {
-        <p>No books available.</p>
-    }
+    </ul>
 </body>
 </html>

@@ -1,20 +1,20 @@
 ﻿using BookApp.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.FileSystemGlobbing.Internal;
-using BookApp.Core.Models;
+using Microsoft.Extensions.Logging; // Import the namespace for ILogger
 using BookApp.Data;
 using BookApp.Core.DTO;
-using BookApp.Models;
 
 namespace BookApp.Controllers
 {
     public class AddBookController : Controller
     {
         private readonly BookRepository bookRepository;
+        private readonly ILogger<AddBookController> logger;
 
-        public AddBookController()
+        public AddBookController(ILogger<AddBookController> logger)
         {
             bookRepository = new BookRepository();
+            this.logger = logger;
         }
 
         [HttpGet("/addbook")]
@@ -24,19 +24,19 @@ namespace BookApp.Controllers
 
             var addBookViewModel = new AddBookViewModel(booksDTO.ToList());
 
-            Console.WriteLine($"Number of books retrieved: {addBookViewModel.Books.Count}");
+            logger.LogInformation($"Number of books retrieved: {addBookViewModel.Books.Count}");
             return View(addBookViewModel);  
         }
 
-
-
-
-
-        [HttpPost("/Home/Index")]
-        public ActionResult SaveBook(AddBookViewModel chosenBook)
+        [HttpPost("/AddBook/SaveBook")]
+        public ActionResult SaveBook(int chosenBookId)
         {
+            var bookTitle = bookRepository.GetBookTitleById(chosenBookId);
+            logger.LogInformation($"Book added: {bookTitle}");
+
+            bookRepository.AddBookToUserCollection(chosenBookId);
+
             return RedirectToAction("Index", "Home");
         }
-
     }
 }

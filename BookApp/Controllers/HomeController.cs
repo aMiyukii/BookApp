@@ -3,27 +3,35 @@ using BookApp.Data;
 using BookApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using BookApp.Core.Models;
 
 namespace BookApp.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly BookRepository bookRepository;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            bookRepository = new BookRepository();
         }
-
-        [HttpGet("/")]
-        public IActionResult Index(string chosenBookId, string chosenBookTitle, string chosenBookAuthor)
+        public IActionResult Index()
         {
-            ViewBag.ChosenBookId = chosenBookId;
-            ViewBag.ChosenBookTitle = chosenBookTitle;
-            ViewBag.ChosenBookAuthor = chosenBookAuthor;
+            var booksInLibrary = bookRepository.GetBooksInLibrary();
+            var libraryViewModel = new LibraryViewModel
+            {
+                Books = booksInLibrary.Select(book => new BookViewModel
+                {
+                    Title = book.Title,
+                    Author = book.Author,
+                }).ToList()
+            };
 
-            return View();
+            return View(libraryViewModel);
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

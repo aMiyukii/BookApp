@@ -72,34 +72,28 @@
         </div>
 
 
-        <script>
-            function handleBookClick(event) {
-                var clickedElement = event.target.closest('.grid-item3');
-                if (clickedElement) {
-                    var id = clickedElement.dataset.bookId;
-                    var title = clickedElement.querySelector('.BookTitle p').textContent;
-                    var author = clickedElement.querySelector('.BookAuthor p').textContent;
-                    displayChosenBook(title, author, id);
-                }
-            }
+<script>
+    function handleBookClick(event) {
+        var clickedElement = event.target.closest('.grid-item3');
+        if (clickedElement) {
+            var id = clickedElement.dataset.bookId;
+            var title = clickedElement.querySelector('.BookTitle p').textContent;
+            var author = clickedElement.querySelector('.BookAuthor p').textContent;
+            displayChosenBook(title, author, id);
+        }
+    }
 
-            function displayChosenBook(title, author, id) {
-                var chosenBookTitle = document.getElementById('chosenTitle');
-                var chosenBookAuthor = document.getElementById('chosenAuthor');
-                var chosenBookImage = document.querySelector('.bookImagechosen');
-                var chosenBookIdInput = document.getElementById('chosenBookId');
+    function displayChosenBook(title, author, id) {
+        var chosenBookTitle = document.getElementById('chosenTitle');
+        var chosenBookAuthor = document.getElementById('chosenAuthor');
+        var chosenBookIdInput = document.getElementById('chosenBookId');
 
-                chosenBookTitle.textContent = title;
-                chosenBookAuthor.textContent = author;
-                chosenBookIdInput.value = id;
+        chosenBookTitle.textContent = title;
+        chosenBookAuthor.textContent = author;
+        chosenBookIdInput.value = id;
+    }
+</script>
 
-                if (title !== "" && author !== "") {
-                    chosenBookImage.style.display = "block";
-                } else {
-                    chosenBookImage.style.display = "none";
-                }
-            }
-        </script>
 
         <div class="chosenbook">
             <img src="~/Images/HarryPotterAndThePrisonerOfAskaban_JK_Rowling.png" class="bookImagechosen" style="display: none;" />

@@ -57,5 +57,111 @@ namespace BookApp.Data
 
             return books;
         } 
+        
+        public string GetBookTitleById(int bookId)
+        {
+            string title = null;
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            dbConnection.OpenConnection();
+
+            try
+            {
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
+                {
+                    string selectQuery = "SELECT title FROM dbo.book WHERE id = @id";
+
+                    using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@id", bookId);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                title = reader["title"].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error fetching book title from the database: " + ex.Message);
+            }
+            finally
+            {
+                dbConnection.CloseConnection();
+            }
+
+            return title;
+        }
+        
+        public void AddBookToUserCollection(int bookId)
+        {
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            dbConnection.OpenConnection();
+
+            try
+            {
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
+                {
+                    string insertQuery = "INSERT INTO user_book (book_id) VALUES (@bookId)";
+
+                    using (SqlCommand cmd = new SqlCommand(insertQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@bookId", bookId);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error adding book to user collection: " + ex.Message);
+            }
+            finally
+            {
+                dbConnection.CloseConnection();
+            }
+        }
+        
+        public List<Book> GetBooksInLibrary()
+        {
+            List<Book> books = new List<Book>();
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            dbConnection.OpenConnection();
+
+            try
+            {
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
+                {
+                    string selectQuery = "SELECT title, author FROM user_book JOIN book ON user_book.book_id = book.id";
+
+                    using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string title = reader["title"].ToString();
+                                string author = reader["author"].ToString();
+
+                                Book book = new Book { Title = title, Author = author };
+                                books.Add(book);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error fetching books from the library: " + ex.Message);
+            }
+            finally
+            {
+                dbConnection.CloseConnection();
+            }
+
+            return books;
+        }
     }
 }
