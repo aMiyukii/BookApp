@@ -1,14 +1,15 @@
-﻿using BookApp.Core.Models;
+﻿using BookApp.Core.DTO;
 using Microsoft.AspNetCore.Mvc;
 using BookApp.Models;
 using BookApp.Data;
 using BookApp.Core.Models;
-using BookApp.Core.DTO;
+using System.Collections.Generic;
+using BookApp.Models;
 
 namespace BookApp.Controllers
 {
     public class AddCategoryController : Controller
-    {      
+    {
         private readonly CategoryRepository categoryRepository;
 
         public AddCategoryController()
@@ -17,55 +18,31 @@ namespace BookApp.Controllers
         }
 
         public IActionResult Index()
-        {
+        {   
             var categories = categoryRepository.GetAllCategory();
 
-            var viewModel = new CategoryViewModel
-            {
-                Categories = categories
-            };
+            var viewModel = new AddCategoryViewModel(categories);
 
             return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult AddCategoryName(CategoryViewModel categoryViewModel)
+        public ActionResult AddCategoryName(AddCategoryViewModel addCategoryViewModel)
         {
+            var categoryName = addCategoryViewModel.Name;
+
             var category = new Category
             {
-                Id = categoryViewModel.Id,
-                Name = categoryViewModel.Name
+                Name = categoryName
             };
-
-            Console.WriteLine($"Category added with name: {categoryViewModel.Name}");
 
             categoryRepository.AddCategory(category);
 
             var categories = categoryRepository.GetAllCategory();
-
-            var viewModel = new CategoryViewModel
-            {
-                Categories = categories
-            };
-
-            return View("Index");
-        }
+            var viewModel = new AddCategoryViewModel(categories);
             
-        [HttpPost]
-        public ActionResult DeleteCategory(int id)
-        {
-            categoryRepository.DeleteCategory(id);
-            return Json(new { success = true, message = "Category deleted successfully" });
+            return View("Index", viewModel);
         }
-
-        [HttpPost]
-        public ActionResult UpdateCategoryName(int id, string name)
-        {
-            categoryRepository.UpdateCategoryName(id, name);
-
-            return Json(new { success = true, message = "Category updated successfully" });
-        }
-
 
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using BookApp.Core.Models;
 using BookApp.Data;
 using BookApp.Core.DTO;
+using BookApp.Models;
 
 namespace BookApp.Controllers
 {
@@ -19,27 +20,23 @@ namespace BookApp.Controllers
         [HttpGet("/addbook")]
         public IActionResult Index()
         {
-            var bookDTOs = bookRepository.GetAll();
+            var booksDTO = bookRepository.GetAll();
 
-            var books = bookDTOs.Select(dto => new Book
-            {
-                Id = dto.Id,
-                Title = dto.Title,
-                Author = dto.Author,
-                //Genre = dto.Genre,
-                //Serie = dto.Serie,
-                Image = dto.Image
-            }).ToList();
+            var addBookViewModel = new AddBookViewModel(booksDTO.ToList());
 
-            Console.WriteLine($"Number of books retrieved: {books.Count}");
-            return View(books);
+            Console.WriteLine($"Number of books retrieved: {addBookViewModel.Books.Count}");
+            return View(addBookViewModel);  
         }
-    
+
+
+
+
 
         [HttpPost("/Home/Index")]
-        public ActionResult SaveBook(string chosenBookId)
+        public ActionResult SaveBook(AddBookViewModel chosenBook)
         {
             return RedirectToAction("Index", "Home");
         }
+
     }
 }

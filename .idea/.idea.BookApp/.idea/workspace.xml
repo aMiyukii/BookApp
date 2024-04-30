@@ -10,9 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ddb3a06-5db6-4567-a199-9c738edfdec0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BookApp.Data/CategoryRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Data/CategoryRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/Controllers/AddBookController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Controllers/AddBookController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/Controllers/AddCategoryController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Controllers/AddCategoryController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/Models/BookViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/Models/CategoryViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Models/AddCategoryViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BookApp/Views/AddBook/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Views/AddBook/Index.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BookApp/Views/AddCategory/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Views/AddCategory/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/wwwroot/css/AddCategory.css" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/wwwroot/css/AddCategory.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,13 +42,14 @@
     ".NET Launch Settings Profile.BookApp: http.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "saveCategory__Database",
+    "git-widget-placeholder": "CategoryCRUD",
+    "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.sourceCode.C#",
+    "settings.editor.selected.configurable": "editor.preferences.smartKeys_rider",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -110,32 +117,31 @@
       <updated>1712919157001</updated>
       <workItem from="1712919168282" duration="2331000" />
       <workItem from="1713336869267" duration="1376000" />
+      <workItem from="1713957493010" duration="8288000" />
+      <workItem from="1714027732221" duration="3192000" />
+      <workItem from="1714039091849" duration="1835000" />
+      <workItem from="1714471387161" duration="1037000" />
+      <workItem from="1714472490850" duration="444000" />
+      <workItem from="1714472966248" duration="1081000" />
+      <workItem from="1714504927409" duration="2361000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/BookApp/Controllers/AddBookController.cs</url>
-          <line>22</line>
-          <properties documentPath="D:\Fontys\2024-2025\Semester 2.1\Individueel\BookApp\BookApp\BookApp\Controllers\AddBookController.cs" initialLine="22" containingFunctionPresentation="Method 'Index'">
-            <startOffsets>
-              <option value="496" />
-            </startOffsets>
-            <endOffsets>
-              <option value="531" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
