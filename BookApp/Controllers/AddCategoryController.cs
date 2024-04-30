@@ -44,5 +44,27 @@ namespace BookApp.Controllers
             return View("Index", viewModel);
         }
 
+        [HttpPost]
+        public ActionResult UpdateCategoryName(int id, string newName)
+        {
+            var category = new Category
+            {
+                Id = id,
+                Name = newName
+            };
+
+            categoryRepository.UpdateCategory(category);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteCategory(int id)
+        {
+            categoryRepository.DeleteCategory(id);
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

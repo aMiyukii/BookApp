@@ -92,67 +92,65 @@
                 SendCategory(newCategory);
             }
 
+            public void UpdateCategory(Category category)
+            {
+                DatabaseConnection dbConnection = new DatabaseConnection();
+                dbConnection.OpenConnection();
 
-            //public void DeleteCategory(int id)
-            //{
-            //    DatabaseConnection dbConnection = new DatabaseConnection();
-            //    dbConnection.OpenConnection();
+                try
+                {
+                    using (SqlConnection connection = dbConnection.GetSqlConnection())
+                    {
+                        string updateQuery = "UPDATE dbo.category SET name = @name WHERE id = @id";
 
-            //    try
-            //    {
-            //        using (SqlConnection connection = dbConnection.GetSqlConnection())
-            //        {
-            //            string deleteQuery = "DELETE FROM dbo.category WHERE id = @id";
+                        using (SqlCommand cmd = new SqlCommand(updateQuery, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@name", category.Name);
+                            cmd.Parameters.AddWithValue("@id", category.Id);
 
-            //            using (SqlCommand cmd = new SqlCommand(deleteQuery, connection))
-            //            {
-            //                cmd.Parameters.AddWithValue("@id", id);
+                            cmd.ExecuteNonQuery();
+                            Console.WriteLine("Category name updated successfully.");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    dbConnection.CloseConnection();
+                }
+            }
 
-            //                cmd.ExecuteNonQuery();
-            //                Console.WriteLine("Category deleted successfully.");
-            //            }
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Console.WriteLine("Error: " + ex.Message);
-            //    }
-            //    finally
-            //    {
-            //        dbConnection.CloseConnection();
-            //    }
-            //}
+            public void DeleteCategory(int id)
+            {
+                DatabaseConnection dbConnection = new DatabaseConnection();
+                dbConnection.OpenConnection();
 
-            //public void UpdateCategoryName(int id, string name)
-            //{
-            //    DatabaseConnection dbConnection = new DatabaseConnection();
-            //    dbConnection.OpenConnection();
+                try
+                {
+                    using (SqlConnection connection = dbConnection.GetSqlConnection())
+                    {
+                        string deleteQuery = "DELETE FROM dbo.category WHERE id = @id";
 
-            //    try
-            //    {
-            //        using (SqlConnection connection = dbConnection.GetSqlConnection())
-            //        {
-            //            string updateQuery = "UPDATE dbo.category SET name = @name WHERE id = @id";
+                        using (SqlCommand cmd = new SqlCommand(deleteQuery, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@id", id);
 
-            //            using (SqlCommand cmd = new SqlCommand(updateQuery, connection))
-            //            {
-            //                cmd.Parameters.AddWithValue("@name", name);
-            //                cmd.Parameters.AddWithValue("@id", id);
-
-            //                cmd.ExecuteNonQuery();
-            //                Console.WriteLine("Category name updated successfully.");
-            //            }
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Console.WriteLine("Error: " + ex.Message);
-            //    }
-            //    finally
-            //    {
-            //        dbConnection.CloseConnection();
-            //    }
-            //}
-
+                            cmd.ExecuteNonQuery();
+                            Console.WriteLine("Category deleted successfully.");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    dbConnection.CloseConnection();
+                }
+            }
 
     }
