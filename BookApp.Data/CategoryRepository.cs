@@ -44,7 +44,6 @@
         }
     }
 
-
     public List<CategoryDTO> GetAllCategory()
     {
         List<CategoryDTO> categories = new List<CategoryDTO>();
