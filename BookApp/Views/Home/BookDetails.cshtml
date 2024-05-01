@@ -1,0 +1,28 @@
+@model BookApp.Models.BookViewModel
+
+@{
+    ViewData["Title"] = "Book Details";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/BookDetails.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div>
+        <div class="BookImage">
+            <img src="~/Images/HarryPotterAndThePrisonerOfAskaban_JK_Rowling.png" class="BookImage"/>
+        </div>
+        <div class="BookTitle">
+            <p>@Model.Title</p>
+        </div>
+        <div class="BookAuthor">
+            <p>@Model.Author</p>
+        </div>
+        <!-- Add other properties of the book here -->
+    </div>
+</body>
+</html>
