@@ -9,5 +9,7 @@ namespace BookApp.Models
     {
         public string Title { get; set; }
         public string Author { get; set; }
+        public string Serie { get; set; }
+        public string Genre { get; set; }
     }
 }

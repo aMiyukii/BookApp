@@ -24,7 +24,16 @@ namespace BookApp.Core.DTO
             Title = title;
             Author = author;
             Image = image;
-
+        }
+        
+        public BookDTO(int id, string title, string author, string image, string serie, string genre)
+        {
+            Id = id;
+            Title = title;
+            Author = author;
+            Image = image;
+            Serie = serie;
+            Genre = genre;
         }
     }
 }

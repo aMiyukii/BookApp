@@ -21,8 +21,10 @@ body {
     margin-bottom: 2.5em;
     overflow: hidden;
 }
-
-
+.grid-item a {
+    text-decoration: none;
+    color: black;
+}
 .BookImage img {
     width: 100%;
     height: auto;
@@ -37,3 +39,4 @@ body {
     margin-top: -1EM;
     font-size: 14px;
 }
+

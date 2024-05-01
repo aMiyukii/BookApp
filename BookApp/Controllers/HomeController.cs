@@ -25,7 +25,7 @@ namespace BookApp.Controllers
                 Books = booksInLibrary.Select(book => new BookViewModel
                 {
                     Title = book.Title,
-                    Author = book.Author,
+                    Author = book.Author
                 }).ToList()
             };
 
@@ -38,9 +38,30 @@ namespace BookApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult BookDetails()
+        public IActionResult BookDetails(string title)
         {
-            return View();
+            if (string.IsNullOrEmpty(title))
+            {
+                return BadRequest("Book title cannot be null or empty.");
+            }
+            
+            var book = bookRepository.GetBookByTitle(title);
+
+            if (book == null)
+            {
+                return NotFound("Book not found.");
+            }
+            
+            var bookViewModel = new BookViewModel
+            {
+                Title = book.Title,
+                Author = book.Author,
+                Serie = book.Serie,
+                Genre = book.Genre
+            };
+
+            return View(bookViewModel);
         }
+
     }
 }

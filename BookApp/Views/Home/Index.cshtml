@@ -12,21 +12,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="grid-container">
-        @foreach (var book in Model.Books)
-        {
-            <div class="grid-item">
-                <div class="BookImage">
-                    <img src="~/Images/HarryPotterAndThePrisonerOfAskaban_JK_Rowling.png" class="BookImage"/>
-                </div>
-                <div class="BookTitle">
-                    <p>@book.Title</p>
-                </div>
-                <div class="BookAuthor">
-                    <p>@book.Author</p>
-                </div>
-            </div>
-        }
-    </div>
+   <div class="grid-container">
+       @foreach (var book in Model.Books)
+       {
+           <div class="grid-item">
+               <a href="@Url.Action("BookDetails", "Home", new { title = book.Title })">
+                   <div class="BookImage">
+                       <img src="~/Images/HarryPotterAndThePrisonerOfAskaban_JK_Rowling.png" class="BookImage"/>
+                   </div>
+                   <div class="BookTitle">
+                       <p>@book.Title</p>
+                   </div>
+                   <div class="BookAuthor">
+                       <p>@book.Author</p>
+                   </div>
+               </a>
+           </div>
+       }
+   </div>
+
 </body>
 </html>

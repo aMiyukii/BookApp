@@ -3,3 +3,41 @@
 body {
     font-family: "Poppins", sans-serif;
 }
+
+.Book{
+    margin-left: 5%;
+}
+
+.BookImage{
+    width: 40%;
+    height: auto;
+}
+
+.BookTitle{
+    font-size: 21px;
+    font-weight: 500;
+    margin-left: 17%;
+    position: absolute;
+    top: 17%;
+}
+
+.BookAuthor{
+    font-size: 21px;
+    margin-left: 17%;
+    position: absolute;
+    top: 22%;
+}
+
+.BookSeries{
+    font-size: 19px;
+    margin-left: 17%;
+    position: absolute;
+    top: 30%;
+}
+
+.BookGenre{
+    font-size: 19px;
+    margin-left: 17%;
+    position: absolute;
+    top: 35%;
+}

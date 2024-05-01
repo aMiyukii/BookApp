@@ -163,5 +163,49 @@ namespace BookApp.Data
 
             return books;
         }
+        public BookDTO GetBookByTitle(string title)
+        {
+            BookDTO book = null;
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            dbConnection.OpenConnection();
+
+            try
+            {
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
+                {
+                    string selectQuery = "SELECT id, title, author, image, serie, genre FROM dbo.book WHERE title = @title";
+
+                    using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@title", title);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                int id = Convert.ToInt32(reader["id"]);
+                                string author = reader["author"].ToString();
+                                string image = reader["image"].ToString();
+                                string serie = reader["serie"].ToString();
+                                string genre = reader["genre"].ToString();
+
+                                book = new BookDTO(id, title, author, image, serie, genre);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error fetching book from the database by title: " + ex.Message);
+            }
+            finally
+            {
+                dbConnection.CloseConnection();
+            }
+
+            return book;
+        }
+
     }
 }
