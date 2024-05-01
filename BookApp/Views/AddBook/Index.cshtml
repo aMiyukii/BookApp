@@ -81,19 +81,21 @@
             var author = clickedElement.querySelector('.BookAuthor p').textContent;
             displayChosenBook(title, author, id);
         }
-    }
-
-    function displayChosenBook(title, author, id) {
-        var chosenBookTitle = document.getElementById('chosenTitle');
-        var chosenBookAuthor = document.getElementById('chosenAuthor');
-        var chosenBookIdInput = document.getElementById('chosenBookId');
-
-        chosenBookTitle.textContent = title;
-        chosenBookAuthor.textContent = author;
-        chosenBookIdInput.value = id;
+        
+        function displayChosenBook(title, author, id) {
+             var chosenBookTitle = document.getElementById('chosenTitle');
+             var chosenBookAuthor = document.getElementById('chosenAuthor');
+             var chosenBookIdInput = document.getElementById('chosenBookId');
+             var chosenBookImage = document.querySelector('.bookImagechosen');
+         
+             chosenBookTitle.textContent = title;
+             chosenBookAuthor.textContent = author;
+             chosenBookIdInput.value = id;
+         
+             chosenBookImage.style.display = 'block';
+         }
     }
 </script>
-
 
         <div class="chosenbook">
             <img src="~/Images/HarryPotterAndThePrisonerOfAskaban_JK_Rowling.png" class="bookImagechosen" style="display: none;" />

@@ -55,7 +55,7 @@
 
     .dropdown {
         cursor: pointer;
-        top: 16.7%;
+        top: 16.5em;
         width: 14rem;
         height: 41px;
         padding: 0px 8px;
@@ -68,7 +68,7 @@
         font-size: 16px;
         font-family: "Poppins";
         line-height: 20px;
-        position: relative;
+        position: fixed;
         margin-left: 8rem;
         margin-top: -2.5rem;
         padding-top: 0px;
@@ -173,14 +173,19 @@
 }
 
 
-.chosenbook{
-}
+    .chosenbook {
+        position: absolute;
+        top: 52%;
+        left: 2%;
+        transform: translate(-100%, 0);
+        z-index: 1;
+    }
 
 .bookImagechosen {
     widht: auto;
     height: 25em;   
     margin-left: 7em;
-    position: absolute;
+    position: fixed;
     margin-top: -6.5em;
 }
 
@@ -189,7 +194,7 @@
     font-weight: 500;
     font-size: 15px;
     font-family: "Poppins";
-    position: absolute;
+    position: fixed;
     margin-top: 20em;
     margin-left: 8em;
     width: 15em;
@@ -203,7 +208,7 @@
     color: #030303;
     font-size: 15px;
     font-family: "Poppins";
-    position: absolute;
+    position: fixed;
     margin-top: 23em;
     margin-left: 8em;
     width: 15em;
