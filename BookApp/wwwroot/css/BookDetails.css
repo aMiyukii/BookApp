@@ -41,3 +41,28 @@ body {
     position: absolute;
     top: 35%;
 }
+.DeleteBookButton {
+    margin-top: 1rem;
+    margin-left: 6.5%;
+    width: 12%;
+    height: 40px;
+    background-color: #efeff6;
+    border-radius: 8px;
+    border-color: transparent;
+    position: relative;
+    padding-left: 1%;
+}
+
+.DeleteBookButton:hover {
+    color: red;
+    background-color: #efeff6;
+    filter: brightness(97%);
+}
+
+.fa-solid.fa-trash-can {
+    position: absolute;
+    left: 20%;
+    top: 50%;
+    transform: translateY(-55%);
+    font-size: 15px;
+}

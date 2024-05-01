@@ -12,22 +12,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="Book">
-        <div class="BookImage">
-            <img src="~/Images/HarryPotterAndThePrisonerOfAskaban_JK_Rowling.png" class="BookImage"/>
-        </div>
-        <div class="BookTitle">
-            <p>@Model.Title</p>
-        </div>
-        <div class="BookAuthor">
-            <p>@Model.Author</p>
-        </div>
-        <div class="BookSeries">
-            <p>Series: @Model.Serie</p>
-        </div>
-        <div class="BookGenre">
-            <p>Genre: @Model.Genre</p>
-        </div>
-        </div>
+<div class="Book">
+    <div class="BookImage">
+        <img src="~/Images/HarryPotterAndThePrisonerOfAskaban_JK_Rowling.png" class="BookImage"/>
+    </div>
+    <div class="BookTitle">
+        <p>@Model.Title</p>
+    </div>
+    <div class="BookAuthor">
+        <p>@Model.Author</p>
+    </div>
+    <div class="BookSeries">
+        <p>Series: @Model.Serie</p>
+    </div>
+    <div class="BookGenre">
+        <p>Genre: @Model.Genre</p>
+    </div>
+</div>
+
+<form id="deleteBookForm" method="post" action="@Url.Action("DeleteBook", "Home")">
+    <input type="hidden" name="title" value="@Model.Title" />
+    <button type="submit" class="DeleteBookButton"><i class="fa-solid fa-trash-can"></i>Delete book</button>
+</form>
+
+<script>
+    document.querySelector('.DeleteBookButton').addEventListener('click', function(event) {
+        event.preventDefault();
+        if (confirm("Are you sure you want to delete this book?")) {
+            document.getElementById('deleteBookForm').submit();
+        }
+    });
+</script>
+
 </body>
 </html>

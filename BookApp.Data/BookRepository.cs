@@ -206,6 +206,62 @@ namespace BookApp.Data
 
             return book;
         }
+        
+        public void DeleteBookByTitle(string title)
+        {
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            dbConnection.OpenConnection();
+
+            try
+            {
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
+                {
+                    string deleteQuery = "DELETE FROM dbo.book WHERE title = @title";
+
+                    using (SqlCommand cmd = new SqlCommand(deleteQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@title", title);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error deleting book from the database: " + ex.Message);
+            }
+            finally
+            {
+                dbConnection.CloseConnection();
+            }
+        }
+        
+        public void DeleteUserBookByBookId(int bookId)
+        {
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            dbConnection.OpenConnection();
+
+            try
+            {
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
+                {
+                    string deleteQuery = "DELETE FROM user_book WHERE book_id = @bookId";
+
+                    using (SqlCommand cmd = new SqlCommand(deleteQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@bookId", bookId);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error deleting user book from the database: " + ex.Message);
+            }
+            finally
+            {
+                dbConnection.CloseConnection();
+            }
+        }
 
     }
 }

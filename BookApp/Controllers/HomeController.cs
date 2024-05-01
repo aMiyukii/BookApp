@@ -62,6 +62,27 @@ namespace BookApp.Controllers
 
             return View(bookViewModel);
         }
+        
+        [HttpPost]
+        public IActionResult DeleteBook(string title)
+        {
+            if (string.IsNullOrEmpty(title))
+            {
+                return BadRequest("Book title cannot be null or empty.");
+            }
+
+            var book = bookRepository.GetBookByTitle(title);
+
+            if (book == null)
+            {
+                return NotFound("Book not found.");
+            }
+            
+            bookRepository.DeleteBookByTitle(title);
+            bookRepository.DeleteUserBookByBookId(book.Id);
+
+            return RedirectToAction("Index");
+        }
 
     }
 }
