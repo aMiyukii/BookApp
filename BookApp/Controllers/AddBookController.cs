@@ -1,6 +1,6 @@
 ﻿using BookApp.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging; // Import the namespace for ILogger
+using Microsoft.Extensions.Logging;
 using BookApp.Data;
 using BookApp.Core.DTO;
 
