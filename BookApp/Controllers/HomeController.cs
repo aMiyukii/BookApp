@@ -25,7 +25,8 @@ namespace BookApp.Controllers
                 Books = booksInLibrary.Select(book => new BookViewModel
                 {
                     Title = book.Title,
-                    Author = book.Author
+                    Author = book.Author,
+                    ImageUrl = book.ImageUrl
                 }).ToList()
             };
 
@@ -57,7 +58,8 @@ namespace BookApp.Controllers
                 Title = book.Title,
                 Author = book.Author,
                 Serie = book.Serie,
-                Genre = book.Genre
+                Genre = book.Genre,
+                ImageUrl = book.ImageUrl
             };
 
             return View(bookViewModel);

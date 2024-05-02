@@ -58,7 +58,7 @@
                 {
                     <div class="grid-item3" data-book-id="@bookDTO.Id" onclick="handleBookClick(event)">
                         <div class="BookImage">
-                            <img src="~/Images/HarryPotterAndThePrisonerOfAskaban_JK_Rowling.png" class="BookImage" />
+                            <img src="@bookDTO.ImageUrl" class="BookImage" />
                         </div>
                         <div class="BookTitle">
                             <p>@bookDTO.Title</p>
