@@ -2,8 +2,10 @@
 
     body {
         font-family: "Poppins", sans-serif;
+        overflow: hidden;
     }
-
+    
+    
     .bookInformation {
         font-size: 16px;
     }
@@ -43,20 +45,29 @@
         margin-top: -2.7rem;
         z-index: 1;
     }
-
-
+    
     .AddCategory {
-        font-size: 18px;
+        font-size: 17px;
         font-weight: 400;
-        margin-left: 30%;
+        margin-left: 5.5%;
         color: #002A2B;
-        margin-top: 40px;
+        margin-top: 0.5em;
+        position: fixed;
+    }
+    
+    .AddCategoryOp {
+        font-size: 17px;
+        font-weight: 400;
+        margin-left: 5.5%;
+        color: #002A2B;
+        position: fixed;
+        margin-top: 6em;
     }
 
     .dropdown {
         cursor: pointer;
         top: 16.5em;
-        width: 14rem;
+        width: 12%;
         height: 41px;
         padding: 0px 8px;
         border: 0;
@@ -66,12 +77,10 @@
         background-color: #ffffff;
         color: #030303;
         font-size: 16px;
-        font-family: "Poppins";
         line-height: 20px;
         position: fixed;
-        margin-left: 8rem;
-        margin-top: -2.5rem;
-        padding-top: 0px;
+        margin-left: 5.5%;
+        margin-top: -4.5rem;
     }
 
         .dropdown select {
@@ -101,39 +110,77 @@
             background-color: #ffffff;
             color: #030303;
             font-size: 16px;
-            font-family: "Poppins";
+            line-height: 16px;
+        }
+    
+    .dropdownOp {
+        cursor: pointer;
+        top: 16.5em;
+        width: 12%;
+        height: 41px;
+        padding: 0px 8px;
+        border: 0;
+        box-sizing: border-box;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(3,3,3,0.2);
+        background-color: #ffffff;
+        color: #030303;
+        font-size: 16px;
+        line-height: 20px;
+        position: fixed;
+        margin-left: 5.5%;
+        margin-top: 1.5rem;
+    }
+
+        .dropdownOp select {
+            position: relative;
+            top: -0.5rem;
+            width: 100%;
+            border: 0;
+            outline: none;
+            background: transparent;
+            appearance: none;
+            z-index: 1;
+        }
+
+        .dropdownOp::after {
+            content: '';
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            box-sizing: border-box;
+            pointer-events: none;
+        }
+
+        .dropdownOp select option {
+            background-color: #ffffff;
+            color: #030303;
+            font-size: 16px;
             line-height: 16px;
         }
 
-    .fa-square-plus{
-        position: absolute;
-        font-size: 20px;
-        margin-left: 14rem;
-        margin-top: 0.7rem;
-    }
-
     .AddBookButton {
-        margin-top: 7rem;
-        margin-left: 9.8rem;
-        width: 25%;
+        margin-top: 43em;
+        margin-left: 5.5%;
+        width: 12%;
         height: 40px;
         background-color: #efeff6;
         border-radius: 8px;
         border-color: transparent;
+        position: fixed;
     }
 
     .grid-column {
         display: grid;
         grid-template-columns: 1fr 2.5fr;
     }
-
-    .grid-item {
+    .BookList{
+        height: 46em;
+        overflow-y: scroll;
     }
-
-    .grid-item2 {
-        overflow: auto;
-    }
-
     .grid-item3 {
         display: inline-block;
         width: 10%;
@@ -143,16 +190,13 @@
     .BookImage {
         width: 9em;
         height: auto;
-        position: absolute;
     }
 
 .BookTitle {
     color: #030303;
     font-weight: 500;
     font-size: 14px;
-    font-family: "Poppins";
-    position: absolute;
-    margin-top: 17em;
+    position: relative;
     width: 9em;
     height: 3em;
     overflow: hidden;
@@ -163,9 +207,7 @@
 .BookAuthor {
     color: #030303;
     font-size: 14px;
-    font-family: "Poppins";
     position: relative;
-    margin-top: 20em;
     width: 9em;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -174,29 +216,26 @@
 
 
     .chosenbook {
-        position: absolute;
+        position: fixed;
         top: 52%;
-        left: 2%;
+        left: 6.2%;
         transform: translate(-100%, 0);
         z-index: 1;
     }
 
-.bookImagechosen {
-    widht: auto;
-    height: 25em;   
-    margin-left: 7em;
+.image {
+    width: auto;
+    height: 22em;   
     position: fixed;
-    margin-top: -6.5em;
+    margin-top: -8em;
 }
 
 .BookTitlechosen {
     color: #030303;
     font-weight: 500;
     font-size: 15px;
-    font-family: "Poppins";
     position: fixed;
-    margin-top: 20em;
-    margin-left: 8em;
+    margin-top: 15em;
     width: 15em;
     height: 3em;
     overflow: hidden;
@@ -207,10 +246,8 @@
 .BookAuthorchosen {
     color: #030303;
     font-size: 15px;
-    font-family: "Poppins";
     position: fixed;
-    margin-top: 23em;
-    margin-left: 8em;
+    margin-top: 18em;
     width: 15em;
     overflow: hidden;
     text-overflow: ellipsis;

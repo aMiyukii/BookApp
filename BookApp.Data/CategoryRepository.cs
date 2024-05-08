@@ -84,8 +84,6 @@
 
         return categories;
     }
-
-
     public void AddCategory(Category newCategory)
             {
                 SendCategory(newCategory);

@@ -9,11 +9,13 @@ namespace BookApp.Controllers
     public class AddBookController : Controller
     {
         private readonly BookRepository bookRepository;
+        private readonly CategoryRepository categoryRepository;
         private readonly ILogger<AddBookController> logger;
 
         public AddBookController(ILogger<AddBookController> logger)
         {
             bookRepository = new BookRepository();
+            categoryRepository = new CategoryRepository();
             this.logger = logger;
         }
 
@@ -21,10 +23,13 @@ namespace BookApp.Controllers
         public IActionResult Index()
         {
             var booksDTO = bookRepository.GetAll();
+            
+            var categoriesDTO = categoryRepository.GetAllCategory();
 
-            var addBookViewModel = new AddBookViewModel(booksDTO.ToList());
+            var addBookViewModel = new AddBookViewModel(booksDTO.ToList(), categoriesDTO.ToList());
 
             logger.LogInformation($"Number of books retrieved: {addBookViewModel.Books.Count}");
+            logger.LogInformation($"Number of categories retrieved: {addBookViewModel.Categories.Count}");
             return View(addBookViewModel);  
         }
 

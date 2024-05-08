@@ -1,4 +1,5 @@
-﻿@model BookApp.Models.AddBookViewModel
+﻿@using BookApp.Core.DTO
+@model BookApp.Models.AddBookViewModel
 @{
     ViewData["Title"] = "Add book to library";
 }
@@ -17,33 +18,33 @@
                 <input class="searchbar" type="search" placeholder="Search book" aria-label="Search">
             </form>
 
-            <h1 class="AddCategory">Add category</h1>
+            <h1 class="AddCategory">Add standard category</h1>
             <div class="dropdown">
                 <label for="category-options"></label>
-                <i class="fa-solid fa-square-plus"></i>
                 <div class="dropdownClone" id="dropdownContainer">
                     <select name="category-options" id="category-options">
-                        <option value="SelectCategory">Select a category</option>
-                        <option value="WantToRead">Want to read</option>
-                        <option value="CurrentlyReading">Currently reading</option>
-                        <option value="Read">Read</option>
+                    <option disabled selected>Select a category</option>
+                    @foreach (var categories in Model.Categories.Where(c => c.IsStandard == true))
+                    {
+                        <option value="@categories.Id">@categories.Name</option>
+                    }  
                     </select>
                 </div>
             </div>
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    const addButton = document.querySelector('.fa-square-plus');
-
-                    addButton.addEventListener('click', function () {
-                        const dropdownContainer = document.getElementById('dropdownContainer');
-                        const clonedDropdown = dropdownContainer.cloneNode(true);
-                        const newContainer = document.createElement('div');
-                        newContainer.classList.add('dropdownClone');
-                        newContainer.appendChild(clonedDropdown);
-                        dropdownContainer.parentNode.appendChild(newContainer);
-                    });
-                });
-            </script>
+            
+            <h1 class="AddCategoryOp">Add your own category - <i>optional</i></h1>
+                        <div class="dropdownOp">
+                            <label for="category-options"></label>
+                            <div class="dropdownClone" id="dropdownContainer">
+                                <select name="category-options" id="category-options">
+                                <option disabled selected>Select a category</option>
+                                    @foreach (var categories in Model.Categories.Where(c => c.IsStandard == false))
+                                    {
+                                        <option value="@categories.Id">@categories.Name</option>
+                                    }   
+                                </select>   
+                            </div>
+                        </div>
 
             @using (Html.BeginForm("SaveBook", "AddBook", FormMethod.Post))
             {
@@ -63,14 +64,13 @@
                         <div class="BookTitle">
                             <p>@bookDTO.Title</p>
                         </div>
-                           <div class="BookAuthor">
+                        <div class="BookAuthor">
                             <p>@bookDTO.Author</p>
                         </div>
                     </div>
                 }
             </div>
         </div>
-
 
 <script>
     function handleBookClick(event) {
@@ -79,34 +79,35 @@
             var id = clickedElement.dataset.bookId;
             var title = clickedElement.querySelector('.BookTitle p').textContent;
             var author = clickedElement.querySelector('.BookAuthor p').textContent;
-            displayChosenBook(title, author, id);
+            var imageUrl = clickedElement.querySelector('.BookImage img').src;
+            displayChosenBook(title, author, imageUrl);
         }
-        
-        function displayChosenBook(title, author, id) {
-             var chosenBookTitle = document.getElementById('chosenTitle');
-             var chosenBookAuthor = document.getElementById('chosenAuthor');
-             var chosenBookIdInput = document.getElementById('chosenBookId');
-             var chosenBookImage = document.querySelector('.bookImagechosen');
-         
-             chosenBookTitle.textContent = title;
-             chosenBookAuthor.textContent = author;
-             chosenBookIdInput.value = id;
-         
-             chosenBookImage.style.display = 'block';
-         }
+    }
+
+    function displayChosenBook(title, author, imageUrl) {
+        var chosenBookTitle = document.getElementById('chosenTitle');
+        var chosenBookAuthor = document.getElementById('chosenAuthor');
+        var chosenBookImage = document.getElementById('chosenImage');
+
+        chosenBookTitle.textContent = title;
+        chosenBookAuthor.textContent = author;
+        chosenBookImage.src = imageUrl;
+
+        chosenBookImage.style.display = 'block';
     }
 </script>
 
-        <div class="chosenbook">
-            <img src="~/Images/HarryPotterAndThePrisonerOfAskaban_JK_Rowling.png" class="bookImagechosen" style="display: none;" />
-            <div class="BookTitlechosen">
-                <p id="chosenTitle"></p>
-            </div>
-            <div class="BookAuthorchosen">
-                <p id="chosenAuthor"></p>
-            </div>
-        </div>
-
+         <div class="chosenbook">
+             <div class="BookImagechosen">
+                 <img id="chosenImage" class="image" style="display: none;" />
+             </div>
+             <div class="BookTitlechosen">
+                 <p id="chosenTitle"></p>
+             </div>
+             <div class="BookAuthorchosen">
+                 <p id="chosenAuthor"></p>
+             </div>
+         </div>
     </div>
 </body>
 </html>
