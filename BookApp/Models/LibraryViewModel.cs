@@ -11,5 +11,6 @@ namespace BookApp.Models
         public string Author { get; set; }
         public string Serie { get; set; }
         public string Genre { get; set; }
+        public string ImageUrl { get; set; }
     }
 }
