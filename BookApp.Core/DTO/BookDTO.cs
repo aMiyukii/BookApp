@@ -18,20 +18,20 @@ namespace BookApp.Core.DTO
 
         public BookDTO() { }
 
-        public BookDTO(int id, string title, string author, string imageUrl) 
+        public BookDTO(int id, string title, string author, string imageurl) 
         {
             Id = id;
             Title = title;
             Author = author;
-            ImageUrl = imageUrl;
+            ImageUrl = imageurl;
         }
         
-        public BookDTO(int id, string title, string author, string imageUrl, string serie, string genre)
+        public BookDTO(int id, string title, string author, string imageurl, string serie, string genre)
         {
             Id = id;
             Title = title;
             Author = author;
-            ImageUrl = imageUrl;
+            ImageUrl = imageurl;
             Serie = serie;
             Genre = genre;
         }

@@ -26,7 +26,7 @@ namespace BookApp.Data
             {
                 using (SqlConnection connection = dbConnection.GetSqlConnection())
                 {
-                    string selectQuery = "SELECT id, title, author, image_Url FROM dbo.book";
+                    string selectQuery = "SELECT id, title, author, image_url FROM dbo.book";
 
                     using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
                     {
@@ -37,9 +37,9 @@ namespace BookApp.Data
                                 int id = Convert.ToInt32(reader["id"]);
                                 string title = reader["title"].ToString();
                                 string author = reader["author"].ToString();
-                                string imageUrl = reader["image_Url"].ToString();
+                                string imageurl = reader["image_url"].ToString();
 
-                                BookDTO book = new BookDTO(id, title, author, imageUrl);
+                                BookDTO book = new BookDTO(id, title, author, imageurl);
                                 books.Add(book);
                             }
                         }
@@ -134,7 +134,7 @@ namespace BookApp.Data
             {
                 using (SqlConnection connection = dbConnection.GetSqlConnection())
                 {
-                    string selectQuery = "SELECT title, author, image_Url FROM user_book JOIN book ON user_book.book_id = book.id";
+                    string selectQuery = "SELECT title, author FROM user_book JOIN book ON user_book.book_id = book.id";
 
                     using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
                     {
@@ -144,9 +144,8 @@ namespace BookApp.Data
                             {
                                 string title = reader["title"].ToString();
                                 string author = reader["author"].ToString();
-                                string imageUrl = reader["image_Url"].ToString();
 
-                                Book book = new Book { Title = title, Author = author, ImageUrl = imageUrl};
+                                Book book = new Book { Title = title, Author = author };
                                 books.Add(book);
                             }
                         }
@@ -174,7 +173,7 @@ namespace BookApp.Data
             {
                 using (SqlConnection connection = dbConnection.GetSqlConnection())
                 {
-                    string selectQuery = "SELECT id, title, author, image_Url, serie, genre FROM dbo.book WHERE title = @title";
+                    string selectQuery = "SELECT id, title, author, image, serie, genre FROM dbo.book WHERE title = @title";
 
                     using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
                     {
@@ -186,7 +185,7 @@ namespace BookApp.Data
                             {
                                 int id = Convert.ToInt32(reader["id"]);
                                 string author = reader["author"].ToString();
-                                string image = reader["image_Url"].ToString();
+                                string image = reader["image"].ToString();
                                 string serie = reader["serie"].ToString();
                                 string genre = reader["genre"].ToString();
 

@@ -11,11 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="9ddb3a06-5db6-4567-a199-9c738edfdec0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Data/CategoryRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Data/CategoryRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp/Controllers/AddBookController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Controllers/AddBookController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp/Models/AddBookViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Models/AddBookViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp/Views/AddBook/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Views/AddBook/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp/wwwroot/css/AddBook.css" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/wwwroot/css/AddBook.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/DTO/BookDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/DTO/BookDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/Models/Book.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Models/Book.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/Models/LibraryViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Models/LibraryViewModel.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,21 +31,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;aMiyukii&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="2e3ee2d6-02b9-4bda-8c33-fd9e0c52d3c5" />
-        <option name="url" value="https://github.com/aMiyukii/BookApp.git" />
-      </UrlAndAccount>
-    </option>
-  </component>
-  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -65,7 +48,7 @@
     &quot;.NET Launch Settings Profile.BookApp: http.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;AddCategoryToBook&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Book-CRUD&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -148,18 +131,14 @@
       <workItem from="1714472490850" duration="444000" />
       <workItem from="1714472966248" duration="1081000" />
       <workItem from="1714504927409" duration="4262000" />
-      <workItem from="1714553511192" duration="10587000" />
-      <workItem from="1714565281770" duration="385000" />
-      <workItem from="1714639846819" duration="4994000" />
-      <workItem from="1714648441246" duration="748000" />
-      <workItem from="1715155963038" duration="2353000" />
+      <workItem from="1714553511192" duration="5198000" />
+      <workItem from="1715160010287" duration="302000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
