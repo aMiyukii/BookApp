@@ -1,26 +1,26 @@
-﻿    using BookApp.Core.DTO;
+﻿using BookApp.Core.DTO;
 
-    namespace BookApp.Models
+namespace BookApp.Models
+{
+    public class AddBookViewModel
     {
-        public class AddBookViewModel
+        public List<BookDTO> Books { get; set; }
+        public List<CategoryDTO> Categories { get; set; }
+
+        public AddBookViewModel(List<CategoryDTO> categories)
         {
-            public List<BookDTO> Books { get; set; }
-            public List<CategoryDTO> Categories { get; set; }
-
-            public AddBookViewModel(List<CategoryDTO> categories)
-            {
-                Categories = categories;
-            }
-
-            public AddBookViewModel(List<BookDTO> books)
-            {
-                Books = books;
-            }
-
-            public AddBookViewModel(List<BookDTO> books, List<CategoryDTO> categories)
-            {
-                Books = books;
-                Categories = categories;
-            }
+            Categories = categories;
         }
-    }   
+
+        public AddBookViewModel(List<BookDTO> books)
+        {
+            Books = books;
+        }
+
+        public AddBookViewModel(List<BookDTO> books, List<CategoryDTO> categories)
+        {
+            Books = books;
+            Categories = categories;
+        }
+    }
+}

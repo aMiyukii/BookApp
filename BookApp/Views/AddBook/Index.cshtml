@@ -73,17 +73,18 @@
         </div>
 
 <script>
-    function handleBookClick(event) {
-        var clickedElement = event.target.closest('.grid-item3');
-        if (clickedElement) {
-            var id = clickedElement.dataset.bookId;
-            var title = clickedElement.querySelector('.BookTitle p').textContent;
-            var author = clickedElement.querySelector('.BookAuthor p').textContent;
-            var imageUrl = clickedElement.querySelector('.BookImage img').src;
-            displayChosenBook(title, author, imageUrl);
-        }
-    }
-
+   function handleBookClick(event) {
+       var clickedElement = event.target.closest('.grid-item3');
+       if (clickedElement) {
+           var id = clickedElement.dataset.bookId;
+           document.getElementById('chosenBookId').value = id;
+           
+           var title = clickedElement.querySelector('.BookTitle p').textContent;
+           var author = clickedElement.querySelector('.BookAuthor p').textContent;
+           var imageUrl = clickedElement.querySelector('.BookImage img').src;
+           displayChosenBook(title, author, imageUrl);
+       }
+   }
     function displayChosenBook(title, author, imageUrl) {
         var chosenBookTitle = document.getElementById('chosenTitle');
         var chosenBookAuthor = document.getElementById('chosenAuthor');
