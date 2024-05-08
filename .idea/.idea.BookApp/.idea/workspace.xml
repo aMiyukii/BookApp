@@ -11,11 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9ddb3a06-5db6-4567-a199-9c738edfdec0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Core/DTO/BookDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/DTO/BookDTO.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BookApp.Data/BookRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Data/BookRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp/Models/AddBookViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Models/AddBookViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp/Views/AddBook/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Views/AddBook/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp/Views/Home/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Views/Home/Index.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +46,7 @@
     ".NET Launch Settings Profile.BookApp: http.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Errorfixing",
     "ignore.virus.scanning.warn.message": "true",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",

@@ -105,7 +105,6 @@
                 {
                     using (SqlConnection connection = dbConnection.GetSqlConnection())
                     {
-                        // Check if the bookId exists in the book table
                         string checkBookQuery = "SELECT COUNT(*) FROM dbo.book WHERE id = @bookId";
 
                         using (SqlCommand checkCmd = new SqlCommand(checkBookQuery, connection))
@@ -113,9 +112,8 @@
                             checkCmd.Parameters.AddWithValue("@bookId", bookId);
                             int count = (int)checkCmd.ExecuteScalar();
 
-                            if (count > 0) // Book with provided ID exists
+                            if (count > 0)
                             {
-                                // Insert the bookId into the user_book table
                                 string insertQuery = "INSERT INTO user_book (book_id) VALUES (@bookId)";
 
                                 using (SqlCommand cmd = new SqlCommand(insertQuery, connection))
@@ -141,9 +139,6 @@
                     dbConnection.CloseConnection();
                 }
             }
-
-
-            
             public List<Book> GetBooksInLibrary()
             {
                 List<Book> books = new List<Book>();
@@ -154,7 +149,7 @@
                 {
                     using (SqlConnection connection = dbConnection.GetSqlConnection())
                     {
-                        string selectQuery = "SELECT title, author FROM user_book JOIN book ON user_book.book_id = book.id";
+                        string selectQuery = "SELECT title, author, image_url FROM user_book JOIN book ON user_book.book_id = book.id";
 
                         using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
                         {
@@ -164,8 +159,10 @@
                                 {
                                     string title = reader["title"].ToString();
                                     string author = reader["author"].ToString();
+                                    string imageUrl = reader["image_url"].ToString();
 
-                                    Book book = new Book { Title = title, Author = author };
+
+                                    Book book = new Book { Title = title, Author = author, ImageUrl = imageUrl };
                                     books.Add(book);
                                 }
                             }
@@ -193,7 +190,7 @@
                 {
                     using (SqlConnection connection = dbConnection.GetSqlConnection())
                     {
-                        string selectQuery = "SELECT id, title, author, image, serie, genre FROM dbo.book WHERE title = @title";
+                        string selectQuery = "SELECT id, title, author, image_url, serie, genre FROM dbo.book WHERE title = @title";
 
                         using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
                         {
@@ -205,11 +202,11 @@
                                 {
                                     int id = Convert.ToInt32(reader["id"]);
                                     string author = reader["author"].ToString();
-                                    string image = reader["image"].ToString();
+                                    string imageUrl = reader["image_url"].ToString();
                                     string serie = reader["serie"].ToString();
                                     string genre = reader["genre"].ToString();
 
-                                    book = new BookDTO(id, title, author, image, serie, genre);
+                                    book = new BookDTO(id, title, author, imageUrl, serie, genre);
                                 }
                             }
                         }
