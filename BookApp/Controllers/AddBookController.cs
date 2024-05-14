@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BookApp.Data;
 using BookApp.Core.DTO;
+using System.Threading.Tasks;
 
 namespace BookApp.Controllers
 {
@@ -12,37 +13,36 @@ namespace BookApp.Controllers
         private readonly CategoryRepository categoryRepository;
         private readonly ILogger<AddBookController> logger;
 
-        public AddBookController(ILogger<AddBookController> logger)
+        public AddBookController(ILogger<AddBookController> logger, BookRepository bookRepository, CategoryRepository categoryRepository)
         {
-            bookRepository = new BookRepository();
-            categoryRepository = new CategoryRepository();
+            this.bookRepository = bookRepository;
+            this.categoryRepository = categoryRepository;
             this.logger = logger;
         }
 
-        [HttpGet("/addbook")]
-        public IActionResult Index()
+        [HttpGet("/addbook")]   
+        public async Task<IActionResult> Index()
         {
-            var booksDTO = bookRepository.GetAll();
-            
-            var categoriesDTO = categoryRepository.GetAllCategory();
+            var booksDTO = await bookRepository.GetAllAsync();
+            var categoriesDTO = await categoryRepository.GetAllCategoryAsync();
 
-            var addBookViewModel = new AddBookViewModel(booksDTO.ToList(), categoriesDTO.ToList());
+            var addBookViewModel = new AddBookViewModel(booksDTO, categoriesDTO);
 
             logger.LogInformation($"Number of books retrieved: {addBookViewModel.Books.Count}");
             logger.LogInformation($"Number of categories retrieved: {addBookViewModel.Categories.Count}");
+
             return View(addBookViewModel);  
         }
 
         [HttpPost("/AddBook/SaveBook")]
-        public ActionResult SaveBook(int chosenBookId)
+        public async Task<ActionResult> SaveBook(int chosenBookId)
         {
-            var bookTitle = bookRepository.GetBookTitleById(chosenBookId);
+            var bookTitle = await bookRepository.GetBookTitleByIdAsync(chosenBookId);
             logger.LogInformation($"Book added: {bookTitle}");
 
-            bookRepository.AddBookToUserCollection(chosenBookId);
+            await bookRepository.AddBookToUserCollectionAsync(chosenBookId);
 
             return RedirectToAction("Index", "Home");
         }
-        
     }
 }

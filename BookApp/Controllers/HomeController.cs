@@ -4,6 +4,7 @@ using BookApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using BookApp.Core.Models;
+using System.Threading.Tasks;
 
 namespace BookApp.Controllers
 {
@@ -17,9 +18,10 @@ namespace BookApp.Controllers
             _logger = logger;
             bookRepository = new BookRepository();
         }
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
-            var booksInLibrary = bookRepository.GetBooksInLibrary();
+            var booksInLibrary = await bookRepository.GetBooksInLibraryAsync();
             var libraryViewModel = new LibraryViewModel
             {
                 Books = booksInLibrary.Select(book => new BookViewModel
@@ -39,14 +41,14 @@ namespace BookApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult BookDetails(string title)
+        public async Task<IActionResult> BookDetails(string title)
         {
             if (string.IsNullOrEmpty(title))
             {
                 return BadRequest("Book title cannot be null or empty.");
             }
             
-            var book = bookRepository.GetBookByTitle(title);
+            var book = await bookRepository.GetBookByTitleAsync(title);
 
             if (book == null)
             {
@@ -66,22 +68,22 @@ namespace BookApp.Controllers
         }
         
         [HttpPost]
-        public IActionResult DeleteBook(string title)
+        public async Task<IActionResult> DeleteBook(string title)
         {
             if (string.IsNullOrEmpty(title))
             {
                 return BadRequest("Book title cannot be null or empty.");
             }
 
-            var book = bookRepository.GetBookByTitle(title);
+            var book = await bookRepository.GetBookByTitleAsync(title);
 
             if (book == null)
             {
                 return NotFound("Book not found.");
             }
             
-            bookRepository.DeleteBookByTitle(title);
-            bookRepository.DeleteUserBookByBookId(book.Id);
+            await bookRepository.DeleteBookByTitleAsync(title);
+            await bookRepository.DeleteUserBookByBookIdAsync(book.Id);
 
             return RedirectToAction("Index");
         }

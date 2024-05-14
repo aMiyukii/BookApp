@@ -4,7 +4,7 @@ using BookApp.Models;
 using BookApp.Data;
 using BookApp.Core.Models;
 using System.Collections.Generic;
-using BookApp.Models;
+using System.Threading.Tasks;
 
 namespace BookApp.Controllers
 {
@@ -17,9 +17,9 @@ namespace BookApp.Controllers
             categoryRepository = new CategoryRepository();
         }
 
-        public IActionResult Index()
-        {   
-            var categories = categoryRepository.GetAllCategory();
+        public async Task<IActionResult> Index()
+        {
+            var categories = await categoryRepository.GetAllCategoryAsync();
 
             var viewModel = new AddCategoryViewModel(categories);
 
@@ -27,41 +27,41 @@ namespace BookApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddCategoryName(AddCategoryViewModel addCategoryViewModel)
+        public async Task<ActionResult> AddCategoryName(AddCategoryViewModel addCategoryViewModel)
         {
             var categoryName = addCategoryViewModel.Name;
 
-            var category = new Category
+            var category = new CategoryDTO
             {
                 Name = categoryName
             };
 
-            categoryRepository.AddCategory(category);
+            await categoryRepository.AddCategoryAsync(category);
 
-            var categories = categoryRepository.GetAllCategory();
+            var categories = await categoryRepository.GetAllCategoryAsync();
             var viewModel = new AddCategoryViewModel(categories);
             
             return View("Index", viewModel);
         }
 
         [HttpPost]
-        public ActionResult UpdateCategoryName(int id, string newName)
+        public async Task<ActionResult> UpdateCategoryName(int id, string newName)
         {
-            var category = new Category
+            var category = new CategoryDTO
             {
                 Id = id,
                 Name = newName
             };
 
-            categoryRepository.UpdateCategory(category);
+            await categoryRepository.UpdateCategoryAsync(category);
 
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public ActionResult DeleteCategory(int id)
+        public async Task<ActionResult> DeleteCategory(int id)
         {
-            categoryRepository.DeleteCategory(id);
+            await categoryRepository.DeleteCategoryAsync(id);
 
             return RedirectToAction("Index");
         }
