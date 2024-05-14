@@ -26,7 +26,7 @@
                 {
                     using (SqlConnection connection = dbConnection.GetSqlConnection())
                     {
-                        string selectQuery = "SELECT id, title, author, image_url FROM dbo.book";
+                        string selectQuery = "SELECT id, title, author, imageUrl FROM dbo.book";
 
                         using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
                         {
@@ -37,7 +37,7 @@
                                     int id = Convert.ToInt32(reader["id"]);
                                     string title = reader["title"].ToString();
                                     string author = reader["author"].ToString();
-                                    string imageurl = reader["image_url"].ToString();
+                                    string imageurl = reader["imageUrl"].ToString();
 
                                     BookDTO book = new BookDTO(id, title, author, imageurl);
                                     books.Add(book);
@@ -149,7 +149,7 @@
                 {
                     using (SqlConnection connection = dbConnection.GetSqlConnection())
                     {
-                        string selectQuery = "SELECT title, author, image_url FROM user_book JOIN book ON user_book.book_id = book.id";
+                        string selectQuery = "SELECT title, author, imageUrl FROM user_book JOIN book ON user_book.book_id = book.id";
 
                         using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
                         {
@@ -159,7 +159,7 @@
                                 {
                                     string title = reader["title"].ToString();
                                     string author = reader["author"].ToString();
-                                    string imageUrl = reader["image_url"].ToString();
+                                    string imageUrl = reader["imageUrl"].ToString();
 
 
                                     Book book = new Book { Title = title, Author = author, ImageUrl = imageUrl };
@@ -190,7 +190,7 @@
                 {
                     using (SqlConnection connection = dbConnection.GetSqlConnection())
                     {
-                        string selectQuery = "SELECT id, title, author, image_url, serie, genre FROM dbo.book WHERE title = @title";
+                        string selectQuery = "SELECT id, title, author, imageUrl, serie, genre FROM dbo.book WHERE title = @title";
 
                         using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
                         {
@@ -202,7 +202,7 @@
                                 {
                                     int id = Convert.ToInt32(reader["id"]);
                                     string author = reader["author"].ToString();
-                                    string imageUrl = reader["image_url"].ToString();
+                                    string imageUrl = reader["imageUrl"].ToString();
                                     string serie = reader["serie"].ToString();
                                     string genre = reader["genre"].ToString();
 

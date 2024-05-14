@@ -65,6 +65,5 @@ namespace BookApp.Controllers
 
             return RedirectToAction("Index");
         }
-
     }
 }
