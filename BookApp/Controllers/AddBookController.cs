@@ -4,32 +4,33 @@ using Microsoft.Extensions.Logging;
 using BookApp.Data;
 using BookApp.Core.DTO;
 using System.Threading.Tasks;
+using BookApp.Core.Services;
 
 namespace BookApp.Controllers
 {
     public class AddBookController : Controller
     {
-        private readonly BookRepository bookRepository;
-        private readonly CategoryRepository categoryRepository;
-        private readonly ILogger<AddBookController> logger;
+        private readonly IBookService _bookService;
+        private readonly ICategoryService _categoryService;
+        private readonly ILogger<AddBookController> _logger;
 
-        public AddBookController(ILogger<AddBookController> logger, BookRepository bookRepository, CategoryRepository categoryRepository)
+        public AddBookController(ILogger<AddBookController> logger, IBookService bookService, ICategoryService categoryService)
         {
-            this.bookRepository = bookRepository;
-            this.categoryRepository = categoryRepository;
-            this.logger = logger;
+            _bookService = bookService;
+            _categoryService = categoryService;
+            _logger = logger;
         }
 
         [HttpGet("/addbook")]   
         public async Task<IActionResult> Index()
         {
-            var booksDTO = await bookRepository.GetAllAsync();
-            var categoriesDTO = await categoryRepository.GetAllCategoryAsync();
+            var booksDTO = await _bookService.GetAllAsync();
+            var categoriesDTO = await _categoryService.GetAllCategoryAsync();
 
             var addBookViewModel = new AddBookViewModel(booksDTO, categoriesDTO);
 
-            logger.LogInformation($"Number of books retrieved: {addBookViewModel.Books.Count}");
-            logger.LogInformation($"Number of categories retrieved: {addBookViewModel.Categories.Count}");
+            _logger.LogInformation($"Number of books retrieved: {addBookViewModel.Books.Count}");
+            _logger.LogInformation($"Number of categories retrieved: {addBookViewModel.Categories.Count}");
 
             return View(addBookViewModel);  
         }
@@ -37,10 +38,10 @@ namespace BookApp.Controllers
         [HttpPost("/AddBook/SaveBook")]
         public async Task<ActionResult> SaveBook(int chosenBookId)
         {
-            var bookTitle = await bookRepository.GetBookTitleByIdAsync(chosenBookId);
-            logger.LogInformation($"Book added: {bookTitle}");
+            var bookTitle = await _bookService.GetBookTitleByIdAsync(chosenBookId);
+            _logger.LogInformation($"Book added: {bookTitle}");
 
-            await bookRepository.AddBookToUserCollectionAsync(chosenBookId);
+            await _bookService.AddBookToUserCollectionAsync(chosenBookId);
 
             return RedirectToAction("Index", "Home");
         }

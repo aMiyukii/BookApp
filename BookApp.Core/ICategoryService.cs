@@ -9,5 +9,6 @@ namespace BookApp.Core.Services
         Task AddCategoryAsync(CategoryDTO category);
         Task UpdateCategoryAsync(CategoryDTO category);
         Task DeleteCategoryAsync(int id);
+        Task<List<CategoryDTO>> GetAllCategoryAsync();
     }
 }

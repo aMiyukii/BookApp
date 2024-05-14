@@ -46,5 +46,10 @@ namespace BookApp.Core.Models
         {
             await _bookService.DeleteUserBookByBookIdAsync(bookId);
         }
+        public async Task<List<BookDTO>> GetBooksInLibraryAsync()
+        {
+            return await _bookService.GetBooksInLibraryAsync();
+        }
+
     }
 }

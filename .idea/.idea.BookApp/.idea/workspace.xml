@@ -10,16 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ddb3a06-5db6-4567-a199-9c738edfdec0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BookApp.Core/IBookService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp.Core/ICategoryService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Core/Models/Book.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Models/Book.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Core/Models/Category.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Models/Category.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/IBookService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/IBookService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BookApp.Data/BookRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Data/BookRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Data/CategoryRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Data/CategoryRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Data/DatabaseConnection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Data/DatabaseConnection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp/Controllers/AddBookController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Controllers/AddBookController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp/Controllers/AddCategoryController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Controllers/AddCategoryController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BookApp/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Controllers/HomeController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -143,7 +136,7 @@
       <workItem from="1715669559008" duration="695000" />
       <workItem from="1715672037678" duration="26000" />
       <workItem from="1715672640331" duration="267000" />
-      <workItem from="1715680527517" duration="2973000" />
+      <workItem from="1715680527517" duration="3614000" />
     </task>
     <servers />
   </component>

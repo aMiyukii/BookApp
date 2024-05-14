@@ -136,9 +136,9 @@
                 await dbConnection.CloseConnectionAsync();
             }
         }
-            public async Task<List<Book>> GetBooksInLibraryAsync()
+        public async Task<List<BookDTO>> GetBooksInLibraryAsync()
         {
-            List<Book> books = new List<Book>();
+            List<BookDTO> books = new List<BookDTO>();
             DatabaseConnection dbConnection = new DatabaseConnection();
             await dbConnection.OpenConnectionAsync();
 
@@ -158,7 +158,7 @@
                                 string author = reader["author"].ToString();
                                 string imageUrl = reader["imageUrl"].ToString();
 
-                                Book book = new Book { Title = title, Author = author, ImageUrl = imageUrl };
+                                BookDTO book = new BookDTO { Title = title, Author = author, ImageUrl = imageUrl };
                                 books.Add(book);
                             }
                         }
@@ -176,6 +176,7 @@
 
             return books;
         }
+
 
         public async Task<BookDTO> GetBookByTitleAsync(string title)
         {

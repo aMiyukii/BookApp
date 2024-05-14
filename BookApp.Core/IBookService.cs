@@ -10,6 +10,6 @@ namespace BookApp.Core.Services
         Task<BookDTO> GetBookByTitleAsync(string title);
         Task DeleteBookByTitleAsync(string title);
         Task DeleteUserBookByBookIdAsync(int bookId);
-        
+        Task<List<BookDTO>> GetBooksInLibraryAsync();
     }
 }
