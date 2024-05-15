@@ -7,40 +7,40 @@ namespace BookApp.Core.Models
 {
     public class Category
     {
-        private readonly ICategoryService _categoryService;
+        private readonly ICategoryRepository _categoryRepository;
 
         public int Id { get; set; }
         public string Name { get; set; }
         public bool IsStandard { get; set; }
 
-        public Category(ICategoryService categoryService)
+        public Category(ICategoryRepository categoryRepository)
         {
-            _categoryService = categoryService;
+            _categoryRepository = categoryRepository;
         }
 
         public async Task<List<CategoryDTO>> GetAllCategoriesAsync()
         {
-            return await _categoryService.GetAllCategoriesAsync();
+            return await _categoryRepository.GetAllCategoriesAsync();
         }
 
         public async Task<CategoryDTO> GetCategoryByIdAsync(int id)
         {
-            return await _categoryService.GetCategoryByIdAsync(id);
+            return await _categoryRepository.GetCategoryByIdAsync(id);
         }
 
         public async Task AddCategoryAsync(CategoryDTO category)
         {
-            await _categoryService.AddCategoryAsync(category);
+            await _categoryRepository.AddCategoryAsync(category);
         }
 
         public async Task UpdateCategoryAsync(CategoryDTO category)
         {
-            await _categoryService.UpdateCategoryAsync(category);
+            await _categoryRepository.UpdateCategoryAsync(category);
         }
 
         public async Task DeleteCategoryAsync(int id)
         {
-            await _categoryService.DeleteCategoryAsync(id);
+            await _categoryRepository.DeleteCategoryAsync(id);
         }
     }
 }

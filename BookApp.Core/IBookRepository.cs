@@ -2,7 +2,7 @@ using BookApp.Core.DTO;
 
 namespace BookApp.Core.Services
 {
-    public interface IBookService
+    public interface IBookRepository
     {
         Task<List<BookDTO>> GetAllAsync();
         Task<string> GetBookTitleByIdAsync(int bookId);

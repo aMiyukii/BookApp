@@ -10,22 +10,22 @@ namespace BookApp.Controllers
 {
     public class AddBookController : Controller
     {
-        private readonly IBookService _bookService;
-        private readonly ICategoryService _categoryService;
+        private readonly IBookRepository _bookRepository;
+        private readonly ICategoryRepository _categoryRepository;
         private readonly ILogger<AddBookController> _logger;
 
-        public AddBookController(ILogger<AddBookController> logger, IBookService bookService, ICategoryService categoryService)
+        public AddBookController(ILogger<AddBookController> logger, IBookRepository bookRepository, ICategoryRepository categoryRepository)
         {
-            _bookService = bookService;
-            _categoryService = categoryService;
+            _bookRepository = bookRepository;
+            _categoryRepository = categoryRepository;
             _logger = logger;
         }
 
         [HttpGet("/addbook")]   
         public async Task<IActionResult> Index()
         {
-            var booksDTO = await _bookService.GetAllAsync();
-            var categoriesDTO = await _categoryService.GetAllCategoryAsync();
+            var booksDTO = await _bookRepository.GetAllAsync();
+            var categoriesDTO = await _categoryRepository.GetAllCategoriesAsync(); // Corrected method name
 
             var addBookViewModel = new AddBookViewModel(booksDTO, categoriesDTO);
 
@@ -34,14 +34,14 @@ namespace BookApp.Controllers
 
             return View(addBookViewModel);  
         }
-
+        
         [HttpPost("/AddBook/SaveBook")]
         public async Task<ActionResult> SaveBook(int chosenBookId)
         {
-            var bookTitle = await _bookService.GetBookTitleByIdAsync(chosenBookId);
+            var bookTitle = await _bookRepository.GetBookTitleByIdAsync(chosenBookId);
             _logger.LogInformation($"Book added: {bookTitle}");
 
-            await _bookService.AddBookToUserCollectionAsync(chosenBookId);
+            await _bookRepository.AddBookToUserCollectionAsync(chosenBookId);
 
             return RedirectToAction("Index", "Home");
         }

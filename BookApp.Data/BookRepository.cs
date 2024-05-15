@@ -13,7 +13,7 @@
 
     namespace BookApp.Data
     {
-        public class BookRepository : IBookService
+        public class BookRepository : IBookRepository
         {
             public async Task<List<BookDTO>> GetAllAsync()
             {

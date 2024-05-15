@@ -11,17 +11,17 @@ namespace BookApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IBookService _bookService;
+        private readonly IBookRepository _bookRepository;
 
-        public HomeController(ILogger<HomeController> logger, IBookService bookService)
+        public HomeController(ILogger<HomeController> logger, IBookRepository bookRepository)
         {
             _logger = logger;
-            _bookService = bookService;
+            _bookRepository = bookRepository;
         }
 
         public async Task<IActionResult> Index()
         {
-            var booksInLibrary = await _bookService.GetBooksInLibraryAsync();
+            var booksInLibrary = await _bookRepository.GetBooksInLibraryAsync();
             var libraryViewModel = new LibraryViewModel
             {
                 Books = booksInLibrary.Select(book => new BookViewModel
@@ -48,7 +48,7 @@ namespace BookApp.Controllers
                 return BadRequest("Book title cannot be null or empty.");
             }
             
-            var book = await _bookService.GetBookByTitleAsync(title);
+            var book = await _bookRepository.GetBookByTitleAsync(title);
 
             if (book == null)
             {
@@ -75,15 +75,15 @@ namespace BookApp.Controllers
                 return BadRequest("Book title cannot be null or empty.");
             }
 
-            var book = await _bookService.GetBookByTitleAsync(title);
+            var book = await _bookRepository.GetBookByTitleAsync(title);
 
             if (book == null)
             {
                 return NotFound("Book not found.");
             }
             
-            await _bookService.DeleteBookByTitleAsync(title);
-            await _bookService.DeleteUserBookByBookIdAsync(book.Id);
+            await _bookRepository.DeleteBookByTitleAsync(title);
+            await _bookRepository.DeleteUserBookByBookIdAsync(book.Id);
 
             return RedirectToAction("Index");
         }

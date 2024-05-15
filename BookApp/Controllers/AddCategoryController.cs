@@ -8,16 +8,16 @@ namespace BookApp.Controllers
 {
     public class AddCategoryController : Controller
     {
-        private readonly ICategoryService _categoryService;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public AddCategoryController(ICategoryService categoryService)
+        public AddCategoryController(ICategoryRepository categoryRepository)
         {
-            _categoryService = categoryService;
+            _categoryRepository = categoryRepository;
         }
 
         public async Task<IActionResult> Index()
         {
-            var categories = await _categoryService.GetAllCategoryAsync();
+            var categories = await _categoryRepository.GetAllCategoriesAsync();
             var viewModel = new AddCategoryViewModel(categories);
             return View(viewModel);
         }
@@ -27,7 +27,7 @@ namespace BookApp.Controllers
         {
             var categoryName = addCategoryViewModel.Name;
             var category = new CategoryDTO { Name = categoryName };
-            await _categoryService.AddCategoryAsync(category);
+            await _categoryRepository.AddCategoryAsync(category);
             return RedirectToAction("Index");
         }
 
@@ -35,14 +35,14 @@ namespace BookApp.Controllers
         public async Task<ActionResult> UpdateCategoryName(int id, string newName)
         {
             var category = new CategoryDTO { Id = id, Name = newName };
-            await _categoryService.UpdateCategoryAsync(category);
+            await _categoryRepository.UpdateCategoryAsync(category);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public async Task<ActionResult> DeleteCategory(int id)
         {
-            await _categoryService.DeleteCategoryAsync(id);
+            await _categoryRepository.DeleteCategoryAsync(id);
             return RedirectToAction("Index");
         }
     }

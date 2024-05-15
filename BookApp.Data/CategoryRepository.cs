@@ -9,7 +9,7 @@ using DAL;
 
 namespace BookApp.Data
 {
-    public class CategoryRepository : ICategoryService
+    public class CategoryRepository : ICategoryRepository
     {
         public async Task<List<CategoryDTO>> GetAllCategoriesAsync()
         {

@@ -17,38 +17,38 @@ namespace BookApp.Core.Models
 
         }
         
-        private readonly IBookService _bookService;
-        public Book(IBookService bookService)
+        private readonly IBookRepository _bookRepository;
+        public Book(IBookRepository bookRepository)
         {
-            _bookService = bookService;
+            _bookRepository = bookRepository;
         }
         public async Task<List<BookDTO>> GetAllAsync()
         {
-            return await _bookService.GetAllAsync();
+            return await _bookRepository.GetAllAsync();
         }
         public async Task<string> GetBookTitleByIdAsync(int bookId)
         {
-            return await _bookService.GetBookTitleByIdAsync(bookId);
+            return await _bookRepository.GetBookTitleByIdAsync(bookId);
         }
         public async Task AddToUserCollectionAsync(int bookId)
         {
-            await _bookService.AddBookToUserCollectionAsync(bookId);
+            await _bookRepository.AddBookToUserCollectionAsync(bookId);
         }
         public async Task<BookDTO> GetBookByTitleAsync(string title)
         {
-            return await _bookService.GetBookByTitleAsync(title);
+            return await _bookRepository.GetBookByTitleAsync(title);
         }
         public async Task DeleteAsync()
         {
-            await _bookService.DeleteBookByTitleAsync(this.Title);
+            await _bookRepository.DeleteBookByTitleAsync(this.Title);
         }
         public async Task DeleteUserBookByBookIdAsync(int bookId)
         {
-            await _bookService.DeleteUserBookByBookIdAsync(bookId);
+            await _bookRepository.DeleteUserBookByBookIdAsync(bookId);
         }
         public async Task<List<BookDTO>> GetBooksInLibraryAsync()
         {
-            return await _bookService.GetBooksInLibraryAsync();
+            return await _bookRepository.GetBooksInLibraryAsync();
         }
 
     }
