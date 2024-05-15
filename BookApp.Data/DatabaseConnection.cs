@@ -1,4 +1,6 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -6,13 +8,12 @@ namespace DAL
     {
         private SqlConnection connection;
 
-        public void OpenConnection()
+        public async Task OpenConnectionAsync()
         {
             try
             {
                 connection = new SqlConnection("Server=(localdb)\\MSSQLLocalDB;Integrated Security=true;Database=BookApp;");
-
-                connection.Open();
+                await connection.OpenAsync();
             }
             catch (Exception ex)
             {
@@ -21,18 +22,16 @@ namespace DAL
             }
         }
 
-
         public SqlConnection GetSqlConnection()
         {
             return connection;
         }
 
-
-        public void CloseConnection()
+        public async Task CloseConnectionAsync()
         {
             if (connection != null && connection.State == System.Data.ConnectionState.Open)
             {
-                connection.Close();
+                await connection.CloseAsync();
             }
         }
     }

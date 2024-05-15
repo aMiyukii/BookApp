@@ -1,7 +1,20 @@
+using BookApp.Core.Interfaces;
+using BookApp.Core.Services;
+using BookApp.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Register your services here
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<BookService, BookService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<CategoryServices>();
+
+
+
 
 var app = builder.Build();
 

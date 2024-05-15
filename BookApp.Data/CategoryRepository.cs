@@ -1,153 +1,240 @@
-﻿    using System.Data.SqlClient;
-    using BookApp.Core.Models;
-    using System.Xml.Linq;
-    using DAL;
-    using BookApp.Core.DTO;
-    using BookApp.Core.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Threading.Tasks;
+using BookApp.Core.DTO;
+using BookApp.Core.Interfaces;
+using BookApp.Core.Services;
+using DAL;
 
-    namespace BookApp.Data;
-
-    public class CategoryRepository
+namespace BookApp.Data
+{
+    public class CategoryRepository : ICategoryRepository
     {
-    public void SendCategory(Category category)
-    {
-        CategoryDTO categoryDTO = new CategoryDTO();
-        categoryDTO.Name = category.Name;
-        categoryDTO.IsStandard = false;
-
-        DatabaseConnection dbConnection = new DatabaseConnection();
-        dbConnection.OpenConnection();
-
-        try
+        public async Task<List<CategoryDTO>> GetAllCategoriesAsync()
         {
-            using (SqlConnection connection = dbConnection.GetSqlConnection())
+            List<CategoryDTO> categories = new List<CategoryDTO>();
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            await dbConnection.OpenConnectionAsync();
+
+            try
             {
-                string insertQuery = "INSERT INTO dbo.category (name, isStandard) VALUES (@name, @isStandard);";
-
-                using (SqlCommand cmd = new SqlCommand(insertQuery, connection))
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
                 {
-                    cmd.Parameters.AddWithValue("@name", categoryDTO.Name);
-                    cmd.Parameters.AddWithValue("@isStandard", categoryDTO.IsStandard);
+                    string selectQuery = "SELECT id, name, isStandard FROM dbo.category";
 
-                    cmd.ExecuteNonQuery();
-                    Console.WriteLine("Category added successfully.");
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error: " + ex.Message);
-        }
-        finally
-        {
-            dbConnection.CloseConnection();
-        }
-    }
-
-    public List<CategoryDTO> GetAllCategory()
-    {
-        List<CategoryDTO> categories = new List<CategoryDTO>();
-        DatabaseConnection dbConnection = new DatabaseConnection();
-        dbConnection.OpenConnection();
-
-        try
-        {
-            using (SqlConnection connection = dbConnection.GetSqlConnection())
-            {
-                string selectQuery = "SELECT id, name, isStandard FROM dbo.category";
-
-                using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
-                {
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
                     {
-                        while (reader.Read())
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
-                            int id = reader.IsDBNull(reader.GetOrdinal("id")) ? 0 : reader.GetInt32(reader.GetOrdinal("id"));
-                            string name = reader.IsDBNull(reader.GetOrdinal("name")) ? null : reader.GetString(reader.GetOrdinal("name"));
-                            bool isStandard = reader.GetBoolean(reader.GetOrdinal("isStandard"));
+                            while (await reader.ReadAsync())
+                            {
+                                int id = reader.GetInt32(reader.GetOrdinal("id"));
+                                string name = reader.GetString(reader.GetOrdinal("name"));
+                                bool isStandard = reader.GetBoolean(reader.GetOrdinal("isStandard"));
 
-                            CategoryDTO category = new CategoryDTO(id, name, isStandard);
-                            categories.Add(category);
+                                CategoryDTO category = new CategoryDTO(id, name, isStandard);
+                                categories.Add(category);
+                            }
                         }
                     }
                 }
             }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error fetching categories from the database: " + ex.Message);
-        }
-        finally
-        {
-            dbConnection.CloseConnection();
-        }
-
-        return categories;
-    }
-    public void AddCategory(Category newCategory)
+            catch (Exception ex)
             {
-                SendCategory(newCategory);
+                Console.WriteLine("Error fetching categories from the database: " + ex.Message);
+            }
+            finally
+            {
+                await dbConnection.CloseConnectionAsync();
             }
 
-            public void UpdateCategory(Category category)
+            return categories;
+        }
+        public async Task AddCategoryAsync(CategoryDTO category)
+        {
+            await SendCategoryAsync(category);
+        }
+
+        public async Task DeleteCategoryAsync(int id)
+        {
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            await dbConnection.OpenConnectionAsync();
+
+            try
             {
-                DatabaseConnection dbConnection = new DatabaseConnection();
-                dbConnection.OpenConnection();
-
-                try
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
                 {
-                    using (SqlConnection connection = dbConnection.GetSqlConnection())
+                    string deleteQuery = "DELETE FROM dbo.category WHERE id = @id";
+
+                    using (SqlCommand cmd = new SqlCommand(deleteQuery, connection))
                     {
-                        string updateQuery = "UPDATE dbo.category SET name = @name WHERE id = @id";
+                        cmd.Parameters.AddWithValue("@id", id);
 
-                        using (SqlCommand cmd = new SqlCommand(updateQuery, connection))
+                        await cmd.ExecuteNonQueryAsync();
+                        Console.WriteLine("Category deleted successfully.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            finally
+            {
+                await dbConnection.CloseConnectionAsync();
+            }
+        }
+
+        public async Task<List<CategoryDTO>> GetAllCategoryAsync()
+        {
+            List<CategoryDTO> categories = new List<CategoryDTO>();
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            await dbConnection.OpenConnectionAsync();
+
+            try
+            {
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
+                {
+                    string selectQuery = "SELECT id, name, isStandard FROM dbo.category";
+
+                    using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
+                    {
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
-                            cmd.Parameters.AddWithValue("@name", category.Name);
-                            cmd.Parameters.AddWithValue("@id", category.Id);
+                            while (await reader.ReadAsync())
+                            {
+                                int id = reader.IsDBNull(reader.GetOrdinal("id"))
+                                    ? 0
+                                    : reader.GetInt32(reader.GetOrdinal("id"));
+                                string name = reader.IsDBNull(reader.GetOrdinal("name"))
+                                    ? null
+                                    : reader.GetString(reader.GetOrdinal("name"));
+                                bool isStandard = reader.GetBoolean(reader.GetOrdinal("isStandard"));
 
-                            cmd.ExecuteNonQuery();
-                            Console.WriteLine("Category name updated successfully.");
+                                CategoryDTO category = new CategoryDTO(id, name, isStandard);
+                                categories.Add(category);
+                            }
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error: " + ex.Message);
-                }
-                finally
-                {
-                    dbConnection.CloseConnection();
-                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error fetching categories from the database: " + ex.Message);
+            }
+            finally
+            {
+                await dbConnection.CloseConnectionAsync();
             }
 
-            public void DeleteCategory(int id)
+            return categories;
+        }
+
+        public async Task<CategoryDTO> GetCategoryByIdAsync(int id)
+        {
+            CategoryDTO category = null;
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            await dbConnection.OpenConnectionAsync();
+
+            try
             {
-                DatabaseConnection dbConnection = new DatabaseConnection();
-                dbConnection.OpenConnection();
-
-                try
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
                 {
-                    using (SqlConnection connection = dbConnection.GetSqlConnection())
+                    string selectQuery = "SELECT id, name, isStandard FROM dbo.category WHERE id = @id";
+
+                    using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
                     {
-                        string deleteQuery = "DELETE FROM dbo.category WHERE id = @id";
+                        cmd.Parameters.AddWithValue("@id", id);
 
-                        using (SqlCommand cmd = new SqlCommand(deleteQuery, connection))
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
-                            cmd.Parameters.AddWithValue("@id", id);
+                            if (await reader.ReadAsync())
+                            {
+                                string name = reader.IsDBNull(reader.GetOrdinal("name"))
+                                    ? null
+                                    : reader.GetString(reader.GetOrdinal("name"));
+                                bool isStandard = reader.GetBoolean(reader.GetOrdinal("isStandard"));
 
-                            cmd.ExecuteNonQuery();
-                            Console.WriteLine("Category deleted successfully.");
+                                category = new CategoryDTO(id, name, isStandard);
+                            }
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error: " + ex.Message);
-                }
-                finally
-                {
-                    dbConnection.CloseConnection();
-                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error fetching category from the database: " + ex.Message);
+            }
+            finally
+            {
+                await dbConnection.CloseConnectionAsync();
             }
 
+            return category;
+        }
+
+        public async Task UpdateCategoryAsync(CategoryDTO category)
+        {
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            await dbConnection.OpenConnectionAsync();
+
+            try
+            {
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
+                {
+                    string updateQuery = "UPDATE dbo.category SET name = @name, isStandard = @isStandard WHERE id = @id";
+
+                    using (SqlCommand cmd = new SqlCommand(updateQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@name", category.Name);
+                        cmd.Parameters.AddWithValue("@isStandard", category.IsStandard);
+                        cmd.Parameters.AddWithValue("@id", category.Id);
+
+                        await cmd.ExecuteNonQueryAsync();
+                        Console.WriteLine("Category updated successfully.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            finally
+            {
+                await dbConnection.CloseConnectionAsync();
+            }
+        }
+
+        private async Task SendCategoryAsync(CategoryDTO category)
+        {
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            await dbConnection.OpenConnectionAsync();
+
+            try
+            {
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
+                {
+                    string insertQuery = "INSERT INTO dbo.category (name, isStandard) VALUES (@name, @isStandard);";
+
+                    using (SqlCommand cmd = new SqlCommand(insertQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@name", category.Name);
+                        cmd.Parameters.AddWithValue("@isStandard", category.IsStandard);
+
+                        await cmd.ExecuteNonQueryAsync();
+                        Console.WriteLine("Category added successfully.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            finally
+            {
+                await dbConnection.CloseConnectionAsync();
+            }
+        }
     }
+}

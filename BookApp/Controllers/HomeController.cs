@@ -1,25 +1,27 @@
 ﻿using BookApp.Core.DTO;
-using BookApp.Data;
+using BookApp.Core.Interfaces;
 using BookApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
-using BookApp.Core.Models;
+using System.Linq;
 
 namespace BookApp.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly BookRepository bookRepository;
+        private readonly IBookRepository _bookRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IBookRepository bookRepository)
         {
             _logger = logger;
-            bookRepository = new BookRepository();
+            _bookRepository = bookRepository;
         }
+
         public IActionResult Index()
         {
-            var booksInLibrary = bookRepository.GetBooksInLibrary();
+            var booksInLibrary = _bookRepository.GetBooksInLibraryAsync().Result;
             var libraryViewModel = new LibraryViewModel
             {
                 Books = booksInLibrary.Select(book => new BookViewModel
@@ -45,14 +47,14 @@ namespace BookApp.Controllers
             {
                 return BadRequest("Book title cannot be null or empty.");
             }
-            
-            var book = bookRepository.GetBookByTitle(title);
+
+            var book = _bookRepository.GetBookByTitleAsync(title).Result;
 
             if (book == null)
             {
                 return NotFound("Book not found.");
             }
-            
+
             var bookViewModel = new BookViewModel
             {
                 Title = book.Title,
@@ -64,7 +66,7 @@ namespace BookApp.Controllers
 
             return View(bookViewModel);
         }
-        
+
         [HttpPost]
         public IActionResult DeleteBook(string title)
         {
@@ -73,18 +75,17 @@ namespace BookApp.Controllers
                 return BadRequest("Book title cannot be null or empty.");
             }
 
-            var book = bookRepository.GetBookByTitle(title);
+            var book = _bookRepository.GetBookByTitleAsync(title).Result;
 
             if (book == null)
             {
                 return NotFound("Book not found.");
             }
-            
-            bookRepository.DeleteBookByTitle(title);
-            bookRepository.DeleteUserBookByBookId(book.Id);
+
+            _bookRepository.DeleteBookByTitleAsync(title).Wait();
+            _bookRepository.DeleteUserBookByBookIdAsync(book.Id).Wait();
 
             return RedirectToAction("Index");
         }
-
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BookApp.Core.Models;
+using BookApp.Core.Services;
 
 namespace BookApp.Core.DTO
 {

@@ -1,69 +1,53 @@
-﻿using BookApp.Core.DTO;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using BookApp.Core.Interfaces;
 using BookApp.Models;
-using BookApp.Data;
-using BookApp.Core.Models;
-using System.Collections.Generic;
-using BookApp.Models;
+using System.Threading.Tasks;
+using BookApp.Core.DTO;
+using BookApp.Core.Services;
 
-namespace BookApp.Controllers
-{
-    public class AddCategoryController : Controller
+    namespace BookApp.Controllers
     {
-        private readonly CategoryRepository categoryRepository;
-
-        public AddCategoryController()
+        public class AddCategoryController : Controller
         {
-            categoryRepository = new CategoryRepository();
-        }
+            private readonly CategoryServices _categoryServices;
 
-        public IActionResult Index()
-        {   
-            var categories = categoryRepository.GetAllCategory();
-
-            var viewModel = new AddCategoryViewModel(categories);
-
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        public ActionResult AddCategoryName(AddCategoryViewModel addCategoryViewModel)
-        {
-            var categoryName = addCategoryViewModel.Name;
-
-            var category = new Category
+            public AddCategoryController(CategoryServices categoryServices)
             {
-                Name = categoryName
-            };
+                _categoryServices = categoryServices;
+            }
 
-            categoryRepository.AddCategory(category);
-
-            var categories = categoryRepository.GetAllCategory();
-            var viewModel = new AddCategoryViewModel(categories);
-            
-            return View("Index", viewModel);
-        }
-
-        [HttpPost]
-        public ActionResult UpdateCategoryName(int id, string newName)
-        {
-            var category = new Category
+            [HttpGet("/addcategory")]
+            public async Task<IActionResult> Index()
             {
-                Id = id,
-                Name = newName
-            };
+                var categoriesDTO = await _categoryServices.GetAllCategoriesAsync();
 
-            categoryRepository.UpdateCategory(category);
+                var viewModel = new AddCategoryViewModel
+                {
+                    Categories = categoriesDTO
+                };
 
-            return RedirectToAction("Index");
+                return View(viewModel);
+            }
+
+            [HttpPost("/AddCategory/AddCategoryName")]
+            public async Task<ActionResult> AddCategoryName(CategoryDTO category)
+            {
+                await _categoryServices.AddCategoryAsync(category);
+                return RedirectToAction("Index");
+            }
+
+            [HttpPost("/AddCategory/UpdateCategoryName")]
+            public async Task<ActionResult> UpdateCategoryName(CategoryDTO category)
+            {
+                await _categoryServices.UpdateCategoryAsync(category);
+                return RedirectToAction("Index");
+            }
+
+            [HttpPost("/AddCategory/DeleteCategory")]
+            public async Task<ActionResult> DeleteCategory(int id)
+            {
+                await _categoryServices.DeleteCategoryAsync(id);
+                return RedirectToAction("Index");
+            }
         }
-
-        [HttpPost]
-        public ActionResult DeleteCategory(int id)
-        {
-            categoryRepository.DeleteCategory(id);
-
-            return RedirectToAction("Index");
-        }
-    }
 }
