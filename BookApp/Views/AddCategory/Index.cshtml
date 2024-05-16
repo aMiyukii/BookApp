@@ -62,7 +62,7 @@
         // Edit category
         $('.edit-icon').click(function() {
             var categoryId = $(this).closest('.categoryItem').data('id');
-            var newName = prompt('Enter new category name:');
+            var newName = prompt('Enter new category name:', $(this).closest('.categoryItem').find('.categoryNames').text());
             if (newName) {
                 $.post('@Url.Action("UpdateCategoryName", "AddCategory")', { id: categoryId, newName: newName }, function(data) {
                     location.reload();
