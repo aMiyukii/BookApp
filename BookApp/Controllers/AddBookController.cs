@@ -34,12 +34,12 @@ namespace BookApp.Controllers
         }
         
         [HttpPost("/AddBook/SaveBook")]
-        public async Task<ActionResult> SaveBook(int chosenBookId)
+        public async Task<ActionResult> SaveBook(int chosenBookId, int chosenCategoryId)
         {
-            await _bookService.AddToUserCollectionAsync(chosenBookId);
-
+            await _bookService.AddToUserCollectionAsync(chosenBookId, chosenCategoryId);
+            
             return RedirectToAction("Index", "Home");
         }
-        
+
     }
 }

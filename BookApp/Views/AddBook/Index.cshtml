@@ -13,45 +13,45 @@
 <body>
     <div class="grid-column">
         <div class="grid-item">
-            <form class="d-flex">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input class="searchbar" type="search" placeholder="Search book" aria-label="Search">
-            </form>
-
-            <h1 class="AddCategory">Add standard category</h1>
-            <div class="dropdown">
-                <label for="category-options"></label>
-                <div class="dropdownClone" id="dropdownContainer">
-                    <select name="category-options" id="category-options">
-                    <option disabled selected>Select a category</option>
-                    @foreach (var categories in Model.Categories.Where(c => c.IsStandard == true))
-                    {
-                        <option value="@categories.Id">@categories.Name</option>
-                    }  
-                    </select>
-                </div>
-            </div>
-            
-            <h1 class="AddCategoryOp">Add your own category - <i>optional</i></h1>
-                        <div class="dropdownOp">
-                            <label for="category-options"></label>
-                            <div class="dropdownClone" id="dropdownContainer">
-                                <select name="category-options" id="category-options">
-                                <option disabled selected>Select a category</option>
-                                    @foreach (var categories in Model.Categories.Where(c => c.IsStandard == false))
-                                    {
-                                        <option value="@categories.Id">@categories.Name</option>
-                                    }   
-                                </select>   
-                            </div>
-                        </div>
-
             @using (Html.BeginForm("SaveBook", "AddBook", FormMethod.Post))
             {
+                <div class="d-flex">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input class="searchbar" type="search" placeholder="Search book" aria-label="Search">
+                </div>
+
+                <h1 class="AddCategory">Add standard category</h1>
+                <div class="dropdown">
+                    <label for="standard-category-options"></label>
+                    <div class="dropdownClone" id="dropdownContainer">
+                        <select name="standard-category-options" id="standard-category-options" onchange="setChosenCategory()">
+                            <option disabled selected>Select a category</option>
+                            @foreach (var category in Model.Categories.Where(c => c.IsStandard))
+                            {
+                                <option value="@category.Id">@category.Name</option>
+                            }  
+                        </select>
+                    </div>
+                </div>
+
+                <h1 class="AddCategoryOp">Add your own category - <i>optional</i></h1>
+                <div class="dropdownOp">
+                    <label for="optional-category-options"></label>
+                    <div class="dropdownClone" id="dropdownContainer">
+                        <select name="optional-category-options" id="optional-category-options" onchange="setChosenCategory()">
+                            <option disabled selected>Select a category</option>
+                            @foreach (var category in Model.Categories.Where(c => !c.IsStandard))
+                            {
+                                <option value="@category.Id">@category.Name</option>
+                            }   
+                        </select>   
+                    </div>
+                </div>
+
                 <input type="hidden" id="chosenBookId" name="chosenBookId" value="" />
+                <input type="hidden" id="chosenCategoryId" name="chosenCategoryId" value="" />
                 <button type="submit" class="AddBookButton">Add book</button>
             }
-
         </div>
         <div class="grid-item2">
             <div class="BookList">
@@ -72,43 +72,49 @@
             </div>
         </div>
 
-<script>
-   function handleBookClick(event) {
-       var clickedElement = event.target.closest('.grid-item3');
-       if (clickedElement) {
-           var id = clickedElement.dataset.bookId;
-           document.getElementById('chosenBookId').value = id;
-           
-           var title = clickedElement.querySelector('.BookTitle p').textContent;
-           var author = clickedElement.querySelector('.BookAuthor p').textContent;
-           var imageUrl = clickedElement.querySelector('.BookImage img').src;
-           displayChosenBook(title, author, imageUrl);
-       }
-   }
-    function displayChosenBook(title, author, imageUrl) {
-        var chosenBookTitle = document.getElementById('chosenTitle');
-        var chosenBookAuthor = document.getElementById('chosenAuthor');
-        var chosenBookImage = document.getElementById('chosenImage');
+        <script>
+            function handleBookClick(event) {
+                var clickedElement = event.target.closest('.grid-item3');
+                if (clickedElement) {
+                    var id = clickedElement.dataset.bookId;
+                    document.getElementById('chosenBookId').value = id;
+                    
+                    var title = clickedElement.querySelector('.BookTitle p').textContent;
+                    var author = clickedElement.querySelector('.BookAuthor p').textContent;
+                    var imageUrl = clickedElement.querySelector('.BookImage img').src;
+                    displayChosenBook(title, author, imageUrl);
+                    
+                    var categorySelect = document.getElementById('category-options');
+                    var categoryId = categorySelect.options[categorySelect.selectedIndex].value;
+                    document.getElementById('chosenCategoryId').value = categoryId;
+                }
+            }
+            
+            function displayChosenBook(title, author, imageUrl) {
+                var chosenBookTitle = document.getElementById('chosenTitle');
+                var chosenBookAuthor = document.getElementById('chosenAuthor');
+                var chosenBookImage = document.getElementById('chosenImage');
+            
+                chosenBookTitle.textContent = title;
+                chosenBookAuthor.textContent = author;
+                chosenBookImage.src = imageUrl;
+            
+                chosenBookImage.style.display = 'block';
+            }
 
-        chosenBookTitle.textContent = title;
-        chosenBookAuthor.textContent = author;
-        chosenBookImage.src = imageUrl;
+        </script>
 
-        chosenBookImage.style.display = 'block';
-    }
-</script>
-
-         <div class="chosenbook">
-             <div class="BookImagechosen">
-                 <img id="chosenImage" class="image" style="display: none;" />
-             </div>
-             <div class="BookTitlechosen">
-                 <p id="chosenTitle"></p>
-             </div>
-             <div class="BookAuthorchosen">
-                 <p id="chosenAuthor"></p>
-             </div>
-         </div>
+        <div class="chosenbook">
+            <div class="BookImagechosen">
+                <img id="chosenImage" class="image" style="display: none;" />
+            </div>
+            <div class="BookTitlechosen">
+                <p id="chosenTitle"></p>
+            </div>
+            <div class="BookAuthorchosen">
+                <p id="chosenAuthor"></p>
+            </div>
+        </div>
     </div>
 </body>
 </html>

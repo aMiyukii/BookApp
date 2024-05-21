@@ -92,50 +92,59 @@
 
             return title;
         }
+            public async Task AddBookToUserCollectionAsync(int bookId, int categoryId)
+{
+    DatabaseConnection dbConnection = new DatabaseConnection();
+    await dbConnection.OpenConnectionAsync();
 
-        public async Task AddBookToUserCollectionAsync(int bookId)
+    try
+    {
+        using (SqlConnection connection = dbConnection.GetSqlConnection())
         {
-            DatabaseConnection dbConnection = new DatabaseConnection();
-            await dbConnection.OpenConnectionAsync();
+            string checkBookQuery = "SELECT COUNT(*) FROM dbo.book WHERE id = @bookId";
 
-            try
+            using (SqlCommand checkCmd = new SqlCommand(checkBookQuery, connection))
             {
-                using (SqlConnection connection = dbConnection.GetSqlConnection())
+                checkCmd.Parameters.AddWithValue("@bookId", bookId);
+                int count = (int)await checkCmd.ExecuteScalarAsync();
+
+                if (count > 0)
                 {
-                    string checkBookQuery = "SELECT COUNT(*) FROM dbo.book WHERE id = @bookId";
+                    string insertUserBookQuery = "INSERT INTO user_book (book_id) OUTPUT INSERTED.id VALUES (@bookId)";
 
-                    using (SqlCommand checkCmd = new SqlCommand(checkBookQuery, connection))
+                    using (SqlCommand insertUserBookCmd = new SqlCommand(insertUserBookQuery, connection))
                     {
-                        checkCmd.Parameters.AddWithValue("@bookId", bookId);
-                        int count = (int)await checkCmd.ExecuteScalarAsync();
+                        insertUserBookCmd.Parameters.AddWithValue("@bookId", bookId);
+                        int userBookId = (int)await insertUserBookCmd.ExecuteScalarAsync();
 
-                        if (count > 0)
-                        {
-                            string insertQuery = "INSERT INTO user_book (book_id) VALUES (@bookId)";
+                        string insertUserBookCategoryQuery = "INSERT INTO user_book_category (category_id, user_book_id) VALUES (@categoryId, @userBookId)";
 
-                            using (SqlCommand cmd = new SqlCommand(insertQuery, connection))
-                            {
-                                cmd.Parameters.AddWithValue("@bookId", bookId);
-                                await cmd.ExecuteNonQueryAsync();
-                                Console.WriteLine("Book added to user collection successfully.");
-                            }
-                        }
-                        else
+                        using (SqlCommand insertUserBookCategoryCmd = new SqlCommand(insertUserBookCategoryQuery, connection))
                         {
-                            Console.WriteLine("Error: Book with ID " + bookId + " does not exist.");
+                            insertUserBookCategoryCmd.Parameters.AddWithValue("@categoryId", categoryId);
+                            insertUserBookCategoryCmd.Parameters.AddWithValue("@userBookId", userBookId);
+                            await insertUserBookCategoryCmd.ExecuteNonQueryAsync();
+                            Console.WriteLine("Book added to user collection successfully.");
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error adding book to user collection: " + ex.Message);
-            }
-            finally
-            {
-                await dbConnection.CloseConnectionAsync();
+                else
+                {
+                    Console.WriteLine("Error: Book with ID " + bookId + " does not exist.");
+                }
             }
         }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Error adding book to user collection: " + ex.Message);
+    }
+    finally
+    {
+        await dbConnection.CloseConnectionAsync();
+    }
+}
+
         public async Task<List<BookDTO>> GetBooksInLibraryAsync()
         {
             List<BookDTO> books = new List<BookDTO>();

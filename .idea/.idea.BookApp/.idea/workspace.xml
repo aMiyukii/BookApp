@@ -11,8 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9ddb3a06-5db6-4567-a199-9c738edfdec0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp/Controllers/AddCategoryController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Controllers/AddCategoryController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp/Views/AddCategory/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Views/AddCategory/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Data/BookRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Data/BookRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +135,7 @@
       <workItem from="1714553511192" duration="5198000" />
       <workItem from="1715160010287" duration="302000" />
       <workItem from="1715669559008" duration="499000" />
-      <workItem from="1715856790612" duration="1881000" />
+      <workItem from="1715856790612" duration="4708000" />
     </task>
     <servers />
   </component>
@@ -156,24 +155,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/BookApp/Controllers/AddCategoryController.cs</url>
-          <line>43</line>
-          <properties documentPath="D:\Fontys\2024-2025\Semester 2.1\Individueel\BookApp\BookApp\Controllers\AddCategoryController.cs" initialLine="43" containingFunctionPresentation="Method 'UpdateCategoryName'">
-            <startOffsets>
-              <option value="1360" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1361" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
