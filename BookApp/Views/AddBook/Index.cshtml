@@ -49,60 +49,63 @@
                 </div>
 
                 <input type="hidden" id="chosenBookId" name="chosenBookId" value="" />
-                <input type="hidden" id="chosenCategoryId" name="chosenCategoryId" value="" />
-                <button type="submit" class="AddBookButton">Add book</button>
-            }
-        </div>
-        <div class="grid-item2">
-            <div class="BookList">
-                @foreach (var bookDTO in Model.Books)
-                {
-                    <div class="grid-item3" data-book-id="@bookDTO.Id" onclick="handleBookClick(event)">
-                        <div class="BookImage">
-                            <img src="@bookDTO.ImageUrl" class="BookImage" />
-                        </div>
-                        <div class="BookTitle">
-                            <p>@bookDTO.Title</p>
-                        </div>
-                        <div class="BookAuthor">
-                            <p>@bookDTO.Author</p>
+                            <input type="hidden" id="chosenCategoryId" name="chosenCategoryId" value="" />
+                            <button type="submit" class="AddBookButton">Add book</button>
+                        }
+                    </div>
+                    <div class="grid-item2">
+                        <div class="BookList">
+                            @foreach (var bookDTO in Model.Books)
+                            {
+                                <div class="grid-item3" data-book-id="@bookDTO.Id" onclick="handleBookClick(event)">
+                                    <div class="BookImage">
+                                        <img src="@bookDTO.ImageUrl" class="BookImage" />
+                                    </div>
+                                    <div class="BookTitle">
+                                        <p>@bookDTO.Title</p>
+                                    </div>
+                                    <div class="BookAuthor">
+                                        <p>@bookDTO.Author</p>
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
-                }
-            </div>
-        </div>
-
-        <script>
-            function handleBookClick(event) {
-                var clickedElement = event.target.closest('.grid-item3');
-                if (clickedElement) {
-                    var id = clickedElement.dataset.bookId;
-                    document.getElementById('chosenBookId').value = id;
-                    
-                    var title = clickedElement.querySelector('.BookTitle p').textContent;
-                    var author = clickedElement.querySelector('.BookAuthor p').textContent;
-                    var imageUrl = clickedElement.querySelector('.BookImage img').src;
-                    displayChosenBook(title, author, imageUrl);
-                    
-                    var categorySelect = document.getElementById('category-options');
-                    var categoryId = categorySelect.options[categorySelect.selectedIndex].value;
-                    document.getElementById('chosenCategoryId').value = categoryId;
-                }
-            }
-            
-            function displayChosenBook(title, author, imageUrl) {
-                var chosenBookTitle = document.getElementById('chosenTitle');
-                var chosenBookAuthor = document.getElementById('chosenAuthor');
-                var chosenBookImage = document.getElementById('chosenImage');
-            
-                chosenBookTitle.textContent = title;
-                chosenBookAuthor.textContent = author;
-                chosenBookImage.src = imageUrl;
-            
-                chosenBookImage.style.display = 'block';
-            }
-
-        </script>
+                
+                    <script>
+                        function handleBookClick(event) {
+                            var clickedElement = event.target.closest('.grid-item3');
+                            if (clickedElement) {
+                                var id = clickedElement.dataset.bookId;
+                                document.getElementById('chosenBookId').value = id;
+                                
+                                var title = clickedElement.querySelector('.BookTitle p').textContent;
+                                var author = clickedElement.querySelector('.BookAuthor p').textContent;
+                                var imageUrl = clickedElement.querySelector('.BookImage img').src;
+                                displayChosenBook(title, author, imageUrl);
+                            }
+                        }
+                        
+                        function displayChosenBook(title, author, imageUrl) {
+                            var chosenBookTitle = document.getElementById('chosenTitle');
+                            var chosenBookAuthor = document.getElementById('chosenAuthor');
+                            var chosenBookImage = document.getElementById('chosenImage');
+                        
+                            chosenBookTitle.textContent = title;
+                            chosenBookAuthor.textContent = author;
+                            chosenBookImage.src = imageUrl;
+                        
+                            chosenBookImage.style.display = 'block';
+                        }
+                
+                        document.getElementById('standard-category-options').addEventListener('change', function() {
+                            document.getElementById('chosenCategoryId').value = this.value;
+                        });
+                
+                        document.getElementById('optional-category-options').addEventListener('change', function() {
+                            document.getElementById('chosenCategoryId').value = this.value;
+                        });
+                    </script>
 
         <div class="chosenbook">
             <div class="BookImagechosen">
