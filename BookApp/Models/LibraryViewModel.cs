@@ -12,5 +12,14 @@ namespace BookApp.Models
         public string Serie { get; set; }
         public string Genre { get; set; }
         public string ImageUrl { get; set; }
+        public List<CategoryViewModel> Categories { get; set; } = new List<CategoryViewModel>();
     }
+    
+    public class CategoryViewModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public bool IsStandard { get; set; }
+    }
+
 }

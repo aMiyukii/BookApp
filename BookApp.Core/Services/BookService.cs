@@ -33,6 +33,11 @@ namespace BookApp.Core.Services
         {
             return await _bookRepository.GetBookTitleByIdAsync(bookId);
         }
+        
+        public async Task<IEnumerable<CategoryDTO>> GetCategoriesByBookIdAsync(int bookId)
+        {
+            return await _bookRepository.GetCategoriesByBookIdAsync(bookId);
+        }
 
         public async Task AddToUserCollectionAsync(int bookId, int categoryId)
         {

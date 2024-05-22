@@ -8,6 +8,7 @@ namespace BookApp.Core.Interfaces
     {
         Task<List<BookDTO>> GetAllAsync();
         Task<string> GetBookTitleByIdAsync(int bookId);
+        Task<IEnumerable<CategoryDTO>> GetCategoriesByBookIdAsync(int bookId);
         Task AddBookToUserCollectionAsync(int bookId, int categoryId);
         Task<BookDTO> GetBookByTitleAsync(string title);
         Task DeleteBookByTitleAsync(string title);

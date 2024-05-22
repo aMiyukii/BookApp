@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BookApp.Controllers
 {
@@ -19,41 +20,47 @@ namespace BookApp.Controllers
             _bookRepository = bookRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var booksInLibrary = _bookRepository.GetBooksInLibraryAsync().Result;
+            var booksInLibrary = await _bookRepository.GetBooksInLibraryAsync();
             var libraryViewModel = new LibraryViewModel
             {
-                Books = booksInLibrary.Select(book => new BookViewModel
+                Books = booksInLibrary.Select(book =>
                 {
-                    Title = book.Title,
-                    Author = book.Author,
-                    ImageUrl = book.ImageUrl
+                    var categories = _bookRepository.GetCategoriesByBookIdAsync(book.Id).Result;
+                    return new BookViewModel
+                    {
+                        Title = book.Title,
+                        Author = book.Author,
+                        ImageUrl = book.ImageUrl,
+                        Categories = categories.Select(c => new CategoryViewModel
+                        {
+                            Id = c.Id,
+                            Name = c.Name,
+                            IsStandard = c.IsStandard
+                        }).ToList()
+                    };
                 }).ToList()
             };
 
             return View(libraryViewModel);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        public IActionResult BookDetails(string title)
+        public async Task<IActionResult> BookDetails(string title)
         {
             if (string.IsNullOrEmpty(title))
             {
                 return BadRequest("Book title cannot be null or empty.");
             }
 
-            var book = _bookRepository.GetBookByTitleAsync(title).Result;
+            var book = await _bookRepository.GetBookByTitleAsync(title);
 
             if (book == null)
             {
                 return NotFound("Book not found.");
             }
+
+            var categories = await _bookRepository.GetCategoriesByBookIdAsync(book.Id);
 
             var bookViewModel = new BookViewModel
             {
@@ -61,29 +68,35 @@ namespace BookApp.Controllers
                 Author = book.Author,
                 Serie = book.Serie,
                 Genre = book.Genre,
-                ImageUrl = book.ImageUrl
+                ImageUrl = book.ImageUrl,
+                Categories = categories.Select(c => new CategoryViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    IsStandard = c.IsStandard
+                }).ToList()
             };
 
             return View(bookViewModel);
         }
 
         [HttpPost]
-        public IActionResult DeleteBook(string title)
+        public async Task<IActionResult> DeleteBook(string title)
         {
             if (string.IsNullOrEmpty(title))
             {
                 return BadRequest("Book title cannot be null or empty.");
             }
 
-            var book = _bookRepository.GetBookByTitleAsync(title).Result;
+            var book = await _bookRepository.GetBookByTitleAsync(title);
 
             if (book == null)
             {
                 return NotFound("Book not found.");
             }
 
-            _bookRepository.DeleteBookByTitleAsync(title).Wait();
-            _bookRepository.DeleteUserBookByBookIdAsync(book.Id).Wait();
+            await _bookRepository.DeleteBookByTitleAsync(title);
+            await _bookRepository.DeleteUserBookByBookIdAsync(book.Id);
 
             return RedirectToAction("Index");
         }

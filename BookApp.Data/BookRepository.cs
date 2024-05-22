@@ -144,7 +144,6 @@
         await dbConnection.CloseConnectionAsync();
     }
 }
-
         public async Task<List<BookDTO>> GetBooksInLibraryAsync()
         {
             List<BookDTO> books = new List<BookDTO>();
@@ -185,8 +184,6 @@
 
             return books;
         }
-
-
         public async Task<BookDTO> GetBookByTitleAsync(string title)
         {
             BookDTO book = null;
@@ -286,5 +283,51 @@
                 await dbConnection.CloseConnectionAsync();
             }
         }
+        
+        public async Task<IEnumerable<CategoryDTO>> GetCategoriesByBookIdAsync(int bookId)
+        {
+            List<CategoryDTO> categories = new List<CategoryDTO>();
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            await dbConnection.OpenConnectionAsync();
+
+            try
+            {
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
+                {
+                    string selectQuery = "SELECT c.id, c.name FROM category c " +
+                                         "INNER JOIN user_book_category ubc ON c.id = ubc.category_id " +
+                                         "INNER JOIN user_book ub ON ubc.user_book_id = ub.id " +
+                                         "WHERE ub.book_id = @bookId";
+
+                    using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@bookId", bookId);
+
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                int id = Convert.ToInt32(reader["id"]);
+                                string name = reader["name"].ToString();
+
+                                CategoryDTO category = new CategoryDTO(id, name);
+                                categories.Add(category);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error fetching categories from the database: " + ex.Message);
+            }
+            finally
+            {
+                await dbConnection.CloseConnectionAsync();
+            }
+
+            return categories;
+        }
+        
         }
     }

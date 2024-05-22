@@ -41,6 +41,19 @@ body {
     position: absolute;
     top: 35%;
 }
+
+.BookCategories{
+    font-size: 19px;
+    margin-left: 17%;
+    position: absolute;
+    top: 45%;
+    font-weight: 500;
+}
+
+.categories{
+    font-weight: 400;
+}
+
 .DeleteBookButton {
     margin-top: 1rem;
     margin-left: 6.5%;

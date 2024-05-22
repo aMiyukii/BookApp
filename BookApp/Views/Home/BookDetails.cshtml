@@ -28,6 +28,15 @@
     <div class="BookGenre">
         <p>Genre: @Model.Genre</p>
     </div>
+    <div class="BookCategories">
+        <p>Categories:</p>
+        <ul>
+            @foreach (var category in Model.Categories)
+            {
+                <li class="categories">@category.Name</li>
+            }
+        </ul>
+    </div>
 </div>
 
 <form id="deleteBookForm" method="post" action="@Url.Action("DeleteBook", "Home")">
