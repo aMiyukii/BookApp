@@ -11,7 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ddb3a06-5db6-4567-a199-9c738edfdec0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BookApp.Unittest/AddBookTest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BookApp.Unittest/BookServiceTest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BookApp.Unittest/CategoryServiceTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/Services/BookService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Services/BookService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/AddBookTest.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/BookApp.Unittest/BookApp.Unittest.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/BookApp.Unittest.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,6 +33,20 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;aMiyukii&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="2e3ee2d6-02b9-4bda-8c33-fd9e0c52d3c5" />
+        <option name="url" value="https://github.com/aMiyukii/BookApp.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/d0ca5a8d20ac50a33d5451e998a5d411a810c8d7/src/Razor/Razor.Runtime/src/Runtime/TagHelpers/TagHelperExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
@@ -49,6 +67,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     ".NET Launch Settings Profile.BookApp: http.executor": "Debug",
+    "2dce3e09-79ad-4431-9318-c73d637bee47.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "Unittest",
@@ -158,6 +177,9 @@
       <workItem from="1715856790612" duration="4708000" />
       <workItem from="1716308523726" duration="5639000" />
       <workItem from="1716361057431" duration="6276000" />
+      <workItem from="1716367381228" duration="3005000" />
+      <workItem from="1716370433603" duration="294000" />
+      <workItem from="1716374885673" duration="1043000" />
     </task>
     <servers />
   </component>
