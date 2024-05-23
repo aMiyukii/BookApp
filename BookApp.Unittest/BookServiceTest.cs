@@ -1,4 +1,4 @@
-using Xunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using BookApp.Core.DTO;
 using BookApp.Core.Interfaces;
@@ -7,8 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookApp.UnitTests
+namespace UnitTests
 {
+    [TestClass]
     public class BookServiceTests
     {
         private readonly Mock<IBookRepository> _mockBookRepository;
@@ -20,7 +21,7 @@ namespace BookApp.UnitTests
             _bookService = new BookService(_mockBookRepository.Object);
         }
 
-        [Fact]
+        [TestMethod]
         public async Task GetAllAsync_ReturnsBookList()
         {
             // Arrange
@@ -36,10 +37,9 @@ namespace BookApp.UnitTests
             var result = await _bookService.GetAllAsync();
 
             // Assert
-            Assert.NotNull(result);
-            Assert.Equal(2, result.Count);
-            Assert.Equal("Book 1", result[0].Title);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual("Book 1", result[0].Title);
         }
     }
-
 }
