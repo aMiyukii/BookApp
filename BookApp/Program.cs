@@ -11,7 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<BookService, BookService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<CategoryServices>();
+builder.Services.AddScoped<CategoryService>();
 
 
 

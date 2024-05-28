@@ -7,9 +7,9 @@ namespace BookApp.Controllers
 {
     public class AddCategoryController : Controller
     {
-        private readonly CategoryServices _categoryServices;
+        private readonly CategoryService _categoryServices;
 
-        public AddCategoryController(CategoryServices categoryServices)
+        public AddCategoryController(CategoryService categoryServices)
         {
             _categoryServices = categoryServices;
         }

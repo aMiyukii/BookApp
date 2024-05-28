@@ -6,7 +6,7 @@ using BookApp.Core.Interfaces;
 
 namespace BookApp.Core.Services
 {
-    public class CategoryServices
+    public class CategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
 
@@ -14,7 +14,7 @@ namespace BookApp.Core.Services
         public string Name { get; set; }
         public bool IsStandard { get; set; }
 
-        public CategoryServices(ICategoryRepository categoryRepository)
+        public CategoryService(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository ?? throw new ArgumentNullException(nameof(categoryRepository));
         }

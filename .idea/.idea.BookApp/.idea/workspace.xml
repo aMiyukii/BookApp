@@ -11,10 +11,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ddb3a06-5db6-4567-a199-9c738edfdec0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/BookApp.Unittest/CategoryTest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeBookRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BookApp.Unittest/BookApp.Unittest.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/BookApp.Unittest.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/BookServiceTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/BookServiceTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/CategoryServiceTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/CategoryServiceTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/BookServiceTest.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/CategoryServiceTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/BookTest.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +50,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/d0ca5a8d20ac50a33d5451e998a5d411a810c8d7/src/Razor/Razor.Runtime/src/Runtime/TagHelpers/TagHelperExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b8b10b8247cb413eab5175c26a5956a755a8/8c/6825c058/ITestMethod.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
@@ -178,7 +181,8 @@
       <workItem from="1716367381228" duration="3005000" />
       <workItem from="1716370433603" duration="294000" />
       <workItem from="1716374885673" duration="4863000" />
-      <workItem from="1716447396690" duration="705000" />
+      <workItem from="1716447396690" duration="1228000" />
+      <workItem from="1716893979506" duration="4826000" />
     </task>
     <servers />
   </component>

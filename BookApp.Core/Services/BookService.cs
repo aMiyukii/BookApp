@@ -48,11 +48,16 @@ namespace BookApp.Core.Services
             return await _bookRepository.GetBookByTitleAsync(title);
         }
 
-        public async Task DeleteAsync()
+        public async Task DeleteAsync(string title)
         {
-            if (string.IsNullOrWhiteSpace(Title)) throw new ArgumentException("Title cannot be null or empty", nameof(Title));
-            await _bookRepository.DeleteBookByTitleAsync(Title);
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                throw new ArgumentException("Title cannot be null or empty", nameof(title));
+            }
+
+            await _bookRepository.DeleteBookByTitleAsync(title);
         }
+
 
         public async Task DeleteUserBookByBookIdAsync(int bookId)
         {
