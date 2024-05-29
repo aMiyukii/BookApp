@@ -21,21 +21,23 @@ body {
     margin-bottom: 2.5em;
     overflow: hidden;
 }
+
 .grid-item a {
     text-decoration: none;
     color: black;
 }
+
 .BookImage img {
     width: 100%;
     height: auto;
 }
 
-.BookTitle{
+.BookTitle {
     font-weight: 500;
     font-size: 14px;
 }
 
-.BookAuthor{
+.BookAuthor {
     margin-top: -1EM;
     font-size: 14px;
 }

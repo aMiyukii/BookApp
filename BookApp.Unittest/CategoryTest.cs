@@ -1,7 +1,6 @@
 using BookApp.Core.DTO;
 using BookApp.Core.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 using BookApp.Unittest.Fake_Repositories;
 
 namespace UnitTests

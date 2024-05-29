@@ -4,16 +4,16 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
-.Book{
+.Book {
     margin-left: 5%;
 }
 
-.BookImage{
+.BookImage {
     width: 40%;
     height: auto;
 }
 
-.BookTitle{
+.BookTitle {
     font-size: 21px;
     font-weight: 500;
     margin-left: 17%;
@@ -21,28 +21,28 @@ body {
     top: 17%;
 }
 
-.BookAuthor{
+.BookAuthor {
     font-size: 21px;
     margin-left: 17%;
     position: absolute;
     top: 22%;
 }
 
-.BookSeries{
+.BookSeries {
     font-size: 19px;
     margin-left: 17%;
     position: absolute;
     top: 30%;
 }
 
-.BookGenre{
+.BookGenre {
     font-size: 19px;
     margin-left: 17%;
     position: absolute;
     top: 35%;
 }
 
-.BookCategories{
+.BookCategories {
     font-size: 19px;
     margin-left: 17%;
     position: absolute;
@@ -50,7 +50,7 @@ body {
     font-weight: 500;
 }
 
-.categories{
+.categories {
     font-weight: 400;
 }
 

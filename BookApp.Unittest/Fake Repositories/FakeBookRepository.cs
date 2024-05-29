@@ -1,8 +1,5 @@
 using BookApp.Core.DTO;
 using BookApp.Core.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 public class FakeBookRepository : IBookRepository
 {

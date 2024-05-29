@@ -1,6 +1,4 @@
 using BookApp.Core.DTO;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace BookApp.Core.Interfaces
 {

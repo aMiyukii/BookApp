@@ -1,6 +1,4 @@
-﻿using System;
-using System.Data.SqlClient;
-using System.Threading.Tasks;
+﻿using System.Data.SqlClient;
 
 namespace DAL
 {
@@ -12,7 +10,8 @@ namespace DAL
         {
             try
             {
-                connection = new SqlConnection("Server=(localdb)\\MSSQLLocalDB;Integrated Security=true;Database=BookApp;");
+                connection =
+                    new SqlConnection("Server=(localdb)\\MSSQLLocalDB;Integrated Security=true;Database=BookApp;");
                 await connection.OpenAsync();
             }
             catch (Exception ex)

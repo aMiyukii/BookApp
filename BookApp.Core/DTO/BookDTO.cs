@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BookApp.Core.Services;
-
-namespace BookApp.Core.DTO
+﻿namespace BookApp.Core.DTO
 {
     public class BookDTO
     {
@@ -16,16 +9,18 @@ namespace BookApp.Core.DTO
         public string Serie { get; set; }
         public string ImageUrl { get; set; }
 
-        public BookDTO() { }
+        public BookDTO()
+        {
+        }
 
-        public BookDTO(int id, string title, string author, string imageurl) 
+        public BookDTO(int id, string title, string author, string imageurl)
         {
             Id = id;
             Title = title;
             Author = author;
             ImageUrl = imageurl;
         }
-        
+
         public BookDTO(int id, string title, string author, string imageurl, string serie, string genre)
         {
             Id = id;

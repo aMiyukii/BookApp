@@ -1,8 +1,5 @@
-using BookApp.Core.DTO;
 using BookApp.Core.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading.Tasks;
-using System.Linq;
 
 namespace UnitTests
 {

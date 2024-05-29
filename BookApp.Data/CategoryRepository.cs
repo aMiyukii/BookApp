@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Threading.Tasks;
+﻿using System.Data.SqlClient;
 using BookApp.Core.DTO;
 using BookApp.Core.Interfaces;
-using BookApp.Core.Services;
 using DAL;
 
 namespace BookApp.Data
@@ -51,6 +47,7 @@ namespace BookApp.Data
 
             return categories;
         }
+
         public async Task AddCategoryAsync(CategoryDTO category)
         {
             await SendCategoryAsync(category);
@@ -183,7 +180,8 @@ namespace BookApp.Data
             {
                 using (SqlConnection connection = dbConnection.GetSqlConnection())
                 {
-                    string updateQuery = "UPDATE dbo.category SET name = @name, isStandard = @isStandard WHERE id = @id";
+                    string updateQuery =
+                        "UPDATE dbo.category SET name = @name, isStandard = @isStandard WHERE id = @id";
 
                     using (SqlCommand cmd = new SqlCommand(updateQuery, connection))
                     {

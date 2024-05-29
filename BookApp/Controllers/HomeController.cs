@@ -1,33 +1,28 @@
-﻿using BookApp.Core.DTO;
-using BookApp.Core.Interfaces;
-using BookApp.Models;
+﻿using BookApp.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+using BookApp.Core.Services;
 
 namespace BookApp.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IBookRepository _bookRepository;
+        private readonly BookService _bookService;
 
-        public HomeController(ILogger<HomeController> logger, IBookRepository bookRepository)
+        public HomeController(ILogger<HomeController> logger, BookService bookService)
         {
             _logger = logger;
-            _bookRepository = bookRepository;
+            _bookService = bookService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var booksInLibrary = await _bookRepository.GetBooksInLibraryAsync();
+            var booksInLibrary = await _bookService.GetBooksInLibraryAsync();
             var libraryViewModel = new LibraryViewModel
             {
                 Books = booksInLibrary.Select(book =>
                 {
-                    var categories = _bookRepository.GetCategoriesByBookIdAsync(book.Id).Result;
+                    var categories = _bookService.GetCategoriesByBookIdAsync(book.Id).Result;
                     return new BookViewModel
                     {
                         Title = book.Title,
@@ -53,14 +48,14 @@ namespace BookApp.Controllers
                 return BadRequest("Book title cannot be null or empty.");
             }
 
-            var book = await _bookRepository.GetBookByTitleAsync(title);
+            var book = await _bookService.GetBookByTitleAsync(title);
 
             if (book == null)
             {
                 return NotFound("Book not found.");
             }
 
-            var categories = await _bookRepository.GetCategoriesByBookIdAsync(book.Id);
+            var categories = await _bookService.GetCategoriesByBookIdAsync(book.Id);
 
             var bookViewModel = new BookViewModel
             {
@@ -88,15 +83,15 @@ namespace BookApp.Controllers
                 return BadRequest("Book title cannot be null or empty.");
             }
 
-            var book = await _bookRepository.GetBookByTitleAsync(title);
+            var book = await _bookService.GetBookByTitleAsync(title);
 
             if (book == null)
             {
                 return NotFound("Book not found.");
             }
 
-            await _bookRepository.DeleteBookByTitleAsync(title);
-            await _bookRepository.DeleteUserBookByBookIdAsync(book.Id);
+            await _bookService.DeleteBookByTitleAsync(title);
+            await _bookService.DeleteUserBookByBookIdAsync(book.Id);
 
             return RedirectToAction("Index");
         }

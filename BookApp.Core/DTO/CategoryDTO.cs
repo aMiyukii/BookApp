@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BookApp.Core.DTO
+﻿namespace BookApp.Core.DTO
 {
     public class CategoryDTO
     {
@@ -12,13 +6,16 @@ namespace BookApp.Core.DTO
         public string Name { get; set; }
         public bool IsStandard { get; set; }
 
-        public CategoryDTO() { }
+        public CategoryDTO()
+        {
+        }
 
         public CategoryDTO(int id, string name)
         {
             Id = id;
             Name = name;
         }
+
         public CategoryDTO(int id, string name, bool isStandard)
         {
             Id = id;
@@ -27,4 +24,3 @@ namespace BookApp.Core.DTO
         }
     }
 }
-

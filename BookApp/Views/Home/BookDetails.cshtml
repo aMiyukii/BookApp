@@ -8,7 +8,7 @@
 <html>
 <head>
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/css/BookDetails.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/BookDetails.css" asp-append-version="true"/>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -40,7 +40,7 @@
 </div>
 
 <form id="deleteBookForm" method="post" action="@Url.Action("DeleteBook", "Home")">
-    <input type="hidden" name="title" value="@Model.Title" />
+    <input type="hidden" name="title" value="@Model.Title"/>
     <button type="submit" class="DeleteBookButton"><i class="fa-solid fa-trash-can"></i>Delete book</button>
 </form>
 

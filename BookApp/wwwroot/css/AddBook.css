@@ -1,196 +1,199 @@
-﻿    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-    body {
-        font-family: "Poppins", sans-serif;
-        overflow: hidden;
-    }
-    
-    
-    .bookInformation {
-        font-size: 16px;
-    }
+body {
+    font-family: "Poppins", sans-serif;
+    overflow: hidden;
+}
 
-    .searchbar-container {
-        position: fixed;
-        top: 2%;
-        right: 2%;
-        display: flex;
-    }
-    .searchbar {
-        width: 20rem;
-        height: 2.5rem;
-        padding: 0 1% 0 2%;
-        border: 1px solid #002a2b;
-        box-sizing: border-box;
-        border-radius: 100px;
-        background-color: #fafafa;
-        color: #002a2b;
-        font-size: 14px;
-        font-family: "Poppins", sans-serif;
-        font-weight: 500;
-        line-height: 18px;
-        text-align: left;
-        outline: none;
-        margin-left: 95rem;
-        margin-top: -4rem;
-        position: absolute;
-    }
 
-    .fa-magnifying-glass:before {
-        position: absolute;
-        transform: translateY(-50%);
-        color: #002a2b;
-        cursor: pointer;
-        margin-left: 96rem;
-        margin-top: -2.7rem;
-        z-index: 1;
-    }
-    
-    .AddCategory {
-        font-size: 17px;
-        font-weight: 400;
-        margin-left: 5.5%;
-        color: #002A2B;
-        margin-top: 0.5em;
-        position: fixed;
-    }
-    
-    .AddCategoryOp {
-        font-size: 17px;
-        font-weight: 400;
-        margin-left: 5.5%;
-        color: #002A2B;
-        position: fixed;
-        margin-top: 6em;
-    }
+.bookInformation {
+    font-size: 16px;
+}
 
-    .dropdown {
-        cursor: pointer;
-        top: 16.5em;
-        width: 12%;
-        height: 41px;
-        padding: 0px 8px;
-        border: 0;
-        box-sizing: border-box;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(3,3,3,0.2);
-        background-color: #ffffff;
-        color: #030303;
-        font-size: 16px;
-        line-height: 20px;
-        position: fixed;
-        margin-left: 5.5%;
-        margin-top: -4.5rem;
-    }
+.searchbar-container {
+    position: fixed;
+    top: 2%;
+    right: 2%;
+    display: flex;
+}
 
-        .dropdown select {
-            position: relative;
-            top: -0.5rem;
-            width: 100%;
-            border: 0;
-            outline: none;
-            background: transparent;
-            appearance: none;
-            z-index: 1;
-        }
+.searchbar {
+    width: 20rem;
+    height: 2.5rem;
+    padding: 0 1% 0 2%;
+    border: 1px solid #002a2b;
+    box-sizing: border-box;
+    border-radius: 100px;
+    background-color: #fafafa;
+    color: #002a2b;
+    font-size: 14px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    line-height: 18px;
+    text-align: left;
+    outline: none;
+    margin-left: 95rem;
+    margin-top: -4rem;
+    position: absolute;
+}
 
-        .dropdown::after {
-            content: '';
-            position: relative;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-            box-sizing: border-box;
-            pointer-events: none;
-        }
+.fa-magnifying-glass:before {
+    position: absolute;
+    transform: translateY(-50%);
+    color: #002a2b;
+    cursor: pointer;
+    margin-left: 96rem;
+    margin-top: -2.7rem;
+    z-index: 1;
+}
 
-        .dropdown select option {
-            background-color: #ffffff;
-            color: #030303;
-            font-size: 16px;
-            line-height: 16px;
-        }
-    
-    .dropdownOp {
-        cursor: pointer;
-        top: 16.5em;
-        width: 12%;
-        height: 41px;
-        padding: 0px 8px;
-        border: 0;
-        box-sizing: border-box;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(3,3,3,0.2);
-        background-color: #ffffff;
-        color: #030303;
-        font-size: 16px;
-        line-height: 20px;
-        position: fixed;
-        margin-left: 5.5%;
-        margin-top: 1.5rem;
-    }
+.AddCategory {
+    font-size: 17px;
+    font-weight: 400;
+    margin-left: 5.5%;
+    color: #002A2B;
+    margin-top: 0.5em;
+    position: fixed;
+}
 
-        .dropdownOp select {
-            position: relative;
-            top: -0.5rem;
-            width: 100%;
-            border: 0;
-            outline: none;
-            background: transparent;
-            appearance: none;
-            z-index: 1;
-        }
+.AddCategoryOp {
+    font-size: 17px;
+    font-weight: 400;
+    margin-left: 5.5%;
+    color: #002A2B;
+    position: fixed;
+    margin-top: 6em;
+}
 
-        .dropdownOp::after {
-            content: '';
-            position: relative;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-            box-sizing: border-box;
-            pointer-events: none;
-        }
+.dropdown {
+    cursor: pointer;
+    top: 16.5em;
+    width: 12%;
+    height: 41px;
+    padding: 0px 8px;
+    border: 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(3, 3, 3, 0.2);
+    background-color: #ffffff;
+    color: #030303;
+    font-size: 16px;
+    line-height: 20px;
+    position: fixed;
+    margin-left: 5.5%;
+    margin-top: -4.5rem;
+}
 
-        .dropdownOp select option {
-            background-color: #ffffff;
-            color: #030303;
-            font-size: 16px;
-            line-height: 16px;
-        }
+.dropdown select {
+    position: relative;
+    top: -0.5rem;
+    width: 100%;
+    border: 0;
+    outline: none;
+    background: transparent;
+    appearance: none;
+    z-index: 1;
+}
 
-    .AddBookButton {
-        margin-top: 43em;
-        margin-left: 5.5%;
-        width: 12%;
-        height: 40px;
-        background-color: #efeff6;
-        border-radius: 8px;
-        border-color: transparent;
-        position: fixed;
-    }
+.dropdown::after {
+    content: '';
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    box-sizing: border-box;
+    pointer-events: none;
+}
 
-    .grid-column {
-        display: grid;
-        grid-template-columns: 1fr 2.5fr;
-    }
-    .BookList{
-        height: 46em;
-        overflow-y: scroll;
-    }
-    .grid-item3 {
-        display: inline-block;
-        width: 10%;
-        margin: 1%;
-    }
+.dropdown select option {
+    background-color: #ffffff;
+    color: #030303;
+    font-size: 16px;
+    line-height: 16px;
+}
 
-    .BookImage {
-        width: 9em;
-        height: auto;
-    }
+.dropdownOp {
+    cursor: pointer;
+    top: 16.5em;
+    width: 12%;
+    height: 41px;
+    padding: 0px 8px;
+    border: 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(3, 3, 3, 0.2);
+    background-color: #ffffff;
+    color: #030303;
+    font-size: 16px;
+    line-height: 20px;
+    position: fixed;
+    margin-left: 5.5%;
+    margin-top: 1.5rem;
+}
+
+.dropdownOp select {
+    position: relative;
+    top: -0.5rem;
+    width: 100%;
+    border: 0;
+    outline: none;
+    background: transparent;
+    appearance: none;
+    z-index: 1;
+}
+
+.dropdownOp::after {
+    content: '';
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+.dropdownOp select option {
+    background-color: #ffffff;
+    color: #030303;
+    font-size: 16px;
+    line-height: 16px;
+}
+
+.AddBookButton {
+    margin-top: 43em;
+    margin-left: 5.5%;
+    width: 12%;
+    height: 40px;
+    background-color: #efeff6;
+    border-radius: 8px;
+    border-color: transparent;
+    position: fixed;
+}
+
+.grid-column {
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+}
+
+.BookList {
+    height: 46em;
+    overflow-y: scroll;
+}
+
+.grid-item3 {
+    display: inline-block;
+    width: 10%;
+    margin: 1%;
+}
+
+.BookImage {
+    width: 9em;
+    height: auto;
+}
 
 .BookTitle {
     color: #030303;
@@ -215,17 +218,17 @@
 }
 
 
-    .chosenbook {
-        position: fixed;
-        top: 52%;
-        left: 6.2%;
-        transform: translate(-100%, 0);
-        z-index: 1;
-    }
+.chosenbook {
+    position: fixed;
+    top: 52%;
+    left: 6.2%;
+    transform: translate(-100%, 0);
+    z-index: 1;
+}
 
 .image {
     width: auto;
-    height: 22em;   
+    height: 22em;
     position: fixed;
     margin-top: -8em;
 }
@@ -240,7 +243,7 @@
     height: 3em;
     overflow: hidden;
     white-space: normal;
-    text-overflow: ellipsis;    
+    text-overflow: ellipsis;
 }
 
 .BookAuthorchosen {

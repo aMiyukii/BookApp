@@ -7,17 +7,17 @@ namespace BookApp.Controllers
 {
     public class AddCategoryController : Controller
     {
-        private readonly CategoryService _categoryServices;
+        private readonly CategoryService _categoryService;
 
-        public AddCategoryController(CategoryService categoryServices)
+        public AddCategoryController(CategoryService categoryService)
         {
-            _categoryServices = categoryServices;
+            _categoryService = categoryService;
         }
 
         [HttpGet("/addcategory")]
         public async Task<IActionResult> Index()
         {
-            var categoriesDto = await _categoryServices.GetAllCategoriesAsync();
+            var categoriesDto = await _categoryService.GetAllCategoriesAsync();
             var viewModel = new AddCategoryViewModel
             {
                 Categories = categoriesDto
@@ -35,10 +35,10 @@ namespace BookApp.Controllers
                 return RedirectToAction("Index");
             }
 
-            await _categoryServices.AddCategoryAsync(category);
+            await _categoryService.AddCategoryAsync(category);
             return RedirectToAction("Index");
         }
-        
+
         [HttpPost("/AddCategory/UpdateCategoryName")]
         public async Task<ActionResult> UpdateCategoryName(int id, string newName)
         {
@@ -47,18 +47,18 @@ namespace BookApp.Controllers
                 Console.WriteLine("Error: Empty category name");
                 return RedirectToAction("Index");
             }
-            var category = await _categoryServices.GetCategoryByIdAsync(id);
+
+            var category = await _categoryService.GetCategoryByIdAsync(id);
             category.Name = newName;
 
-            await _categoryServices.UpdateCategoryAsync(category);
+            await _categoryService.UpdateCategoryAsync(category);
             return RedirectToAction("Index");
         }
-
 
         [HttpPost("/AddCategory/DeleteCategory")]
         public async Task<ActionResult> DeleteCategory(int id)
         {
-            await _categoryServices.DeleteCategoryAsync(id);
+            await _categoryService.DeleteCategoryAsync(id);
             return RedirectToAction("Index");
         }
     }

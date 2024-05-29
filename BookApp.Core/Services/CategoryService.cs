@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using BookApp.Core.DTO;
+﻿using BookApp.Core.DTO;
 using BookApp.Core.Interfaces;
 
 namespace BookApp.Core.Services

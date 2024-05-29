@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using BookApp.Core.DTO;
+﻿using BookApp.Core.DTO;
 using BookApp.Core.Interfaces;
 
 namespace BookApp.Core.Services
@@ -27,7 +24,7 @@ namespace BookApp.Core.Services
             if (bookId <= 0) throw new ArgumentException("Invalid book ID", nameof(bookId));
             return await _bookRepository.GetBookTitleByIdAsync(bookId);
         }
-        
+
         public async Task<IEnumerable<CategoryDTO>> GetCategoriesByBookIdAsync(int bookId)
         {
             if (bookId <= 0) throw new ArgumentException("Invalid book ID", nameof(bookId));
@@ -44,7 +41,8 @@ namespace BookApp.Core.Services
 
         public async Task<BookDTO> GetBookByTitleAsync(string title)
         {
-            if (string.IsNullOrWhiteSpace(title)) throw new ArgumentException("Title cannot be null or empty", nameof(title));
+            if (string.IsNullOrWhiteSpace(title))
+                throw new ArgumentException("Title cannot be null or empty", nameof(title));
             return await _bookRepository.GetBookByTitleAsync(title);
         }
 
@@ -57,7 +55,6 @@ namespace BookApp.Core.Services
 
             await _bookRepository.DeleteBookByTitleAsync(title);
         }
-
 
         public async Task DeleteUserBookByBookIdAsync(int bookId)
         {

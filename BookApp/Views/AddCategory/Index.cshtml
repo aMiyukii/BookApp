@@ -5,7 +5,7 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="~/css/AddCategory.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/AddCategory.css" asp-append-version="true"/>
     <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 </head>
@@ -22,10 +22,10 @@
     <button type="submit" class="AddCategoryButton">Add category</button>
 }
 
-    
+
 <div class="Categories">
     @if (Model.Categories != null)
-    {  
+    {
         <p class="categorytype">Standard Categories</p>
         @foreach (var categoryDTO in Model.Categories.Where(c => c.IsStandard == true))
         {
@@ -34,7 +34,7 @@
             </div>
             <hr class="LineStand">
         }
-     
+
         <p class="categorytype">Your Categories</p>
         @foreach (var categoryDTO in Model.Categories.Where(c => c.IsStandard == false))
         {
