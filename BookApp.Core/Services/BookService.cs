@@ -46,7 +46,7 @@ namespace BookApp.Core.Services
             return await _bookRepository.GetBookByTitleAsync(title);
         }
 
-        public async Task DeleteAsync(string title)
+        public async Task DeleteBookByTitleAsync(string title)
         {
             if (string.IsNullOrWhiteSpace(title))
             {
