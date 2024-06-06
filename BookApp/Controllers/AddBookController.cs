@@ -15,7 +15,8 @@ namespace BookApp.Controllers
         private readonly ICategoryRepository _categoryRepository;
         private readonly ILogger<AddBookController> _logger;
 
-        public AddBookController(BookService bookService, ICategoryRepository categoryRepository, ILogger<AddBookController> logger)
+        public AddBookController(BookService bookService, ICategoryRepository categoryRepository,
+            ILogger<AddBookController> logger)
         {
             _bookService = bookService;
             _categoryRepository = categoryRepository;
@@ -32,14 +33,17 @@ namespace BookApp.Controllers
 
             return View(addBookViewModel);
         }
-        
+
         [HttpPost("/AddBook/SaveBook")]
-        public async Task<ActionResult> SaveBook(int chosenBookId, int chosenCategoryId)
+        public async Task<ActionResult> SaveBook(int chosenBookId, int chosenCategoryId1, int chosenCategoryId2)
         {
-            await _bookService.AddToUserCollectionAsync(chosenBookId, chosenCategoryId);
-            
+            if (chosenCategoryId2 == 0)
+            {
+            }
+
+            await _bookService.AddBookToUserCollectionAsync(chosenBookId, chosenCategoryId1, chosenCategoryId2);
+
             return RedirectToAction("Index", "Home");
         }
-
     }
 }

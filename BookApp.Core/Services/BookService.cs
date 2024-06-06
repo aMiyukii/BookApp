@@ -27,24 +27,30 @@ namespace BookApp.Core.Services
             if (bookId <= 0) throw new ArgumentException("Invalid book ID", nameof(bookId));
             return await _bookRepository.GetBookTitleByIdAsync(bookId);
         }
-        
+
         public async Task<IEnumerable<CategoryDTO>> GetCategoriesByBookIdAsync(int bookId)
         {
             if (bookId <= 0) throw new ArgumentException("Invalid book ID", nameof(bookId));
             return await _bookRepository.GetCategoriesByBookIdAsync(bookId);
         }
 
-        public async Task AddToUserCollectionAsync(int bookId, int categoryId)
+        public async Task AddBookToUserCollectionAsync(int bookId, int categoryId1, int categoryId2)
         {
             if (bookId <= 0) throw new ArgumentException("Invalid book ID", nameof(bookId));
-            if (categoryId <= 0) throw new ArgumentException("Invalid category ID", nameof(categoryId));
+            if (categoryId1 <= 0) throw new ArgumentException("Invalid category ID", nameof(categoryId1));
 
-            await _bookRepository.AddBookToUserCollectionAsync(bookId, categoryId);
+            if (categoryId2 < 0)
+            {
+            }
+
+            await _bookRepository.AddBookToUserCollectionAsync(bookId, categoryId1, categoryId2);
         }
+
 
         public async Task<BookDTO> GetBookByTitleAsync(string title)
         {
-            if (string.IsNullOrWhiteSpace(title)) throw new ArgumentException("Title cannot be null or empty", nameof(title));
+            if (string.IsNullOrWhiteSpace(title))
+                throw new ArgumentException("Title cannot be null or empty", nameof(title));
             return await _bookRepository.GetBookByTitleAsync(title);
         }
 
@@ -57,7 +63,6 @@ namespace BookApp.Core.Services
 
             await _bookRepository.DeleteBookByTitleAsync(title);
         }
-
 
         public async Task DeleteUserBookByBookIdAsync(int bookId)
         {

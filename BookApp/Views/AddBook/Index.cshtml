@@ -25,7 +25,7 @@
                     <label for="standard-category-options"></label>
                     <div class="dropdownClone" id="dropdownContainer">
                         <select name="standard-category-options" id="standard-category-options" onchange="setChosenCategory()">
-                            <option disabled selected>Select a category</option>
+                            <option selected>Select a category</option>
                             @foreach (var category in Model.Categories.Where(c => c.IsStandard))
                             {
                                 <option value="@category.Id">@category.Name</option>
@@ -39,7 +39,7 @@
                     <label for="optional-category-options"></label>
                     <div class="dropdownClone" id="dropdownContainer">
                         <select name="optional-category-options" id="optional-category-options" onchange="setChosenCategory()">
-                            <option disabled selected>Select a category</option>
+                            <option selected>Select a category</option>
                             @foreach (var category in Model.Categories.Where(c => !c.IsStandard))
                             {
                                 <option value="@category.Id">@category.Name</option>
@@ -49,75 +49,75 @@
                 </div>
 
                 <input type="hidden" id="chosenBookId" name="chosenBookId" value="" />
-                            <input type="hidden" id="chosenCategoryId" name="chosenCategoryId" value="" />
-                            <button type="submit" class="AddBookButton">Add book</button>
-                        }
-                    </div>
-                    <div class="grid-item2">
-                        <div class="BookList">
-                            @foreach (var bookDTO in Model.Books)
-                            {
-                                <div class="grid-item3" data-book-id="@bookDTO.Id" onclick="handleBookClick(event)">
-                                    <div class="BookImage">
-                                        <img src="@bookDTO.ImageUrl" class="BookImage" />
-                                    </div>
-                                    <div class="BookTitle">
-                                        <p>@bookDTO.Title</p>
-                                    </div>
-                                    <div class="BookAuthor">
-                                        <p>@bookDTO.Author</p>
-                                    </div>
-                                </div>
-                            }
+                <input type="hidden" id="chosenCategoryId1" name="chosenCategoryId1" value="" />
+                <input type="hidden" id="chosenCategoryId2" name="chosenCategoryId2" value="" />
+                <button type="submit" class="AddBookButton">Add book</button>
+            }
+        </div>
+        <div class="grid-item2">
+            <div class="BookList">
+                @foreach (var bookDTO in Model.Books)
+                {
+                    <div class="grid-item3" data-book-id="@bookDTO.Id" onclick="handleBookClick(event)">
+                        <div class="BookImage">
+                            <img src="@bookDTO.ImageUrl" class="BookImage" />
+                        </div>
+                        <div class="BookTitle">
+                            <p>@bookDTO.Title</p>
+                        </div>
+                        <div class="BookAuthor">
+                            <p>@bookDTO.Author</p>
                         </div>
                     </div>
-                
-                    <script>
-                        function handleBookClick(event) {
-                            var clickedElement = event.target.closest('.grid-item3');
-                            if (clickedElement) {
-                                var id = clickedElement.dataset.bookId;
-                                document.getElementById('chosenBookId').value = id;
-                                
-                                var title = clickedElement.querySelector('.BookTitle p').textContent;
-                                var author = clickedElement.querySelector('.BookAuthor p').textContent;
-                                var imageUrl = clickedElement.querySelector('.BookImage img').src;
-                                displayChosenBook(title, author, imageUrl);
-                            }
-                        }
-                        
-                        function displayChosenBook(title, author, imageUrl) {
-                            var chosenBookTitle = document.getElementById('chosenTitle');
-                            var chosenBookAuthor = document.getElementById('chosenAuthor');
-                            var chosenBookImage = document.getElementById('chosenImage');
-                        
-                            chosenBookTitle.textContent = title;
-                            chosenBookAuthor.textContent = author;
-                            chosenBookImage.src = imageUrl;
-                        
-                            chosenBookImage.style.display = 'block';
-                        }
-                
-                        document.getElementById('standard-category-options').addEventListener('change', function() {
-                            document.getElementById('chosenCategoryId').value = this.value;
-                        });
-                
-                        document.getElementById('optional-category-options').addEventListener('change', function() {
-                            document.getElementById('chosenCategoryId').value = this.value;
-                        });
-                    </script>
-
-        <div class="chosenbook">
-            <div class="BookImagechosen">
-                <img id="chosenImage" class="image" style="display: none;" />
-            </div>
-            <div class="BookTitlechosen">
-                <p id="chosenTitle"></p>
-            </div>
-            <div class="BookAuthorchosen">
-                <p id="chosenAuthor"></p>
+                }
             </div>
         </div>
     </div>
+
+    <div class="chosenbook">
+        <div class="BookImagechosen">
+            <img id="chosenImage" class="image" style="display: none;" />
+        </div>
+        <div class="BookTitlechosen">
+            <p id="chosenTitle"></p>
+        </div>
+        <div class="BookAuthorchosen">
+            <p id="chosenAuthor"></p>
+        </div>
+    </div>
+
+    <script>
+        function handleBookClick(event) {
+            var clickedElement = event.target.closest('.grid-item3');
+            if (clickedElement) {
+                var bookId = clickedElement.getAttribute('data-book-id');
+                document.getElementById('chosenBookId').value = bookId;
+                
+                var title = clickedElement.querySelector('.BookTitle p').textContent;
+                var author = clickedElement.querySelector('.BookAuthor p').textContent;
+                var imageUrl = clickedElement.querySelector('.BookImage img').src;
+                displayChosenBook(title, author, imageUrl);
+            }
+        }
+        
+        function displayChosenBook(title, author, imageUrl) {
+            var chosenBookTitle = document.getElementById('chosenTitle');
+            var chosenBookAuthor = document.getElementById('chosenAuthor');
+            var chosenBookImage = document.getElementById('chosenImage');
+        
+            chosenBookTitle.textContent = title;
+            chosenBookAuthor.textContent = author;
+            chosenBookImage.src = imageUrl;
+        
+            chosenBookImage.style.display = 'block';
+        }
+
+        function setChosenCategory() {  
+            var categoryId1 = document.getElementById('standard-category-options').value;
+            var categoryId2 = document.getElementById('optional-category-options').value;
+            document.getElementById('chosenCategoryId1').value = categoryId1;
+            document.getElementById('chosenCategoryId2').value = categoryId2;
+        }
+    </script>
 </body>
 </html>

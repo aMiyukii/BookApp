@@ -100,5 +100,11 @@ namespace BookApp.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public IActionResult ChangeCategories(int bookId, List<int> categoryIds)
+        {
+            return RedirectToAction("BookDetails", new { id = bookId });
+        }
     }
 }

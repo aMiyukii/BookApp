@@ -1,63 +1,63 @@
-﻿    using DAL;
-    using System;
-    using System.Collections.Generic;
-    using System.Data.SqlClient;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Xml.Linq;
-    using static System.Net.Mime.MediaTypeNames;
-    using BookApp.Core.DTO;
-    using BookApp.Core.Interfaces;
-    using BookApp.Core.Services;
+﻿using DAL;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
+using BookApp.Core.DTO;
+using BookApp.Core.Interfaces;
+using BookApp.Core.Services;
 
-    namespace BookApp.Data
+namespace BookApp.Data
+{
+    public class BookRepository : IBookRepository
     {
-        public class BookRepository : IBookRepository
+        public async Task<List<BookDTO>> GetAllAsync()
         {
-            public async Task<List<BookDTO>> GetAllAsync()
+            List<BookDTO> books = new List<BookDTO>();
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            await dbConnection.OpenConnectionAsync();
+
+            try
             {
-                List<BookDTO> books = new List<BookDTO>();
-                DatabaseConnection dbConnection = new DatabaseConnection();
-                await dbConnection.OpenConnectionAsync();
-
-                try
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
                 {
-                    using (SqlConnection connection = dbConnection.GetSqlConnection())
+                    string selectQuery = "SELECT id, title, author, imageUrl FROM dbo.book";
+
+                    using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
                     {
-                        string selectQuery = "SELECT id, title, author, imageUrl FROM dbo.book";
-
-                        using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
-                            using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                            while (await reader.ReadAsync())
                             {
-                                while (await reader.ReadAsync())
-                                {
-                                    int id = Convert.ToInt32(reader["id"]);
-                                    string title = reader["title"].ToString();
-                                    string author = reader["author"].ToString();
-                                    string imageUrl = reader["imageUrl"].ToString();
+                                int id = Convert.ToInt32(reader["id"]);
+                                string title = reader["title"].ToString();
+                                string author = reader["author"].ToString();
+                                string imageUrl = reader["imageUrl"].ToString();
 
-                                    BookDTO book = new BookDTO(id, title, author, imageUrl);
-                                    books.Add(book);
-                                }
+                                BookDTO book = new BookDTO(id, title, author, imageUrl);
+                                books.Add(book);
                             }
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error fetching books from the database: " + ex.Message);
-                }
-                finally
-                {
-                    await dbConnection.CloseConnectionAsync();
-                }
-
-                return books;
             }
-            
-            public async Task<string> GetBookTitleByIdAsync(int bookId)
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error fetching books from the database: " + ex.Message);
+            }
+            finally
+            {
+                await dbConnection.CloseConnectionAsync();
+            }
+
+            return books;
+        }
+
+        public async Task<string> GetBookTitleByIdAsync(int bookId)
         {
             string title = null;
             DatabaseConnection dbConnection = new DatabaseConnection();
@@ -92,58 +92,65 @@
 
             return title;
         }
-            public async Task AddBookToUserCollectionAsync(int bookId, int categoryId)
-{
-    DatabaseConnection dbConnection = new DatabaseConnection();
-    await dbConnection.OpenConnectionAsync();
 
-    try
-    {
-        using (SqlConnection connection = dbConnection.GetSqlConnection())
+        public async Task AddBookToUserCollectionAsync(int bookId, int categoryId1, int categoryId2)
         {
-            string checkBookQuery = "SELECT COUNT(*) FROM dbo.book WHERE id = @bookId";
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            await dbConnection.OpenConnectionAsync();
 
-            using (SqlCommand checkCmd = new SqlCommand(checkBookQuery, connection))
+            try
             {
-                checkCmd.Parameters.AddWithValue("@bookId", bookId);
-                int count = (int)await checkCmd.ExecuteScalarAsync();
-
-                if (count > 0)
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
                 {
-                    string insertUserBookQuery = "INSERT INTO user_book (book_id) OUTPUT INSERTED.id VALUES (@bookId)";
+                    string checkBookQuery = "SELECT COUNT(*) FROM dbo.book WHERE id = @bookId";
 
-                    using (SqlCommand insertUserBookCmd = new SqlCommand(insertUserBookQuery, connection))
+                    using (SqlCommand checkCmd = new SqlCommand(checkBookQuery, connection))
                     {
-                        insertUserBookCmd.Parameters.AddWithValue("@bookId", bookId);
-                        int userBookId = (int)await insertUserBookCmd.ExecuteScalarAsync();
+                        checkCmd.Parameters.AddWithValue("@bookId", bookId);
+                        int count = (int)await checkCmd.ExecuteScalarAsync();
 
-                        string insertUserBookCategoryQuery = "INSERT INTO user_book_category (category_id, user_book_id) VALUES (@categoryId, @userBookId)";
-
-                        using (SqlCommand insertUserBookCategoryCmd = new SqlCommand(insertUserBookCategoryQuery, connection))
+                        if (count > 0)
                         {
-                            insertUserBookCategoryCmd.Parameters.AddWithValue("@categoryId", categoryId);
-                            insertUserBookCategoryCmd.Parameters.AddWithValue("@userBookId", userBookId);
-                            await insertUserBookCategoryCmd.ExecuteNonQueryAsync();
-                            Console.WriteLine("Book added to user collection successfully.");
+                            string insertUserBookQuery =
+                                "INSERT INTO user_book (book_id) OUTPUT INSERTED.id VALUES (@bookId)";
+
+                            using (SqlCommand insertUserBookCmd = new SqlCommand(insertUserBookQuery, connection))
+                            {
+                                insertUserBookCmd.Parameters.AddWithValue("@bookId", bookId);
+                                int userBookId = (int)await insertUserBookCmd.ExecuteScalarAsync();
+
+                                string insertUserBookCategoryQuery =
+                                    "INSERT INTO user_book_category (category_id, category_id_2, user_book_id) VALUES (@categoryId1, @categoryId2, @userBookId)";
+
+                                using (SqlCommand insertUserBookCategoryCmd =
+                                       new SqlCommand(insertUserBookCategoryQuery, connection))
+                                {
+                                    insertUserBookCategoryCmd.Parameters.AddWithValue("@categoryId1", categoryId1);
+                                    insertUserBookCategoryCmd.Parameters.AddWithValue("@categoryId2", categoryId2);
+                                    insertUserBookCategoryCmd.Parameters.AddWithValue("@userBookId", userBookId);
+                                    await insertUserBookCategoryCmd.ExecuteNonQueryAsync();
+                                    Console.WriteLine("Book added to user collection successfully with categories.");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Error: Book with ID " + bookId + " does not exist.");
                         }
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Error: Book with ID " + bookId + " does not exist.");
-                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error adding book to user collection: " + ex.Message);
+            }
+            finally
+            {
+                await dbConnection.CloseConnectionAsync();
             }
         }
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine("Error adding book to user collection: " + ex.Message);
-    }
-    finally
-    {
-        await dbConnection.CloseConnectionAsync();
-    }
-}
+
+
         public async Task<List<BookDTO>> GetBooksInLibraryAsync()
         {
             List<BookDTO> books = new List<BookDTO>();
@@ -154,7 +161,8 @@
             {
                 using (SqlConnection connection = dbConnection.GetSqlConnection())
                 {
-                    string selectQuery = "SELECT title, author, imageUrl FROM user_book JOIN book ON user_book.book_id = book.id";
+                    string selectQuery =
+                        "SELECT title, author, imageUrl FROM user_book JOIN book ON user_book.book_id = book.id";
 
                     using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
                     {
@@ -184,6 +192,7 @@
 
             return books;
         }
+
         public async Task<BookDTO> GetBookByTitleAsync(string title)
         {
             BookDTO book = null;
@@ -194,7 +203,8 @@
             {
                 using (SqlConnection connection = dbConnection.GetSqlConnection())
                 {
-                    string selectQuery = "SELECT id, title, author, imageUrl, serie, genre FROM dbo.book WHERE title = @title";
+                    string selectQuery =
+                        "SELECT id, title, author, imageUrl, serie, genre FROM dbo.book WHERE title = @title";
 
                     using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
                     {
@@ -283,7 +293,7 @@
                 await dbConnection.CloseConnectionAsync();
             }
         }
-        
+
         public async Task<IEnumerable<CategoryDTO>> GetCategoriesByBookIdAsync(int bookId)
         {
             List<CategoryDTO> categories = new List<CategoryDTO>();
@@ -295,7 +305,7 @@
                 using (SqlConnection connection = dbConnection.GetSqlConnection())
                 {
                     string selectQuery = "SELECT c.id, c.name FROM category c " +
-                                         "INNER JOIN user_book_category ubc ON c.id = ubc.category_id " +
+                                         "INNER JOIN user_book_category ubc ON c.id = ubc.category_id OR c.id = ubc.category_id_2 " +
                                          "INNER JOIN user_book ub ON ubc.user_book_id = ub.id " +
                                          "WHERE ub.book_id = @bookId";
 
@@ -328,6 +338,5 @@
 
             return categories;
         }
-        
-        }
     }
+}
