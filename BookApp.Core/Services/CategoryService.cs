@@ -10,10 +10,6 @@ namespace BookApp.Core.Services
     {
         private readonly ICategoryRepository _categoryRepository;
 
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public bool IsStandard { get; set; }
-
         public CategoryService(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository ?? throw new ArgumentNullException(nameof(categoryRepository));
@@ -41,6 +37,11 @@ namespace BookApp.Core.Services
                 throw new ArgumentNullException(nameof(category));
             }
 
+            if (await CategoryExistsAsync(category.Name))
+            {
+                throw new InvalidOperationException("Category with the same name already exists.");
+            }
+
             await _categoryRepository.AddCategoryAsync(category);
         }
 
@@ -49,6 +50,11 @@ namespace BookApp.Core.Services
             if (category == null)
             {
                 throw new ArgumentNullException(nameof(category));
+            }
+
+            if (await CategoryExistsAsync(category.Name, category.Id))
+            {
+                throw new InvalidOperationException("Category with the same name already exists.");
             }
 
             await _categoryRepository.UpdateCategoryAsync(category);
@@ -62,6 +68,22 @@ namespace BookApp.Core.Services
             }
 
             await _categoryRepository.DeleteCategoryAsync(id);
+        }
+
+        public async Task<bool> CategoryExistsAsync(string categoryName, int? categoryId = null)
+        {
+            var existingCategory = await _categoryRepository.GetCategoryByNameAsync(categoryName);
+            return existingCategory != null && existingCategory.Id != categoryId;
+        }
+
+        public async Task SaveCategoryAsync(int userBookId, int categoryId1, int categoryId2)
+        {
+            await _categoryRepository.SaveCategoryAsync(userBookId, categoryId1, categoryId2);
+        }
+        
+        public async Task<CategoryDTO> GetCategoryByNameAsync(string name)
+        {
+            return await _categoryRepository.GetCategoryByNameAsync(name);
         }
     }
 }

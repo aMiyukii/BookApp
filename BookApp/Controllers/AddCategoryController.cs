@@ -2,6 +2,8 @@
 using BookApp.Core.DTO;
 using BookApp.Core.Services;
 using BookApp.Models;
+using System;
+using System.Threading.Tasks;
 
 namespace BookApp.Controllers
 {
@@ -35,6 +37,13 @@ namespace BookApp.Controllers
                 return RedirectToAction("Index");
             }
 
+            var existingCategory = await _categoryServices.GetCategoryByNameAsync(category.Name);
+            if (existingCategory != null)
+            {
+                TempData["ErrorMessage"] = "Category with the same name already exists.";
+                return RedirectToAction("Index");
+            }
+
             await _categoryServices.AddCategoryAsync(category);
             return RedirectToAction("Index");
         }
@@ -47,6 +56,14 @@ namespace BookApp.Controllers
                 Console.WriteLine("Error: Empty category name");
                 return RedirectToAction("Index");
             }
+            
+            var existingCategory = await _categoryServices.GetCategoryByNameAsync(newName);
+            if (existingCategory != null)
+            {
+                TempData["ErrorMessage"] = "Category with the same name already exists.";
+                return RedirectToAction("Index");
+            }
+
             var category = await _categoryServices.GetCategoryByIdAsync(id);
             category.Name = newName;
 

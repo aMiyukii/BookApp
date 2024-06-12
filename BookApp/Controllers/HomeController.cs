@@ -6,44 +6,51 @@ using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using BookApp.Core.Services;
 
 namespace BookApp.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IBookRepository _bookRepository;
+        private readonly BookService _bookService;
+        private readonly CategoryService _categoryService;
 
-        public HomeController(ILogger<HomeController> logger, IBookRepository bookRepository)
+        public HomeController(ILogger<HomeController> logger, BookService bookService, CategoryService categoryService)
         {
             _logger = logger;
-            _bookRepository = bookRepository;
+            _bookService = bookService;
+            _categoryService = categoryService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var booksInLibrary = await _bookRepository.GetBooksInLibraryAsync();
-            var libraryViewModel = new LibraryViewModel
+            try
             {
-                Books = booksInLibrary.Select(book =>
-                {
-                    var categories = _bookRepository.GetCategoriesByBookIdAsync(book.Id).Result;
-                    return new BookViewModel
-                    {
-                        Title = book.Title,
-                        Author = book.Author,
-                        ImageUrl = book.ImageUrl,
-                        Categories = categories.Select(c => new CategoryViewModel
-                        {
-                            Id = c.Id,
-                            Name = c.Name,
-                            IsStandard = c.IsStandard
-                        }).ToList()
-                    };
-                }).ToList()
-            };
+                var booksInLibrary = await _bookService.GetBooksInLibraryAsync();
 
-            return View(libraryViewModel);
+                if (booksInLibrary == null || !booksInLibrary.Any())
+                {
+                    _logger.LogInformation("No books found in the library.");
+                    return View(new LibraryViewModel { Books = new List<BookViewModel>() });
+                }
+
+                _logger.LogInformation($"Found {booksInLibrary.Count()} books in the library.");
+
+                var booksViewModel = booksInLibrary.Select(book => new BookViewModel
+                {
+                    Title = book.Title,
+                    Author = book.Author,
+                    ImageUrl = book.ImageUrl
+                }).ToList();
+
+                return View(new LibraryViewModel { Books = booksViewModel });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while processing the index action.");
+                return View(new LibraryViewModel { Books = new List<BookViewModel>() });
+            }
         }
 
         public async Task<IActionResult> BookDetails(string title)
@@ -53,23 +60,31 @@ namespace BookApp.Controllers
                 return BadRequest("Book title cannot be null or empty.");
             }
 
-            var book = await _bookRepository.GetBookByTitleAsync(title);
+            var book = await _bookService.GetBookByTitleAsync(title);
 
             if (book == null)
             {
                 return NotFound("Book not found.");
             }
 
-            var categories = await _bookRepository.GetCategoriesByBookIdAsync(book.Id);
+            var bookCategories = await _bookService.GetCategoriesByBookIdAsync(book.Id);
+            var allCategories = await _categoryService.GetAllCategoriesAsync();
 
             var bookViewModel = new BookViewModel
             {
+                Id = book.Id,
                 Title = book.Title,
                 Author = book.Author,
                 Serie = book.Serie,
                 Genre = book.Genre,
                 ImageUrl = book.ImageUrl,
-                Categories = categories.Select(c => new CategoryViewModel
+                Categories = bookCategories.Select(c => new BookViewModel.CategoryViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    IsStandard = c.IsStandard
+                }).ToList(),
+                AllCategories = allCategories.Select(c => new BookViewModel.CategoryViewModel
                 {
                     Id = c.Id,
                     Name = c.Name,
@@ -88,23 +103,26 @@ namespace BookApp.Controllers
                 return BadRequest("Book title cannot be null or empty.");
             }
 
-            var book = await _bookRepository.GetBookByTitleAsync(title);
+            var book = await _bookService.GetBookByTitleAsync(title);
 
             if (book == null)
             {
                 return NotFound("Book not found.");
             }
 
-            await _bookRepository.DeleteBookByTitleAsync(title);
-            await _bookRepository.DeleteUserBookByBookIdAsync(book.Id);
+            await _bookService.DeleteBookByTitleAsync(title);
+            await _bookService.DeleteUserBookByBookIdAsync(book.Id);
 
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public IActionResult ChangeCategories(int bookId, List<int> categoryIds)
+        public async Task<IActionResult> SaveCategory(int bookId, int categoryId)
         {
-            return RedirectToAction("BookDetails", new { id = bookId });
+            await _categoryService.SaveCategoryAsync(bookId, categoryId, categoryId);
+
+            return Ok();
         }
+
     }
 }

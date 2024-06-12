@@ -8,14 +8,14 @@ namespace BookApp.Core.Services
 {
     public class BookService
     {
-        private readonly IBookRepository _bookRepository;
+            private readonly IBookRepository _bookRepository;
 
-        public string Title { get; set; }
+            public string Title { get; set; }
 
-        public BookService(IBookRepository bookRepository)
-        {
-            _bookRepository = bookRepository ?? throw new ArgumentNullException(nameof(bookRepository));
-        }
+            public BookService(IBookRepository bookRepository)
+            {
+                _bookRepository = bookRepository ?? throw new ArgumentNullException(nameof(bookRepository));
+            }
 
         public async Task<List<BookDTO>> GetAllAsync()
         {
@@ -38,14 +38,10 @@ namespace BookApp.Core.Services
         {
             if (bookId <= 0) throw new ArgumentException("Invalid book ID", nameof(bookId));
             if (categoryId1 <= 0) throw new ArgumentException("Invalid category ID", nameof(categoryId1));
-
-            if (categoryId2 < 0)
-            {
-            }
+            if (categoryId2 <= 0) throw new ArgumentException("Invalid category ID", nameof(categoryId2));
 
             await _bookRepository.AddBookToUserCollectionAsync(bookId, categoryId1, categoryId2);
         }
-
 
         public async Task<BookDTO> GetBookByTitleAsync(string title)
         {
@@ -54,7 +50,7 @@ namespace BookApp.Core.Services
             return await _bookRepository.GetBookByTitleAsync(title);
         }
 
-        public async Task DeleteAsync(string title)
+        public async Task DeleteBookByTitleAsync(string title)
         {
             if (string.IsNullOrWhiteSpace(title))
             {
@@ -64,6 +60,7 @@ namespace BookApp.Core.Services
             await _bookRepository.DeleteBookByTitleAsync(title);
         }
 
+
         public async Task DeleteUserBookByBookIdAsync(int bookId)
         {
             if (bookId <= 0) throw new ArgumentException("Invalid book ID", nameof(bookId));
@@ -72,7 +69,7 @@ namespace BookApp.Core.Services
 
         public async Task<List<BookDTO>> GetBooksInLibraryAsync()
         {
-            return await _bookRepository.GetBooksInLibraryAsync();
+            return await _bookRepository.GetBooksInLibraryAsync();;
         }
     }
 }

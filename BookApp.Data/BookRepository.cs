@@ -338,5 +338,38 @@ namespace BookApp.Data
 
             return categories;
         }
+        public async Task SaveCategoryAsync(int userBookId, int categoryId1, int categoryId2)
+        {
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            await dbConnection.OpenConnectionAsync();
+
+            try
+            {
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
+                {
+                    string updateQuery =
+                        "UPDATE user_book_category SET category_id = @categoryId1, category_id_2 = @categoryId2 WHERE user_book_id = @userBookId";
+
+                    using (SqlCommand cmd = new SqlCommand(updateQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@categoryId1", categoryId1);
+                        cmd.Parameters.AddWithValue("@categoryId2", categoryId2);
+                        cmd.Parameters.AddWithValue("@userBookId", userBookId);
+
+                        await cmd.ExecuteNonQueryAsync();
+                        Console.WriteLine("Categories saved successfully.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error saving categories: " + ex.Message);
+            }
+            finally
+            {
+                await dbConnection.CloseConnectionAsync();
+            }
+        }
+
     }
 }

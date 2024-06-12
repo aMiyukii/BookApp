@@ -1,4 +1,5 @@
 ﻿using BookApp.Core.DTO;
+using System.Collections.Generic;
 
 namespace BookApp.Models
 {

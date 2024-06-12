@@ -68,14 +68,15 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public async Task AddToUserCollectionAsync_ValidIds_ShouldNotThrowException()
+        public async Task AddBookToUserCollectionAsync_ValidIds_ShouldNotThrowException()
         {
             // Arrange
             var bookId = 1;
-            var userId = 1;
+            var categoryId1 = 1;
+            var categoryId2 = 2;
 
             // Act & Assert
-            await _bookService.AddToUserCollectionAsync(bookId, userId);
+            await _bookService.AddBookToUserCollectionAsync(bookId, categoryId1, categoryId2);
         }
 
         [TestMethod]
