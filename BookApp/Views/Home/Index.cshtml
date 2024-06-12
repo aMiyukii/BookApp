@@ -1,4 +1,3 @@
-@model TModel
 
 @{
     Layout = null;
@@ -8,11 +7,23 @@
 
 <html>
 <head>
-    <title>title</title>
+    <link rel="stylesheet" href="~/css/Home.css" asp-append-version="true"/>
+    <link rel="icon" type="image/png" href="~/Images/BookLogo.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <title>Reading Realm</title>
 </head>
 <body>
 <div>
-      
+    <div class="image"><img src="~/Images/BookLogo.png"/></div>
+    <div class="welcome">Welcome to Reading Realm!</div>
+</div> 
+<div class="Login">
+    <h1 class="Username">Enter your username here</h1>
+    <input class="UsernameInput" placeholder="Enter username here">
+    
+    <h1 class="Password">Enter your password here</h1>
+    <input class="PasswordInput" placeholder="Enter password here">
+    <div class="loginButtonDiv"><button class="loginButton">Login</button></div>
 </div>
 </body>
 </html>

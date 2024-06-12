@@ -14,11 +14,11 @@ namespace BookApp.Controllers
 {
     public class LibraryController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<LibraryController> _logger;
         private readonly BookService _bookService;
         private readonly CategoryService _categoryService;
 
-        public LibraryController(ILogger<HomeController> logger, BookService bookService, CategoryService categoryService)
+        public LibraryController(ILogger<LibraryController> logger, BookService bookService, CategoryService categoryService)
         {
             _logger = logger;
             _bookService = bookService;

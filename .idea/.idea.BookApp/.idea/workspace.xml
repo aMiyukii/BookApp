@@ -11,7 +11,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ddb3a06-5db6-4567-a199-9c738edfdec0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/BookApp/wwwroot/css/Home.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/Controllers/LibraryController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Controllers/LibraryController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/Views/AddCategory/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Views/AddCategory/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/Views/Home/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Views/Home/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/wwwroot/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/wwwroot/css/Library.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +190,7 @@
       <workItem from="1718092965424" duration="1152000" />
       <workItem from="1718109102233" duration="4722000" />
       <workItem from="1718113862654" duration="6821000" />
-      <workItem from="1718189807866" duration="5730000" />
+      <workItem from="1718189807866" duration="10818000" />
     </task>
     <servers />
   </component>

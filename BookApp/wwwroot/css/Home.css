@@ -1,0 +1,67 @@
+body {
+    color: #030303;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.welcome {
+    font-size: 32px;
+    font-weight: 600;
+    display: flex;
+    align-content: center;
+    margin-left: 38.5%;
+    margin-right: 35%;
+    margin-top: 15%;
+}
+
+.Login {
+    text-align: center;
+    margin-top: 2%;
+}
+
+.Login h1 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.Password{
+    margin-top: 2em;
+}
+
+.UsernameInput,
+.PasswordInput {
+    border-radius: 10px;
+    padding: 10px;
+    text-align: left;
+    border: 0px;
+    width: 15%;
+    height: 1.5em;
+    box-shadow: 0 0 10px rgba(0, 42, 43, 0.2);
+    margin-top: 0.2em;
+    padding-left: 1%;
+    font-size: 16px;
+}
+
+.loginButton{
+    margin-top: 2em;
+    margin-left: -5%;
+    width: 10%;
+    height: 40px;
+    background-color: #efeff6;
+    border-radius: 8px;
+    border-color: transparent;
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.image img {
+    height: auto;
+    width: 15%;
+    position: absolute;
+    margin-top: -17em;
+    margin-left: 42.5%;
+    
+}
