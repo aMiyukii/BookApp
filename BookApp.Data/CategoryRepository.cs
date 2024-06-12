@@ -234,5 +234,80 @@ namespace BookApp.Data
                 await dbConnection.CloseConnectionAsync();
             }
         }
+
+        public async Task SaveCategoryAsync(int userBookId, int categoryId1, int categoryId2)
+        {
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            await dbConnection.OpenConnectionAsync();
+
+            try
+            {
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
+                {
+                    string updateQuery =
+                        "UPDATE user_book_category SET category_id = @categoryId1, category_id_2 = @categoryId2 WHERE user_book_id = @userBookId";
+
+                    using (SqlCommand cmd = new SqlCommand(updateQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@categoryId1", categoryId1);
+                        cmd.Parameters.AddWithValue("@categoryId2", categoryId2);
+                        cmd.Parameters.AddWithValue("@userBookId", userBookId);
+
+                        await cmd.ExecuteNonQueryAsync();
+                        Console.WriteLine("Categories saved successfully.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error saving categories: " + ex.Message);
+            }
+            finally
+            {
+                await dbConnection.CloseConnectionAsync();
+            }
+        }
+        
+        public async Task<CategoryDTO> GetCategoryByNameAsync(string name)
+        {
+            CategoryDTO category = null;
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            await dbConnection.OpenConnectionAsync();
+
+            try
+            {
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
+                {
+                    string selectQuery = "SELECT id, name, isStandard FROM dbo.category WHERE name = @name";
+
+                    using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@name", name);
+
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                int id = reader.IsDBNull(reader.GetOrdinal("id")) ? 0 : reader.GetInt32(reader.GetOrdinal("id"));
+                                bool isStandard = reader.GetBoolean(reader.GetOrdinal("isStandard"));
+
+                                category = new CategoryDTO(id, name, isStandard);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error fetching category by name from the database: " + ex.Message);
+            }
+            finally
+            {
+                await dbConnection.CloseConnectionAsync();
+            }
+
+            return category;
+        }
+
     }
 }

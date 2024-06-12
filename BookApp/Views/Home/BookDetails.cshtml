@@ -1,11 +1,7 @@
 @model BookApp.Models.BookViewModel
 
-@{
-    ViewData["Title"] = "Book Details";
-}
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/BookDetails.css" asp-append-version="true"/>
@@ -14,7 +10,7 @@
 <body>
 <div class="Book">
     <div class="BookImage">
-        <img src="@Model.ImageUrl" class="BookImage"/>
+        <img src="@Model.ImageUrl" class="BookImage" alt="Cover image of @Model.Title"/>
     </div>
     <div class="BookTitle">
         <p>@Model.Title</p>
@@ -28,15 +24,39 @@
     <div class="BookGenre">
         <p>Genre: @Model.Genre</p>
     </div>
-    <div class="BookCategories">
-        <p>Categories:</p>
-        <ul>
-            @foreach (var category in Model.Categories)
-            {
-                <li class="categories">@category.Name</li>
-            }
-        </ul>
-    </div>
+   <div class="BookCategories">
+       <p>Categories:</p>
+       <ul>
+           @foreach (var category in Model.Categories)
+           {
+               <li class="categories">
+                   <span>@category.Name</span>
+                   <i class="fas fa-edit" onclick="toggleEditCategory(this)"></i>
+                   @if (category.IsStandard)
+                   {
+                       <select name="standardCategoryIds" class="category-dropdown" style="display:none;">
+                           @foreach (var cat in Model.AllCategories.Where(c => c.IsStandard))
+                           {
+                               <option value="@cat.Id">@cat.Name</option>
+                           }
+                       </select>
+                   }
+                   else
+                   {
+                       <select name="nonStandardCategoryIds" class="category-dropdown" style="display:none;">
+                           @foreach (var cat in Model.AllCategories.Where(c => !c.IsStandard))
+                           {
+                               <option value="@cat.Id">@cat.Name</option>
+                           }
+                       </select>
+                   }
+               </li>
+           }
+
+       </ul>
+   </div>
+
+
 </div>
 
 <form id="deleteBookForm" method="post" action="@Url.Action("DeleteBook", "Home")">
@@ -45,7 +65,52 @@
 </form>
 
 <script>
-    document.querySelector('.DeleteBookButton').addEventListener('click', function(event) {
+    function toggleEditCategory(icon) {
+        var categoryElement = icon.parentElement;
+        var spans = categoryElement.querySelectorAll('span');
+        var selects = categoryElement.querySelectorAll('select');
+
+        for (var i = 0; i < spans.length; i++) {
+            if (selects[i].style.display === 'none') {
+                spans[i].style.display = 'none';
+                selects[i].style.display = 'inline';
+                icon.classList.remove('fa-edit');
+                icon.classList.add('fa-save');
+            } else {
+                spans[i].style.display = 'inline';
+                selects[i].style.display = 'none';
+                icon.classList.remove('fa-save');
+                icon.classList.add('fa-edit');
+                spans[i].innerText = selects[i].options[selects[i].selectedIndex].text;
+                
+                // Get the selected category ID
+                var categoryId = selects[i].value;
+                var bookId = '@Model.Id'; // Get the book ID from the model
+
+                // Make an AJAX request to update the book's category
+                saveCategory(bookId, categoryId);
+            }
+        }
+    }
+
+    function saveCategory(bookId, categoryId) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                type: 'POST',
+                url: '/Home/SaveCategory', // Update the URL with your controller action
+                data: { userBookId: bookId, categoryId1: categoryId, categoryId2: 0 }, // Assuming categoryId2 is always 0 for now
+                success: function (response) {
+                    resolve(true);
+                },
+                error: function (xhr, status, error) {
+                    reject(false);
+                }
+            });
+        });
+    }
+
+
+    document.querySelector('.DeleteBookButton').addEventListener('click', function (event) {
         event.preventDefault();
         if (confirm("Are you sure you want to delete this book?")) {
             document.getElementById('deleteBookForm').submit();

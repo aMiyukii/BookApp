@@ -11,12 +11,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ddb3a06-5db6-4567-a199-9c738edfdec0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BookApp.Unittest/CategoryTest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeBookRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/BookApp.Unittest.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/BookApp.Unittest.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/BookServiceTest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/CategoryServiceTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/BookTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/Interfaces/ICategoryRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Interfaces/ICategoryRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/Services/BookService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Services/BookService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/Services/CategoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Services/CategoryService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Data/BookRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Data/BookRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Data/CategoryRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Data/CategoryRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/BookTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/BookTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeBookRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeBookRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/Controllers/AddCategoryController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Controllers/AddCategoryController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Controllers/HomeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/Models/AddBookViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Models/AddBookViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/Models/LibraryViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Models/LibraryViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/Views/AddCategory/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Views/AddCategory/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/Views/Home/BookDetails.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Views/Home/BookDetails.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +57,10 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/d0ca5a8d20ac50a33d5451e998a5d411a810c8d7/src/Mvc/Mvc.Core/src/Infrastructure/ActionMethodExecutor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/d0ca5a8d20ac50a33d5451e998a5d411a810c8d7/src/Mvc/Mvc.TagHelpers/src/OptionTagHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/d0ca5a8d20ac50a33d5451e998a5d411a810c8d7/src/Razor/Razor.Runtime/src/Runtime/TagHelpers/TagHelperExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/dff486f2d78d3f932d0f9bfa38043f85e358fb8c/src/libraries/System.Linq/src/System/Linq/Select.SpeedOpt.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b8b10b8247cb413eab5175c26a5956a755a8/8c/6825c058/ITestMethod.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -71,7 +82,7 @@
     &quot;2dce3e09-79ad-4431-9318-c73d637bee47.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Unittest&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;twobookscategory&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -183,6 +194,10 @@
       <workItem from="1716374885673" duration="4863000" />
       <workItem from="1716447396690" duration="1228000" />
       <workItem from="1716893979506" duration="4826000" />
+      <workItem from="1718051153378" duration="4064000" />
+      <workItem from="1718092965424" duration="1152000" />
+      <workItem from="1718109102233" duration="4722000" />
+      <workItem from="1718113862654" duration="6821000" />
     </task>
     <servers />
   </component>

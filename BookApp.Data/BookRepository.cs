@@ -1,7 +1,15 @@
 ﻿using DAL;
+using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 using BookApp.Core.DTO;
 using BookApp.Core.Interfaces;
+using BookApp.Core.Services;
 
 namespace BookApp.Data
 {
@@ -85,7 +93,7 @@ namespace BookApp.Data
             return title;
         }
 
-        public async Task AddBookToUserCollectionAsync(int bookId, int categoryId)
+        public async Task AddBookToUserCollectionAsync(int bookId, int categoryId1, int categoryId2)
         {
             DatabaseConnection dbConnection = new DatabaseConnection();
             await dbConnection.OpenConnectionAsync();
@@ -112,15 +120,16 @@ namespace BookApp.Data
                                 int userBookId = (int)await insertUserBookCmd.ExecuteScalarAsync();
 
                                 string insertUserBookCategoryQuery =
-                                    "INSERT INTO user_book_category (category_id, user_book_id) VALUES (@categoryId, @userBookId)";
+                                    "INSERT INTO user_book_category (category_id, category_id_2, user_book_id) VALUES (@categoryId1, @categoryId2, @userBookId)";
 
                                 using (SqlCommand insertUserBookCategoryCmd =
                                        new SqlCommand(insertUserBookCategoryQuery, connection))
                                 {
-                                    insertUserBookCategoryCmd.Parameters.AddWithValue("@categoryId", categoryId);
+                                    insertUserBookCategoryCmd.Parameters.AddWithValue("@categoryId1", categoryId1);
+                                    insertUserBookCategoryCmd.Parameters.AddWithValue("@categoryId2", categoryId2);
                                     insertUserBookCategoryCmd.Parameters.AddWithValue("@userBookId", userBookId);
                                     await insertUserBookCategoryCmd.ExecuteNonQueryAsync();
-                                    Console.WriteLine("Book added to user collection successfully.");
+                                    Console.WriteLine("Book added to user collection successfully with categories.");
                                 }
                             }
                         }
@@ -140,6 +149,7 @@ namespace BookApp.Data
                 await dbConnection.CloseConnectionAsync();
             }
         }
+
 
         public async Task<List<BookDTO>> GetBooksInLibraryAsync()
         {
@@ -295,7 +305,7 @@ namespace BookApp.Data
                 using (SqlConnection connection = dbConnection.GetSqlConnection())
                 {
                     string selectQuery = "SELECT c.id, c.name FROM category c " +
-                                         "INNER JOIN user_book_category ubc ON c.id = ubc.category_id " +
+                                         "INNER JOIN user_book_category ubc ON c.id = ubc.category_id OR c.id = ubc.category_id_2 " +
                                          "INNER JOIN user_book ub ON ubc.user_book_id = ub.id " +
                                          "WHERE ub.book_id = @bookId";
 
@@ -328,5 +338,38 @@ namespace BookApp.Data
 
             return categories;
         }
+        public async Task SaveCategoryAsync(int userBookId, int categoryId1, int categoryId2)
+        {
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            await dbConnection.OpenConnectionAsync();
+
+            try
+            {
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
+                {
+                    string updateQuery =
+                        "UPDATE user_book_category SET category_id = @categoryId1, category_id_2 = @categoryId2 WHERE user_book_id = @userBookId";
+
+                    using (SqlCommand cmd = new SqlCommand(updateQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@categoryId1", categoryId1);
+                        cmd.Parameters.AddWithValue("@categoryId2", categoryId2);
+                        cmd.Parameters.AddWithValue("@userBookId", userBookId);
+
+                        await cmd.ExecuteNonQueryAsync();
+                        Console.WriteLine("Categories saved successfully.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error saving categories: " + ex.Message);
+            }
+            finally
+            {
+                await dbConnection.CloseConnectionAsync();
+            }
+        }
+
     }
 }

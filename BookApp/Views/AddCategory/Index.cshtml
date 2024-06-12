@@ -85,7 +85,11 @@
             var categoryName = $('#AddPatternName').val();
             if (categoryName.trim() !== '') {
                 $.post('@Url.Action("AddCategoryName", "AddCategory")', { name: categoryName }, function(data) {
-                    location.reload();
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Category with the same name already exists.');
+                    }
                 });
             } else {
                 alert('Please enter a category name.');

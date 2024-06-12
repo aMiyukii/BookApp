@@ -1,6 +1,10 @@
 ﻿using BookApp.Models;
 using BookApp.Core.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 using BookApp.Core.Interfaces;
 
 namespace BookApp.Controllers
@@ -8,14 +12,14 @@ namespace BookApp.Controllers
     public class AddBookController : Controller
     {
         private readonly BookService _bookService;
-        private readonly CategoryService _categoryService;
+        private readonly ICategoryRepository _categoryRepository;
         private readonly ILogger<AddBookController> _logger;
 
-        public AddBookController(BookService bookService, CategoryService categoryService,
+        public AddBookController(BookService bookService, ICategoryRepository categoryRepository,
             ILogger<AddBookController> logger)
         {
             _bookService = bookService;
-            _categoryService = categoryService;
+            _categoryRepository = categoryRepository;
             _logger = logger;
         }
 
@@ -23,7 +27,7 @@ namespace BookApp.Controllers
         public async Task<IActionResult> Index()
         {
             var booksDTO = await _bookService.GetAllAsync();
-            var categoriesDTO = await _categoryService.GetAllCategoriesAsync();
+            var categoriesDTO = await _categoryRepository.GetAllCategoriesAsync();
 
             var addBookViewModel = new AddBookViewModel(booksDTO.ToList(), categoriesDTO.ToList());
 
@@ -31,9 +35,13 @@ namespace BookApp.Controllers
         }
 
         [HttpPost("/AddBook/SaveBook")]
-        public async Task<ActionResult> SaveBook(int chosenBookId, int chosenCategoryId)
+        public async Task<ActionResult> SaveBook(int chosenBookId, int chosenCategoryId1, int chosenCategoryId2)
         {
-            await _bookService.AddToUserCollectionAsync(chosenBookId, chosenCategoryId);
+            if (chosenCategoryId2 == 0)
+            {
+            }
+
+            await _bookService.AddBookToUserCollectionAsync(chosenBookId, chosenCategoryId1, chosenCategoryId2);
 
             return RedirectToAction("Index", "Home");
         }

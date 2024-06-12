@@ -34,11 +34,13 @@ public class FakeBookRepository : IBookRepository
 
     public Task<IEnumerable<CategoryDTO>> GetCategoriesByBookIdAsync(int bookId)
     {
+        // Assuming all books have the same categories in the fake repository
         return Task.FromResult(_categories.AsEnumerable());
     }
 
-    public Task AddBookToUserCollectionAsync(int bookId, int userId)
+    public Task AddBookToUserCollectionAsync(int bookId, int categoryId1, int categoryId2)
     {
+        // No operation needed for fake repository
         return Task.CompletedTask;
     }
 
@@ -66,11 +68,13 @@ public class FakeBookRepository : IBookRepository
 
     public Task DeleteUserBookByBookIdAsync(int bookId)
     {
+        // No operation needed for fake repository
         return Task.CompletedTask;
     }
 
     public Task<List<BookDTO>> GetBooksInLibraryAsync()
     {
+        // Assuming all books are in the library in the fake repository
         return Task.FromResult(_books);
     }
 }
