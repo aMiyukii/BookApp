@@ -93,7 +93,7 @@ namespace BookApp.Data
             return title;
         }
 
-        public async Task AddBookToUserCollectionAsync(int bookId, int categoryId1, int categoryId2)
+        public async Task AddBookToUserCollectionAsync(int bookId, int categoryId1, int? categoryId2 = null)
         {
             DatabaseConnection dbConnection = new DatabaseConnection();
             await dbConnection.OpenConnectionAsync();
@@ -126,7 +126,8 @@ namespace BookApp.Data
                                        new SqlCommand(insertUserBookCategoryQuery, connection))
                                 {
                                     insertUserBookCategoryCmd.Parameters.AddWithValue("@categoryId1", categoryId1);
-                                    insertUserBookCategoryCmd.Parameters.AddWithValue("@categoryId2", categoryId2);
+                                    insertUserBookCategoryCmd.Parameters.AddWithValue("@categoryId2",
+                                        (object)categoryId2 ?? DBNull.Value);
                                     insertUserBookCategoryCmd.Parameters.AddWithValue("@userBookId", userBookId);
                                     await insertUserBookCategoryCmd.ExecuteNonQueryAsync();
                                     Console.WriteLine("Book added to user collection successfully with categories.");
@@ -149,7 +150,6 @@ namespace BookApp.Data
                 await dbConnection.CloseConnectionAsync();
             }
         }
-
 
         public async Task<List<BookDTO>> GetBooksInLibraryAsync()
         {
@@ -338,6 +338,7 @@ namespace BookApp.Data
 
             return categories;
         }
+
         public async Task SaveCategoryAsync(int userBookId, int categoryId1, int categoryId2)
         {
             DatabaseConnection dbConnection = new DatabaseConnection();
@@ -371,5 +372,36 @@ namespace BookApp.Data
             }
         }
 
+        public async Task<bool> IsBookInUserCollectionAsync(int bookId)
+        {
+            bool isInCollection = false;
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            await dbConnection.OpenConnectionAsync();
+
+            try
+            {
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
+                {
+                    string checkQuery = "SELECT COUNT(*) FROM user_book WHERE book_id = @bookId";
+
+                    using (SqlCommand cmd = new SqlCommand(checkQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@bookId", bookId);
+                        int count = (int)await cmd.ExecuteScalarAsync();
+                        isInCollection = count > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error checking if book is in user collection: " + ex.Message);
+            }
+            finally
+            {
+                await dbConnection.CloseConnectionAsync();
+            }
+
+            return isInCollection;
+        }
     }
 }

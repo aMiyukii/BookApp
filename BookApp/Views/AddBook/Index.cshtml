@@ -20,7 +20,7 @@
                     <input class="searchbar" type="search" placeholder="Search book" aria-label="Search">
                 </div>
 
-                <h1 class="AddCategory">Add standard category</h1>
+                <h1 class="AddCategory">Add standard category - <i>required</i></h1>
                 <div class="dropdown">
                     <label for="standard-category-options"></label>
                     <div class="dropdownClone" id="dropdownContainer">
@@ -87,6 +87,17 @@
     </div>
 
     <script>
+        function displayErrorMessage(message) {
+            alert(message);
+        }
+
+        window.onload = function () {
+            var errorMessage = "@TempData["ErrorMessage"]";
+            if (errorMessage) {
+                displayErrorMessage(errorMessage);
+            }
+        }
+
         function handleBookClick(event) {
             var clickedElement = event.target.closest('.grid-item3');
             if (clickedElement) {

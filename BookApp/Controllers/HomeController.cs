@@ -3,6 +3,8 @@ using BookApp.Core.Interfaces;
 using BookApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -119,10 +121,21 @@ namespace BookApp.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveCategory(int bookId, int categoryId)
         {
-            await _categoryService.SaveCategoryAsync(bookId, categoryId, categoryId);
+            if (categoryId <= 0)
+            {
+                return BadRequest("First category must be chosen.");
+            }
 
-            return Ok();
+            try
+            {
+                await _categoryService.SaveCategoryAsync(bookId, categoryId, categoryId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while saving the category.");
+                return StatusCode(500, "Internal server error");
+            }
         }
-
     }
 }

@@ -12,38 +12,66 @@ namespace BookApp.Controllers
     public class AddBookController : Controller
     {
         private readonly BookService _bookService;
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly CategoryService _categoryService;
         private readonly ILogger<AddBookController> _logger;
 
-        public AddBookController(BookService bookService, ICategoryRepository categoryRepository,
+        public AddBookController(BookService bookService, CategoryService categoryService,
             ILogger<AddBookController> logger)
         {
             _bookService = bookService;
-            _categoryRepository = categoryRepository;
+            _categoryService = categoryService;
             _logger = logger;
         }
 
         [HttpGet("/addbook")]
         public async Task<IActionResult> Index()
         {
-            var booksDTO = await _bookService.GetAllAsync();
-            var categoriesDTO = await _categoryRepository.GetAllCategoriesAsync();
+            try
+            {
+                var booksDTO = await _bookService.GetAllAsync();
+                var categoriesDTO = await _categoryService.GetAllCategoriesAsync();
 
-            var addBookViewModel = new AddBookViewModel(booksDTO.ToList(), categoriesDTO.ToList());
+                var viewModel = new AddBookViewModel(booksDTO.ToList(), categoriesDTO.ToList());
 
-            return View(addBookViewModel);
+                return View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while retrieving data for the add book page.");
+                TempData["ErrorMessage"] = "An error occurred while retrieving data for the add book page.";
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost("/AddBook/SaveBook")]
         public async Task<ActionResult> SaveBook(int chosenBookId, int chosenCategoryId1, int chosenCategoryId2)
         {
-            if (chosenCategoryId2 == 0)
+            try
             {
+                if (chosenCategoryId2 == 0)
+                {
+                }
+                await _bookService.AddBookToUserCollectionAsync(chosenBookId, chosenCategoryId1, chosenCategoryId2);
+
+                TempData["SuccessMessage"] = "Book added successfully.";
+                return RedirectToAction("Index", "Home");
             }
-
-            await _bookService.AddBookToUserCollectionAsync(chosenBookId, chosenCategoryId1, chosenCategoryId2);
-
-            return RedirectToAction("Index", "Home");
+            catch (ArgumentException ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction("Index");
+            }
+            catch (InvalidOperationException ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while saving the book.");
+                TempData["ErrorMessage"] = "An error occurred while saving the book.";
+                return RedirectToAction("Index");
+            }
         }
     }
 }
