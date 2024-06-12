@@ -65,3 +65,16 @@ body {
     margin-left: 42.5%;
     
 }
+
+.PasswordInput {
+    position: relative;
+}
+
+
+.toggle-password {
+    position: relative;
+    top: 50%;
+    margin-left: -2em;
+    transform: translateY(-50%);
+    cursor: pointer;
+}

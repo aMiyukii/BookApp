@@ -1,15 +1,14 @@
-
 @{
     Layout = null;
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <link rel="stylesheet" href="~/css/Home.css" asp-append-version="true"/>
     <link rel="icon" type="image/png" href="~/Images/BookLogo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/de6521028c.js" crossorigin="anonymous"></script>
     <title>Reading Realm</title>
 </head>
 <body>
@@ -22,8 +21,28 @@
     <input class="UsernameInput" placeholder="Enter username here">
     
     <h1 class="Password">Enter your password here</h1>
-    <input class="PasswordInput" placeholder="Enter password here">
+    <div class="password-container">
+        <input class="PasswordInput" type="password" placeholder="Enter password here">
+        <span class="toggle-password" onclick="togglePasswordVisibility(this)">
+            <i class="fas fa-eye-slash"></i>
+        </span>
+    </div>
+    
     <div class="loginButtonDiv"><button class="loginButton">Login</button></div>
 </div>
+
+<script>
+    function togglePasswordVisibility(element) {
+        var passwordInput = element.parentElement.querySelector('.PasswordInput');
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            element.innerHTML = '<i class="fas fa-eye"></i>';
+        } else {
+            passwordInput.type = "password";
+            element.innerHTML = '<i class="fas fa-eye-slash"></i>';
+        }
+    }
+</script>
+
 </body>
 </html>
