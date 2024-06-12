@@ -1,5 +1,8 @@
 ﻿using BookApp.Core.DTO;
 using BookApp.Core.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BookApp.Core.Services
 {
@@ -29,9 +32,9 @@ namespace BookApp.Core.Services
 
         public async Task AddCategoryAsync(CategoryDTO category)
         {
-            if (category == null)
+            if (category == null || string.IsNullOrEmpty(category.Name))
             {
-                throw new ArgumentNullException(nameof(category));
+                throw new ArgumentNullException(nameof(category), "Category or Category Name cannot be null or empty");
             }
 
             if (await CategoryExistsAsync(category.Name))
@@ -42,17 +45,25 @@ namespace BookApp.Core.Services
             await _categoryRepository.AddCategoryAsync(category);
         }
 
-        public async Task UpdateCategoryAsync(CategoryDTO category)
+        public async Task UpdateCategoryNameAsync(int id, string newName)
         {
-            if (category == null)
+            if (id <= 0)
             {
-                throw new ArgumentNullException(nameof(category));
+                throw new ArgumentException("Invalid category ID", nameof(id));
             }
 
-            if (await CategoryExistsAsync(category.Name, category.Id))
+            if (string.IsNullOrEmpty(newName))
+            {
+                throw new ArgumentNullException(nameof(newName), "Category name cannot be null or empty");
+            }
+
+            if (await CategoryExistsAsync(newName, id))
             {
                 throw new InvalidOperationException("Category with the same name already exists.");
             }
+
+            var category = await _categoryRepository.GetCategoryByIdAsync(id);
+            category.Name = newName;
 
             await _categoryRepository.UpdateCategoryAsync(category);
         }
@@ -67,7 +78,7 @@ namespace BookApp.Core.Services
             await _categoryRepository.DeleteCategoryAsync(id);
         }
 
-        public async Task<bool> CategoryExistsAsync(string categoryName, int? categoryId = null)
+        private async Task<bool> CategoryExistsAsync(string categoryName, int? categoryId = null)
         {
             var existingCategory = await _categoryRepository.GetCategoryByNameAsync(categoryName);
             return existingCategory != null && existingCategory.Id != categoryId;
@@ -77,7 +88,7 @@ namespace BookApp.Core.Services
         {
             await _categoryRepository.SaveCategoryAsync(userBookId, categoryId1, categoryId2);
         }
-        
+
         public async Task<CategoryDTO> GetCategoryByNameAsync(string name)
         {
             return await _categoryRepository.GetCategoryByNameAsync(name);

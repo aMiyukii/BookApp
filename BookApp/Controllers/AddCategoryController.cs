@@ -31,52 +31,56 @@ namespace BookApp.Controllers
         [HttpPost("/AddCategory/AddCategoryName")]
         public async Task<ActionResult> AddCategoryName(CategoryDTO category)
         {
-            if (string.IsNullOrEmpty(category.Name))
+            try
             {
-                Console.WriteLine("Error: Empty category name");
+                await _categoryServices.AddCategoryAsync(category);
                 return RedirectToAction("Index");
             }
-
-            var existingCategory = await _categoryServices.GetCategoryByNameAsync(category.Name);
-            if (existingCategory != null)
+            catch (ArgumentNullException ex)
             {
-                TempData["ErrorMessage"] = "Category with the same name already exists.";
+                TempData["ErrorMessage"] = ex.Message;
                 return RedirectToAction("Index");
             }
-
-            await _categoryServices.AddCategoryAsync(category);
-            return RedirectToAction("Index");
+            catch (InvalidOperationException ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction("Index");
+            }
         }
-        
+
         [HttpPost("/AddCategory/UpdateCategoryName")]
         public async Task<ActionResult> UpdateCategoryName(int id, string newName)
         {
-            if (string.IsNullOrEmpty(newName))
+            try
             {
-                Console.WriteLine("Error: Empty category name");
+                await _categoryServices.UpdateCategoryNameAsync(id, newName);
                 return RedirectToAction("Index");
             }
-            
-            var existingCategory = await _categoryServices.GetCategoryByNameAsync(newName);
-            if (existingCategory != null)
+            catch (ArgumentNullException ex)
             {
-                TempData["ErrorMessage"] = "Category with the same name already exists.";
+                TempData["ErrorMessage"] = ex.Message;
                 return RedirectToAction("Index");
             }
-
-            var category = await _categoryServices.GetCategoryByIdAsync(id);
-            category.Name = newName;
-
-            await _categoryServices.UpdateCategoryAsync(category);
-            return RedirectToAction("Index");
+            catch (InvalidOperationException ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction("Index");
+            }
         }
-
 
         [HttpPost("/AddCategory/DeleteCategory")]
         public async Task<ActionResult> DeleteCategory(int id)
         {
-            await _categoryServices.DeleteCategoryAsync(id);
-            return RedirectToAction("Index");
+            try
+            {
+                await _categoryServices.DeleteCategoryAsync(id);
+                return RedirectToAction("Index");
+            }
+            catch (ArgumentException ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction("Index");
+            }
         }
     }
 }
