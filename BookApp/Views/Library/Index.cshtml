@@ -1,0 +1,43 @@
+﻿@model BookApp.Models.LibraryViewModel
+
+@{
+    ViewData["Title"] = "Your Library";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/Library.css" asp-append-version="true"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="grid-container">
+    @foreach (var book in Model.Books)
+    {
+        <div class="grid-item">
+            <a href="@Url.Action("BookDetails", "Library", new { title = book.Title })">
+                <div class="BookImage">
+                    <img src="@book.ImageUrl" class="BookImage"/>
+                </div>
+                <div class="BookTitle">
+                    <p>@book.Title</p>
+                </div>
+                <div class="BookAuthor">
+                    <p>@book.Author</p>
+                </div>
+                @* <div class="BookCategories"> *@
+                @*     <p>Categories:</p> *@
+                @*     <ul> *@
+                @*         @foreach (var category in book.Categories) *@
+                @*         { *@
+                @*             <li>@category.Name)</li> *@
+                @*         } *@
+                @*     </ul> *@
+                @* </div> *@
+            </a>
+        </div>
+    }
+</div>
+</body>
+</html>

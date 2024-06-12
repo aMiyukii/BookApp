@@ -59,7 +59,7 @@
 
 </div>
 
-<form id="deleteBookForm" method="post" action="@Url.Action("DeleteBook", "Home")">
+<form id="deleteBookForm" method="post" action="@Url.Action("DeleteBook", "Library")">
     <input type="hidden" name="title" value="@Model.Title"/>
     <button type="submit" class="DeleteBookButton"><i class="fa-solid fa-trash-can"></i>Delete book</button>
 </form>
@@ -97,7 +97,7 @@
         return new Promise((resolve, reject) => {
             $.ajax({
                 type: 'POST',
-                url: '/Home/SaveCategory', // Update the URL with your controller action
+                url: '/Library/SaveCategory', // Update the URL with your controller action
                 data: { userBookId: bookId, categoryId1: categoryId, categoryId2: 0 }, // Assuming categoryId2 is always 0 for now
                 success: function (response) {
                     resolve(true);
