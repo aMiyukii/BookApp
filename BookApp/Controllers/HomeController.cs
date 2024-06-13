@@ -7,12 +7,10 @@ namespace BookApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly UserService _userService;
 
-        public HomeController(ILogger<HomeController> logger, UserService userService)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _userService = userService;
         }
 
         public IActionResult Index()

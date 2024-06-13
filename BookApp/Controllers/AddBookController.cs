@@ -54,7 +54,7 @@ namespace BookApp.Controllers
                 await _bookService.AddBookToUserCollectionAsync(chosenBookId, chosenCategoryId1, chosenCategoryId2);
 
                 TempData["SuccessMessage"] = "Book added successfully.";
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Library");
             }
             catch (ArgumentException ex)
             {
