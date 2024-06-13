@@ -1,5 +1,7 @@
 using BookApp.Core.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace UnitTests
 {
@@ -70,7 +72,7 @@ namespace UnitTests
             // Arrange
             var bookId = 1;
             var categoryId1 = 1;
-            var categoryId2 = 2;
+            int? categoryId2 = 2;
 
             // Act & Assert
             await _bookService.AddBookToUserCollectionAsync(bookId, categoryId1, categoryId2);
@@ -91,13 +93,13 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public async Task DeleteAsync_ValidTitle_ShouldRemoveBook()
+        public async Task DeleteBookByTitleAsync_ValidTitle_ShouldRemoveBook()
         {
             // Arrange
             var title = "Test Book 1";
 
             // Act
-            await _bookService.DeleteAsync(title);
+            await _bookService.DeleteBookByTitleAsync(title);
             var books = await _bookService.GetAllAsync();
 
             // Assert

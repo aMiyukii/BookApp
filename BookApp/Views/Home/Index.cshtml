@@ -16,20 +16,25 @@
     <div class="image"><img src="~/Images/BookLogo.png"/></div>
     <div class="welcome">Welcome to Reading Realm!</div>
 </div> 
-<div class="Login">
-    <h1 class="Username">Enter your username here</h1>
-    <input class="UsernameInput" placeholder="Enter username here">
-    
-    <h1 class="Password">Enter your password here</h1>
-    <div class="password-container">
-        <input class="PasswordInput" type="password" placeholder="Enter password here">
-        <span class="toggle-password" onclick="togglePasswordVisibility(this)">
-            <i class="fas fa-eye-slash"></i>
-        </span>
+<form method="post" action="/Home/Login">
+    <div class="Login">
+        <h1 class="Username">Enter your username here</h1>
+        <input class="UsernameInput" name="EmailAddress" placeholder="Enter username here">
+        
+        <h1 class="Password">Enter your password here</h1>
+        <div class="password-container">
+            <input class="PasswordInput" type="password" name="Password" placeholder="Enter password here">
+            <span class="toggle-password" onclick="togglePasswordVisibility(this)">
+                <i class="fas fa-eye-slash"></i>
+            </span>
+        </div>
+        
+        <div class="loginButtonDiv">
+            <button type="submit" class="loginButton">Login</button>
+        </div>
     </div>
-    
-    <div class="loginButtonDiv"><button class="loginButton">Login</button></div>
-</div>
+</form>
+
 
 <script>
     function togglePasswordVisibility(element) {

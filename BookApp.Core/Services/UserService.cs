@@ -1,6 +1,16 @@
-namespace BookApp.Core.Services;
+using BookApp.Core.DTO;
+using BookApp.Core.Interfaces;
 
-public class UserService
+namespace BookApp.Core.Services
 {
-    
+    public class UserService
+    {
+        private readonly IUserRepository _userRepository;
+
+        public UserService(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
+    }
 }

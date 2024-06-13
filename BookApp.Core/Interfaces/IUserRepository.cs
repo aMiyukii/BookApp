@@ -1,6 +1,9 @@
-namespace BookApp.Core.Interfaces;
+using BookApp.Core.DTO;
 
-public interface IUserRepository
+namespace BookApp.Core.Interfaces
 {
-    
+    public interface IUserRepository
+    {
+        
+    }
 }

@@ -1,5 +1,8 @@
 using BookApp.Core.DTO;
 using BookApp.Core.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 public class FakeBookRepository : IBookRepository
 {
@@ -34,13 +37,11 @@ public class FakeBookRepository : IBookRepository
 
     public Task<IEnumerable<CategoryDTO>> GetCategoriesByBookIdAsync(int bookId)
     {
-        // Assuming all books have the same categories in the fake repository
         return Task.FromResult(_categories.AsEnumerable());
     }
 
-    public Task AddBookToUserCollectionAsync(int bookId, int categoryId1, int categoryId2)
+    public Task AddBookToUserCollectionAsync(int bookId, int categoryId1, int? categoryId2 = null)
     {
-        // No operation needed for fake repository
         return Task.CompletedTask;
     }
 
@@ -67,14 +68,23 @@ public class FakeBookRepository : IBookRepository
     }
 
     public Task DeleteUserBookByBookIdAsync(int bookId)
-    {
-        // No operation needed for fake repository
+    {   
         return Task.CompletedTask;
     }
 
     public Task<List<BookDTO>> GetBooksInLibraryAsync()
     {
-        // Assuming all books are in the library in the fake repository
         return Task.FromResult(_books);
+    }
+
+    public Task SaveCategoryAsync(int userBookId, int categoryId1, int categoryId2)
+    {
+        return Task.CompletedTask;
+    }
+
+    public Task<bool> IsBookInUserCollectionAsync(int bookId)
+    {
+        var isInCollection = _books.Any(b => b.Id == bookId);
+        return Task.FromResult(isInCollection);
     }
 }
