@@ -89,22 +89,33 @@
 
     <script>
         function displaySuccessMessage(title) {
-            Swal.fire('Added!', `Book "${title}" has been added.`, 'success').then(() => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Added!',
+                text: `Book "${title}" has been added.`,
+            }).then(() => {
                 location.reload();
             });
         }
-
+    
         function displayErrorMessage(message) {
             Swal.fire('Error!', message, 'error');
         }
-
+    
         window.onload = function () {
             var errorMessage = "@TempData["ErrorMessage"]";
             if (errorMessage) {
                 displayErrorMessage(errorMessage);
             }
         }
-
+    
+        document.addEventListener('DOMContentLoaded', function () {
+            var successMessage = "@TempData["SuccessMessage"]";
+            if (successMessage) {
+                displaySuccessMessage(successMessage);
+            }
+        });
+    
         function handleBookClick(event) {
             var clickedElement = event.target.closest('.grid-item3');
             if (clickedElement) {
@@ -129,7 +140,7 @@
         
             chosenBookImage.style.display = 'block';
         }
-
+    
         function setChosenCategory() {  
             var categoryId1 = document.getElementById('standard-category-options').value;
             var categoryId2 = document.getElementById('optional-category-options').value;
@@ -137,5 +148,6 @@
             document.getElementById('chosenCategoryId2').value = categoryId2;
         }
     </script>
+
 </body>
 </html>

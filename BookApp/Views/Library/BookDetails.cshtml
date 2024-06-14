@@ -6,6 +6,7 @@
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/BookDetails.css" asp-append-version="true"/>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <div class="Book">
@@ -65,11 +66,30 @@
 </form>
 
 <script>
+    // Display confirmation dialog before submitting delete form
+    document.querySelector('.DeleteBookButton').addEventListener('click', function (event) {
+            event.preventDefault();
+            var title = document.querySelector('.BookTitle p').textContent.trim(); // Fetch the book title
+            Swal.fire({
+                title: 'Are you sure?',
+                text: `The book "${title}" will be deleted from your library.`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('deleteBookForm').submit();
+                }
+            });
+        });
+    
     function toggleEditCategory(icon) {
         var categoryElement = icon.parentElement;
         var spans = categoryElement.querySelectorAll('span');
         var selects = categoryElement.querySelectorAll('select');
-
+    
         for (var i = 0; i < spans.length; i++) {
             if (selects[i].style.display === 'none') {
                 spans[i].style.display = 'none';
@@ -86,13 +106,13 @@
                 // Get the selected category ID
                 var categoryId = selects[i].value;
                 var bookId = '@Model.Id'; // Get the book ID from the model
-
+    
                 // Make an AJAX request to update the book's category
                 saveCategory(bookId, categoryId);
             }
         }
     }
-
+    
     function saveCategory(bookId, categoryId) {
         return new Promise((resolve, reject) => {
             $.ajax({
@@ -109,13 +129,6 @@
         });
     }
 
-
-    document.querySelector('.DeleteBookButton').addEventListener('click', function (event) {
-        event.preventDefault();
-        if (confirm("Are you sure you want to delete this book?")) {
-            document.getElementById('deleteBookForm').submit();
-        }
-    });
 </script>
 
 </body>

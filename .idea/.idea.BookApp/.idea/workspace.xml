@@ -12,10 +12,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9ddb3a06-5db6-4567-a199-9c738edfdec0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Core/Services/BookService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Services/BookService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp/Controllers/AddCategoryController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Controllers/AddCategoryController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BookApp/Views/AddBook/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Views/AddBook/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp/Views/AddCategory/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Views/AddCategory/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/Views/Library/BookDetails.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Views/Library/BookDetails.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +189,7 @@
       <workItem from="1718113862654" duration="6821000" />
       <workItem from="1718189807866" duration="13965000" />
       <workItem from="1718261254906" duration="3767000" />
-      <workItem from="1718364195817" duration="3126000" />
+      <workItem from="1718364195817" duration="4596000" />
     </task>
     <servers />
   </component>
