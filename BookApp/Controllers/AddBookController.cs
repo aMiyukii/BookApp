@@ -1,21 +1,16 @@
 ﻿using BookApp.Models;
-using BookApp.Core.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using BookApp.Core.Interfaces;
 
 namespace BookApp.Controllers
 {
     public class AddBookController : Controller
     {
-        private readonly BookService _bookService;
-        private readonly CategoryService _categoryService;
+        private readonly IBookService _bookService;
+        private readonly ICategoryService _categoryService;
         private readonly ILogger<AddBookController> _logger;
 
-        public AddBookController(BookService bookService, CategoryService categoryService,
+        public AddBookController(IBookService bookService, ICategoryService categoryService,
             ILogger<AddBookController> logger)
         {
             _bookService = bookService;

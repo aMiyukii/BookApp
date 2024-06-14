@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookApp.Core.Services
 {
-    public class BookService
+    public class BookService : IBookService
     {
         private readonly IBookRepository _bookRepository;
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BookApp.Core.DTO;
-using BookApp.Core.Services;
+using BookApp.Core.Interfaces;
 using BookApp.Models;
 using System;
 using System.Threading.Tasks;
@@ -9,9 +9,9 @@ namespace BookApp.Controllers
 {
     public class AddCategoryController : Controller
     {
-        private readonly CategoryService _categoryServices;
+        private readonly ICategoryService _categoryServices;
 
-        public AddCategoryController(CategoryService categoryServices)
+        public AddCategoryController(ICategoryService categoryServices)
         {
             _categoryServices = categoryServices;
         }

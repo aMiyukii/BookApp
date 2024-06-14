@@ -9,9 +9,9 @@ builder.Services.AddControllersWithViews();
 
 // Register your services here
 builder.Services.AddScoped<IBookRepository, BookRepository>();
-builder.Services.AddScoped<BookService, BookService>();
+builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<CategoryService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 
 

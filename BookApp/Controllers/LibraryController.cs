@@ -1,24 +1,16 @@
-using BookApp.Core.DTO;
 using BookApp.Core.Interfaces;
 using BookApp.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using BookApp.Core.Services;
 
 namespace BookApp.Controllers
 {
     public class LibraryController : Controller
     {
         private readonly ILogger<LibraryController> _logger;
-        private readonly BookService _bookService;
-        private readonly CategoryService _categoryService;
+        private readonly IBookService _bookService;
+        private readonly ICategoryService _categoryService;
 
-        public LibraryController(ILogger<LibraryController> logger, BookService bookService, CategoryService categoryService)
+        public LibraryController(ILogger<LibraryController> logger, IBookService bookService, ICategoryService categoryService)
         {
             _logger = logger;
             _bookService = bookService;

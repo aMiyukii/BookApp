@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookApp.Core.Services
 {
-    public class CategoryService
+    public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
 
