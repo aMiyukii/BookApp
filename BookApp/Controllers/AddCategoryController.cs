@@ -46,6 +46,8 @@ namespace BookApp.Controllers
                 TempData["ErrorMessage"] = ex.Message;
                 return RedirectToAction("Index");
             }
+
+            return RedirectToAction("Index");
         }
 
         [HttpPost("/AddCategory/UpdateCategoryName")]
