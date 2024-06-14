@@ -36,7 +36,7 @@ namespace BookApp.Core.Services
         public async Task AddBookToUserCollectionAsync(int bookId, int categoryId1, int? categoryId2 = null)
         {
             if (bookId <= 0) throw new ArgumentException("Invalid book ID", nameof(bookId));
-            if (categoryId1 <= 0) throw new ArgumentException("The required category is empty", nameof(categoryId1));
+            if (categoryId1 <= 0) throw new ArgumentException("The required category is empty");
 
             bool isInCollection = await _bookRepository.IsBookInUserCollectionAsync(bookId);
             if (isInCollection)

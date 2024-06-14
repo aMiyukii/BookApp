@@ -8,6 +8,7 @@
 <head>
     <link rel="stylesheet" href="~/css/AddBook.css" asp-append-version="true" />
     <script src="https://kit.fontawesome.com/de6521028c.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -87,8 +88,14 @@
     </div>
 
     <script>
+        function displaySuccessMessage(title) {
+            Swal.fire('Added!', `Book "${title}" has been added.`, 'success').then(() => {
+                location.reload();
+            });
+        }
+
         function displayErrorMessage(message) {
-            alert(message);
+            Swal.fire('Error!', message, 'error');
         }
 
         window.onload = function () {

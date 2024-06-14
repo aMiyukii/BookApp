@@ -34,19 +34,35 @@ namespace BookApp.Controllers
             try
             {
                 await _categoryServices.AddCategoryAsync(category);
+
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new { success = true });
+                }
+
                 return RedirectToAction("Index");
             }
             catch (ArgumentNullException ex)
             {
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new { success = false, message = ex.Message });
+                }
+
                 TempData["ErrorMessage"] = ex.Message;
                 return RedirectToAction("Index");
             }
             catch (InvalidOperationException ex)
             {
+                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new { success = false, message = ex.Message });
+                }
+
                 TempData["ErrorMessage"] = ex.Message;
                 return RedirectToAction("Index");
             }
-
+    
             return RedirectToAction("Index");
         }
 
