@@ -1,6 +1,9 @@
-namespace BookApp.Core.Interfaces;
+using BookApp.Core.DTO;
+using System.Threading.Tasks;
 
-public interface IUserService
+namespace BookApp.Core.Interfaces
 {
-    
+    public interface IUserService
+    {
+    }
 }

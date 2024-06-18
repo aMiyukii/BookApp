@@ -88,6 +88,40 @@
     </div>
 
     <script>
+        // Function to handle search input
+        function handleSearch() {
+            var input = document.querySelector('.searchbar');
+            var filter = input.value.toUpperCase();
+            var books = document.querySelectorAll('.grid-item3');
+
+            books.forEach(function(book) {
+                var titleElement = book.querySelector('.BookTitle p');
+                var title = titleElement.textContent.toUpperCase();
+
+                if (title.includes(filter)) {
+                    book.style.display = "";
+                } else {
+                    book.style.display = "none";
+                }
+            });
+        }
+
+        // Function to clear search input and show all books
+        function clearSearch() {
+            var input = document.querySelector('.searchbar');
+            input.value = "";
+            var books = document.querySelectorAll('.grid-item3');
+
+            books.forEach(function(book) {
+                book.style.display = "";
+            });
+        }
+
+        // Attach event listener to search input
+        document.querySelector('.searchbar').addEventListener('input', function() {
+            handleSearch();
+        });
+
         function displaySuccessMessage(title) {
             Swal.fire({
                 icon: 'success',
@@ -97,50 +131,50 @@
                 location.reload();
             });
         }
-    
+
         function displayErrorMessage(message) {
             Swal.fire('Error!', message, 'error');
         }
-    
+
         window.onload = function () {
             var errorMessage = "@TempData["ErrorMessage"]";
             if (errorMessage) {
                 displayErrorMessage(errorMessage);
             }
         }
-    
+
         document.addEventListener('DOMContentLoaded', function () {
             var successMessage = "@TempData["SuccessMessage"]";
             if (successMessage) {
                 displaySuccessMessage(successMessage);
             }
         });
-    
+
         function handleBookClick(event) {
             var clickedElement = event.target.closest('.grid-item3');
             if (clickedElement) {
                 var bookId = clickedElement.getAttribute('data-book-id');
                 document.getElementById('chosenBookId').value = bookId;
-                
+
                 var title = clickedElement.querySelector('.BookTitle p').textContent;
                 var author = clickedElement.querySelector('.BookAuthor p').textContent;
                 var imageUrl = clickedElement.querySelector('.BookImage img').src;
                 displayChosenBook(title, author, imageUrl);
             }
         }
-        
+
         function displayChosenBook(title, author, imageUrl) {
             var chosenBookTitle = document.getElementById('chosenTitle');
             var chosenBookAuthor = document.getElementById('chosenAuthor');
             var chosenBookImage = document.getElementById('chosenImage');
-        
+
             chosenBookTitle.textContent = title;
             chosenBookAuthor.textContent = author;
             chosenBookImage.src = imageUrl;
-        
+
             chosenBookImage.style.display = 'block';
         }
-    
+
         function setChosenCategory() {  
             var categoryId1 = document.getElementById('standard-category-options').value;
             var categoryId2 = document.getElementById('optional-category-options').value;
