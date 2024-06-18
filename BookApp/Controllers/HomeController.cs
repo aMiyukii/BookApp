@@ -1,13 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BookApp.Core.Services;
-using BookApp.Core.DTO;
 using BookApp.Core.Interfaces;
-using Microsoft.IdentityModel.Tokens;
-using System.Diagnostics;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BookApp.Controllers
@@ -16,13 +10,11 @@ namespace BookApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IUserService _userService;
-        private readonly ILoginManager _loginManager;
 
-        public HomeController(ILogger<HomeController> logger, IUserService userService, ILoginManager loginManager)
+        public HomeController(ILogger<HomeController> logger, IUserService userService)
         {
             _logger = logger;
             _userService = userService;
-            _loginManager = loginManager;
         }
 
         public IActionResult Index()
@@ -33,7 +25,22 @@ namespace BookApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string Emailaddress, string Password)
         {
-            return RedirectToAction("Index", "Library");
+            if (string.IsNullOrWhiteSpace(Emailaddress) || string.IsNullOrWhiteSpace(Password))
+            {
+                ViewBag.ErrorMessage = "Email and password are required.";
+                return View("Index");
+            }
+
+            var isValidUser = await _userService.LoginAsync(Emailaddress, Password);
+            if (isValidUser)
+            {
+                return RedirectToAction("Index", "Library");
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Invalid email or password.";
+                return View("Index");
+            }
         }
     }
 }

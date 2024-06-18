@@ -16,6 +16,12 @@
     <div class="image"><img src="~/Images/BookLogo.png"/></div>
     <div class="welcome">Welcome to Reading Realm!</div>
 </div> 
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="error-message">@ViewBag.ErrorMessage</div>
+}
+
 <form method="post" action="/Home/Login">
     <div class="Login">
         <h1 class="Username">Enter your username here</h1>
@@ -34,7 +40,6 @@
         </div>
     </div>
 </form>
-
 
 <script>
     function togglePasswordVisibility(element) {
