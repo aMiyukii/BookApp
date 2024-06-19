@@ -41,5 +41,33 @@ namespace BookApp.Data
                 await _databaseConnection.CloseConnectionAsync();
             }
         }
+
+        public async Task<int> GetUserIdByEmailAsync(string emailAddress)
+        {
+            int userId = 0;
+            await _databaseConnection.OpenConnectionAsync();
+
+            try
+            {
+                using (var connection = _databaseConnection.GetSqlConnection())
+                {
+                    using (var command = new SqlCommand("SELECT id FROM [user] WHERE emailaddress = @EmailAddress", connection))
+                    {
+                        command.Parameters.AddWithValue("@EmailAddress", emailAddress);
+                        var result = await command.ExecuteScalarAsync();
+                        if (result != null && int.TryParse(result.ToString(), out userId))
+                        {
+                            return userId;
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                await _databaseConnection.CloseConnectionAsync();
+            }
+
+            return userId; // 0 if not found
+        }
     }
 }

@@ -10,15 +10,20 @@ namespace BookApp.Core.Services
 
         public UserService(IUserRepository userRepository)
         {
-            _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
+            _userRepository = userRepository;
         }
 
         public async Task<bool> LoginAsync(string emailAddress, string password)
         {
-            if (string.IsNullOrWhiteSpace(emailAddress)) throw new ArgumentNullException(nameof(emailAddress));
-            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentNullException(nameof(password));
-
             return await _userRepository.LoginAsync(emailAddress, password);
         }
+
+        public async Task<int> GetUserIdAsync(string emailAddress)
+        {
+            // Implement logic to retrieve user ID by email address from database
+            // Example implementation assuming UserRepository has a method for this
+            return await _userRepository.GetUserIdByEmailAsync(emailAddress);
+        }
     }
+
 }

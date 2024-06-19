@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using BookApp.Core.Services;
 using BookApp.Core.Interfaces;
 using System.Threading.Tasks;
 
@@ -34,6 +33,12 @@ namespace BookApp.Controllers
             var isValidUser = await _userService.LoginAsync(Emailaddress, Password);
             if (isValidUser)
             {
+                // Retrieve user ID from database or some service method
+                var userId = await _userService.GetUserIdAsync(Emailaddress);
+
+                // Store user ID in session
+                HttpContext.Session.SetInt32("UserId", userId);
+
                 return RedirectToAction("Index", "Library");
             }
             else
@@ -41,6 +46,13 @@ namespace BookApp.Controllers
                 ViewBag.ErrorMessage = "Invalid email or password.";
                 return View("Index");
             }
+        }
+
+        public IActionResult Logout()
+        {
+            // Clear user ID from session on logout
+            HttpContext.Session.Remove("UserId");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

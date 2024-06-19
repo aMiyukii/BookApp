@@ -11,15 +11,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ddb3a06-5db6-4567-a199-9c738edfdec0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/Interfaces/IBookRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Interfaces/IBookRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/Interfaces/IBookService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Interfaces/IBookService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BookApp.Core/Interfaces/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Interfaces/IUserRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BookApp.Core/Interfaces/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Interfaces/IUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/Services/BookService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Services/BookService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BookApp.Core/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Services/UserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Data/DatabaseConnection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Data/DatabaseConnection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Data/BookRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Data/BookRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BookApp.Data/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Data/UserRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BookApp/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Controllers/HomeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/Controllers/LibraryController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Controllers/LibraryController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BookApp/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp/Views/Home/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Views/Home/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Views/Shared/_Layout.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,6 +207,7 @@
       <workItem from="1718473682267" duration="4409000" />
       <workItem from="1718540094008" duration="1893000" />
       <workItem from="1718697137412" duration="660000" />
+      <workItem from="1718808651592" duration="403000" />
     </task>
     <servers />
   </component>

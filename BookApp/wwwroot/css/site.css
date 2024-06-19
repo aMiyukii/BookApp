@@ -47,3 +47,7 @@ body {
     font-weight: 500;
     color: #002A2B;
 }
+
+.nav-item-right{
+    margin-left: 65%;
+}

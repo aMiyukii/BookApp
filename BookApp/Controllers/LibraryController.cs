@@ -10,7 +10,8 @@ namespace BookApp.Controllers
         private readonly IBookService _bookService;
         private readonly ICategoryService _categoryService;
 
-        public LibraryController(ILogger<LibraryController> logger, IBookService bookService, ICategoryService categoryService)
+        public LibraryController(ILogger<LibraryController> logger, IBookService bookService,
+            ICategoryService categoryService)
         {
             _logger = logger;
             _bookService = bookService;
@@ -21,7 +22,15 @@ namespace BookApp.Controllers
         {
             try
             {
-                var booksInLibrary = await _bookService.GetBooksInLibraryAsync();
+                // Retrieve user ID from session
+                int? userId = HttpContext.Session.GetInt32("UserId");
+                if (!userId.HasValue)
+                {
+                    // Handle case where user ID is not found in session (redirect to login or handle appropriately)
+                    return RedirectToAction("Index", "Home"); // Redirect to login page or handle as needed
+                }
+
+                var booksInLibrary = await _bookService.GetBooksByUserIdAsync(userId.Value);
 
                 if (booksInLibrary == null || !booksInLibrary.Any())
                 {

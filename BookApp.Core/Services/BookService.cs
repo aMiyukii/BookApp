@@ -74,5 +74,10 @@ namespace BookApp.Core.Services
         {
             return await _bookRepository.GetBooksInLibraryAsync();
         }
+        
+        public async Task<List<BookDTO>> GetBooksByUserIdAsync(int userId)
+        {
+            return await _bookRepository.GetBooksByUserIdAsync(userId);
+        }
     }
 }

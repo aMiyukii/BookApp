@@ -13,6 +13,7 @@ namespace BookApp.Core.Interfaces
         Task DeleteUserBookByBookIdAsync(int bookId);
         Task<List<BookDTO>> GetBooksInLibraryAsync();
         Task<bool> IsBookInUserCollectionAsync(int bookId);
+        Task<List<BookDTO>> GetBooksByUserIdAsync(int userId);
     }
 
 }

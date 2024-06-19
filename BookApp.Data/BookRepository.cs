@@ -403,5 +403,52 @@ namespace BookApp.Data
 
             return isInCollection;
         }
+        
+        public async Task<List<BookDTO>> GetBooksByUserIdAsync(int userId)
+        {
+            List<BookDTO> books = new List<BookDTO>();
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            await dbConnection.OpenConnectionAsync();
+
+            try
+            {
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
+                {
+                    string selectQuery =
+                        "SELECT b.id, b.title, b.author, b.imageUrl FROM user_book ub " +
+                        "JOIN book b ON ub.book_id = b.id " +
+                        "WHERE ub.user_id = @userId";
+
+                    using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@userId", userId);
+
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                int id = Convert.ToInt32(reader["id"]);
+                                string title = reader["title"].ToString();
+                                string author = reader["author"].ToString();
+                                string imageUrl = reader["imageUrl"].ToString();
+
+                                BookDTO book = new BookDTO(id, title, author, imageUrl);
+                                books.Add(book);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error fetching books by user ID from the database: " + ex.Message);
+            }
+            finally
+            {
+                await dbConnection.CloseConnectionAsync();
+            }
+
+            return books;
+        }
     }
 }
