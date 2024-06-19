@@ -62,7 +62,7 @@
         $('.edit-icon').click(async function() {
             var categoryId = $(this).closest('.categoryItem').data('id');
             var currentName = $(this).closest('.categoryItem').find('.categoryNames').text();
-
+    
             const { value: newName } = await Swal.fire({
                 title: 'Edit category name',
                 input: 'text',
@@ -75,15 +75,23 @@
                     }
                 }
             });
-
+    
             if (newName) {
-                $.post('@Url.Action("UpdateCategoryName", "AddCategory")', { id: categoryId, newName: newName }, function(data) {
-                    if (data.success) {
-                        Swal.fire('Updated!', 'The category name has been updated.', 'success').then(() => {
-                            location.reload();
-                        });
-                    } else {
-                        Swal.fire('Error!', `A category with the name "${newName}" already exists.`, 'error');
+                $.ajax({
+                    url: '@Url.Action("UpdateCategoryName", "AddCategory")',
+                    type: 'POST',
+                    data: { id: categoryId, newName: newName },
+                    success: function(data) {
+                        if (data.success) {
+                            Swal.fire('Updated!', 'The category name has been updated.', 'success').then(() => {
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire('Error!', data.message || 'Error updating category name.', 'error');
+                        }
+                    },
+                    error: function() {
+                        Swal.fire('Error!', 'There was an error updating the category name.', 'error');
                     }
                 });
             }

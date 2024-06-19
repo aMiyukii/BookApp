@@ -72,19 +72,25 @@ namespace BookApp.Controllers
             try
             {
                 await _categoryServices.UpdateCategoryNameAsync(id, newName);
-                return RedirectToAction("Index");
+                return Json(new { success = true });
             }
             catch (ArgumentNullException ex)
             {
-                TempData["ErrorMessage"] = ex.Message;
-                return RedirectToAction("Index");
+                // Handle specific exceptions
+                return Json(new { success = false, message = ex.Message });
             }
             catch (InvalidOperationException ex)
             {
-                TempData["ErrorMessage"] = ex.Message;
-                return RedirectToAction("Index");
+                // Handle specific exceptions
+                return Json(new { success = false, message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                // Handle general exceptions
+                return Json(new { success = false, message = ex.Message });
             }
         }
+
 
         [HttpPost("/AddCategory/DeleteCategory")]
         public async Task<ActionResult> DeleteCategory(int id)

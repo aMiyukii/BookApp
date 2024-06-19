@@ -93,12 +93,14 @@
             var input = document.querySelector('.searchbar');
             var filter = input.value.toUpperCase();
             var books = document.querySelectorAll('.grid-item3');
-
+        
             books.forEach(function(book) {
                 var titleElement = book.querySelector('.BookTitle p');
+                var authorElement = book.querySelector('.BookAuthor p');
                 var title = titleElement.textContent.toUpperCase();
-
-                if (title.includes(filter)) {
+                var author = authorElement.textContent.toUpperCase();
+        
+                if (title.includes(filter) || author.includes(filter)) {
                     book.style.display = "";
                 } else {
                     book.style.display = "none";
@@ -121,17 +123,7 @@
         document.querySelector('.searchbar').addEventListener('input', function() {
             handleSearch();
         });
-
-        function displaySuccessMessage(title) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Added!',
-                text: `Book "${title}" has been added.`,
-            }).then(() => {
-                location.reload();
-            });
-        }
-
+        
         function displayErrorMessage(message) {
             Swal.fire('Error!', message, 'error');
         }
