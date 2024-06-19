@@ -43,10 +43,21 @@ namespace BookApp.Controllers
         {
             try
             {
-                if (chosenCategoryId2 == 0)
+                // Retrieve the user ID from the session
+                int? userId = HttpContext.Session.GetInt32("UserId");
+
+                if (userId == null)
                 {
+                    // Handle the case where the user ID is not found in the session
+                    TempData["ErrorMessage"] = "User not logged in.";
+                    return RedirectToAction("Index");
                 }
-                await _bookService.AddBookToUserCollectionAsync(chosenBookId, chosenCategoryId1, chosenCategoryId2);
+
+                // Convert chosenCategoryId2 to nullable int
+                int? categoryId2 = (chosenCategoryId2 == 0) ? (int?)null : chosenCategoryId2;
+
+                // Pass the userId to the service method
+                await _bookService.AddBookToUserCollectionAsync((int)userId, chosenBookId, chosenCategoryId1, categoryId2);
 
                 TempData["SuccessMessage"] = "Book added successfully.";
                 return RedirectToAction("Index", "Library");

@@ -93,7 +93,7 @@ namespace BookApp.Data
             return title;
         }
 
-        public async Task AddBookToUserCollectionAsync(int bookId, int categoryId1, int? categoryId2 = null)
+        public async Task AddBookToUserCollectionAsync(int userId, int bookId, int categoryId1, int? categoryId2 = null)
         {
             DatabaseConnection dbConnection = new DatabaseConnection();
             await dbConnection.OpenConnectionAsync();
@@ -112,10 +112,11 @@ namespace BookApp.Data
                         if (count > 0)
                         {
                             string insertUserBookQuery =
-                                "INSERT INTO user_book (book_id) OUTPUT INSERTED.id VALUES (@bookId)";
+                                "INSERT INTO user_book (user_id, book_id) OUTPUT INSERTED.id VALUES (@userId, @bookId)";
 
                             using (SqlCommand insertUserBookCmd = new SqlCommand(insertUserBookQuery, connection))
                             {
+                                insertUserBookCmd.Parameters.AddWithValue("@userId", userId);
                                 insertUserBookCmd.Parameters.AddWithValue("@bookId", bookId);
                                 int userBookId = (int)await insertUserBookCmd.ExecuteScalarAsync();
 
@@ -403,7 +404,7 @@ namespace BookApp.Data
 
             return isInCollection;
         }
-        
+
         public async Task<List<BookDTO>> GetBooksByUserIdAsync(int userId)
         {
             List<BookDTO> books = new List<BookDTO>();
