@@ -9,10 +9,10 @@ namespace BookApp.Core.Interfaces
         Task<IEnumerable<CategoryDTO>> GetCategoriesByBookIdAsync(int bookId);
         Task AddBookToUserCollectionAsync(int userId, int bookId, int categoryId1, int? categoryId2 = null);
         Task<BookDTO> GetBookByTitleAsync(string title);
-        Task DeleteBookByTitleAsync(string title);
-        Task DeleteUserBookByBookIdAsync(int bookId);
+        Task DeleteBookByTitleAsync(string title, int userId);
+        Task DeleteUserBookByBookIdAsync(int bookId, int userId);
         Task<List<BookDTO>> GetBooksInLibraryAsync();
-        Task<bool> IsBookInUserCollectionAsync(int bookId);
+        Task<bool> IsBookInUserCollectionAsync(int userId, int bookId);
         Task<List<BookDTO>> GetBooksByUserIdAsync(int userId);
     }
 

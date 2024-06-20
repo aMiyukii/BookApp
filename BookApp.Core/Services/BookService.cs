@@ -38,7 +38,7 @@ namespace BookApp.Core.Services
             if (bookId <= 0) throw new ArgumentException("Invalid book ID", nameof(bookId));
             if (categoryId1 <= 0) throw new ArgumentException("The required category is empty");
 
-            bool isInCollection = await _bookRepository.IsBookInUserCollectionAsync(bookId);
+            bool isInCollection = await _bookRepository.IsBookInUserCollectionAsync(bookId, userId);
             if (isInCollection)
             {
                 throw new InvalidOperationException("The book is already added to the library.");
@@ -54,20 +54,20 @@ namespace BookApp.Core.Services
             return await _bookRepository.GetBookByTitleAsync(title);
         }
 
-        public async Task DeleteBookByTitleAsync(string title)
+        public async Task DeleteBookByTitleAsync(string title, int userId)
         {
             if (string.IsNullOrWhiteSpace(title))
             {
                 throw new ArgumentException("Title cannot be null or empty", nameof(title));
             }
 
-            await _bookRepository.DeleteBookByTitleAsync(title);
+            await _bookRepository.DeleteBookByTitleAsync(title, userId);
         }
 
-        public async Task DeleteUserBookByBookIdAsync(int bookId)
+        public async Task DeleteUserBookByBookIdAsync(int bookId, int userId)
         {
             if (bookId <= 0) throw new ArgumentException("Invalid book ID", nameof(bookId));
-            await _bookRepository.DeleteUserBookByBookIdAsync(bookId);
+            await _bookRepository.DeleteUserBookByBookIdAsync(bookId, userId);
         }
 
         public async Task<List<BookDTO>> GetBooksInLibraryAsync()

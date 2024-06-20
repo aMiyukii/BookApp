@@ -22,12 +22,10 @@ namespace BookApp.Controllers
         {
             try
             {
-                // Retrieve user ID from session
                 int? userId = HttpContext.Session.GetInt32("UserId");
                 if (!userId.HasValue)
                 {
-                    // Handle case where user ID is not found in session (redirect to login or handle appropriately)
-                    return RedirectToAction("Index", "Home"); // Redirect to login page or handle as needed
+                    return RedirectToAction("Index", "Home");
                 }
 
                 var booksInLibrary = await _bookService.GetBooksByUserIdAsync(userId.Value);
@@ -101,6 +99,12 @@ namespace BookApp.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteBook(string title)
         {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (!userId.HasValue)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (string.IsNullOrEmpty(title))
             {
                 return BadRequest("Book title cannot be null or empty.");
@@ -113,8 +117,8 @@ namespace BookApp.Controllers
                 return NotFound("Book not found.");
             }
 
-            await _bookService.DeleteBookByTitleAsync(title);
-            await _bookService.DeleteUserBookByBookIdAsync(book.Id);
+            await _bookService.DeleteBookByTitleAsync(title, userId.Value);
+            await _bookService.DeleteUserBookByBookIdAsync(book.Id, userId.Value);
 
             return RedirectToAction("Index");
         }

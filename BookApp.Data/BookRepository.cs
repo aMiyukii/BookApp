@@ -239,7 +239,7 @@ namespace BookApp.Data
             return book;
         }
 
-        public async Task DeleteBookByTitleAsync(string title)
+        public async Task DeleteBookByTitleAsync(string title, int userId)
         {
             DatabaseConnection dbConnection = new DatabaseConnection();
             await dbConnection.OpenConnectionAsync();
@@ -248,11 +248,12 @@ namespace BookApp.Data
             {
                 using (SqlConnection connection = dbConnection.GetSqlConnection())
                 {
-                    string deleteQuery = "DELETE FROM dbo.book WHERE title = @title";
+                    string deleteQuery = "DELETE FROM dbo.book WHERE user_id = @userId AND title = @title";
 
                     using (SqlCommand cmd = new SqlCommand(deleteQuery, connection))
                     {
                         cmd.Parameters.AddWithValue("@title", title);
+                        cmd.Parameters.AddWithValue("@userId", userId);
                         await cmd.ExecuteNonQueryAsync();
                     }
                 }
@@ -267,7 +268,7 @@ namespace BookApp.Data
             }
         }
 
-        public async Task DeleteUserBookByBookIdAsync(int bookId)
+        public async Task DeleteUserBookByBookIdAsync(int bookId, int userId)
         {
             DatabaseConnection dbConnection = new DatabaseConnection();
             await dbConnection.OpenConnectionAsync();
@@ -276,11 +277,12 @@ namespace BookApp.Data
             {
                 using (SqlConnection connection = dbConnection.GetSqlConnection())
                 {
-                    string deleteQuery = "DELETE FROM user_book WHERE book_id = @bookId";
+                    string deleteQuery = "DELETE FROM user_book WHERE user_id = @userId AND book_id = @bookId";
 
                     using (SqlCommand cmd = new SqlCommand(deleteQuery, connection))
                     {
                         cmd.Parameters.AddWithValue("@bookId", bookId);
+                        cmd.Parameters.AddWithValue("@userId", userId);
                         await cmd.ExecuteNonQueryAsync();
                     }
                 }
@@ -373,7 +375,7 @@ namespace BookApp.Data
             }
         }
 
-        public async Task<bool> IsBookInUserCollectionAsync(int bookId)
+        public async Task<bool> IsBookInUserCollectionAsync(int userId, int bookId)
         {
             bool isInCollection = false;
             DatabaseConnection dbConnection = new DatabaseConnection();
@@ -383,10 +385,11 @@ namespace BookApp.Data
             {
                 using (SqlConnection connection = dbConnection.GetSqlConnection())
                 {
-                    string checkQuery = "SELECT COUNT(*) FROM user_book WHERE book_id = @bookId";
+                    string checkQuery = "SELECT COUNT(*) FROM user_book WHERE user_id = @userId AND book_id = @bookId";
 
                     using (SqlCommand cmd = new SqlCommand(checkQuery, connection))
                     {
+                        cmd.Parameters.AddWithValue("@userId", userId);
                         cmd.Parameters.AddWithValue("@bookId", bookId);
                         int count = (int)await cmd.ExecuteScalarAsync();
                         isInCollection = count > 0;
