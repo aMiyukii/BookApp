@@ -9,7 +9,9 @@ namespace BookApp.Core.Interfaces
         Task AddCategoryAsync(CategoryDTO category);
         Task UpdateCategoryAsync(CategoryDTO category);
         Task DeleteCategoryAsync(int id);
-        Task SaveCategoryAsync(int userBookId, int categoryId1, int categoryId2);
         Task<CategoryDTO> GetCategoryByNameAsync(string name);
+        Task SaveCategoryAsync(int userBookId, int categoryId1, int categoryId2);
+        Task<List<CategoryDTO>> GetCategoriesByUserIdAsync(int userId);
+        Task<List<CategoryDTO>> GetStandardCategoriesAsync();
     }
 }

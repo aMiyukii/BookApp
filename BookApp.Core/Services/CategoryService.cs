@@ -90,5 +90,17 @@ namespace BookApp.Core.Services
         {
             return await _categoryRepository.GetCategoryByNameAsync(name);
         }
+        
+        public async Task<List<CategoryDTO>> GetCategoriesByUserIdAsync(int userId)
+        {
+            // Fetch all standard categories
+            var standardCategories = await _categoryRepository.GetStandardCategoriesAsync();
+
+            // Fetch non-standard categories specific to the user
+            var userCategories = await _categoryRepository.GetCategoriesByUserIdAsync(userId);
+
+            // Combine both sets of categories
+            return standardCategories.Concat(userCategories).ToList();
+        }
     }
 }

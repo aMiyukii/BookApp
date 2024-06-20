@@ -12,11 +12,10 @@
   <component name="ChangeListManager">
     <list default="true" id="9ddb3a06-5db6-4567-a199-9c738edfdec0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Core/Interfaces/IBookRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Interfaces/IBookRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Core/Interfaces/IBookService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Interfaces/IBookService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Core/Services/BookService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Services/BookService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Data/BookRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Data/BookRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp/Controllers/AddBookController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Controllers/AddBookController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/Interfaces/ICategoryRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Interfaces/ICategoryRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/Interfaces/ICategoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Interfaces/ICategoryService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/Services/CategoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Services/CategoryService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Data/CategoryRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Data/CategoryRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,32 +68,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.BookApp: http.executor&quot;: &quot;Debug&quot;,
-    &quot;2dce3e09-79ad-4431-9318-c73d637bee47.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.9147541&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;RiderDotCoverFilteringPageId&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.BookApp: http.executor": "Debug",
+    "2dce3e09-79ad-4431-9318-c73d637bee47.executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "XThreadsFramesViewSplitterKey": "0.9147541",
+    "git-widget-placeholder": "CategoryPerUser",
+    "ignore.virus.scanning.warn.message": "true",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "RiderDotCoverFilteringPageId",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\Marleen\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\Marleen\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\Marleen\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\Marleen\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\Marleen\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\Marleen\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RiderProblemsViewState">
     <option name="showPreview" value="true" />
   </component>

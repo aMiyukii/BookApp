@@ -267,7 +267,7 @@ namespace BookApp.Data
                 await dbConnection.CloseConnectionAsync();
             }
         }
-        
+
         public async Task<CategoryDTO> GetCategoryByNameAsync(string name)
         {
             CategoryDTO category = null;
@@ -288,7 +288,9 @@ namespace BookApp.Data
                         {
                             if (await reader.ReadAsync())
                             {
-                                int id = reader.IsDBNull(reader.GetOrdinal("id")) ? 0 : reader.GetInt32(reader.GetOrdinal("id"));
+                                int id = reader.IsDBNull(reader.GetOrdinal("id"))
+                                    ? 0
+                                    : reader.GetInt32(reader.GetOrdinal("id"));
                                 bool isStandard = reader.GetBoolean(reader.GetOrdinal("isStandard"));
 
                                 category = new CategoryDTO(id, name, isStandard);
@@ -309,5 +311,92 @@ namespace BookApp.Data
             return category;
         }
 
+        public async Task<List<CategoryDTO>> GetStandardCategoriesAsync()
+        {
+            List<CategoryDTO> categories = new List<CategoryDTO>();
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            await dbConnection.OpenConnectionAsync();
+
+            try
+            {
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
+                {
+                    string selectQuery = "SELECT id, name, isStandard FROM dbo.category WHERE isStandard = 1";
+
+                    using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
+                    {
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                int id = reader.GetInt32(reader.GetOrdinal("id"));
+                                string name = reader.GetString(reader.GetOrdinal("name"));
+                                bool isStandard = reader.GetBoolean(reader.GetOrdinal("isStandard"));
+
+                                CategoryDTO category = new CategoryDTO(id, name, isStandard);
+                                categories.Add(category);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error fetching standard categories from the database: " + ex.Message);
+            }
+            finally
+            {
+                await dbConnection.CloseConnectionAsync();
+            }
+
+            return categories;
+        }
+
+        public async Task<List<CategoryDTO>> GetCategoriesByUserIdAsync(int userId)
+        {
+            List<CategoryDTO> categories = new List<CategoryDTO>();
+            DatabaseConnection dbConnection = new DatabaseConnection();
+            await dbConnection.OpenConnectionAsync();
+
+            try
+            {
+                using (SqlConnection connection = dbConnection.GetSqlConnection())
+                {
+                    string selectQuery = @"
+                    SELECT c.id, c.name, c.isStandard 
+                    FROM dbo.category c
+                    INNER JOIN dbo.user_book_category ubc ON c.id = ubc.category_id 
+                    WHERE ubc.user_id = @userId AND c.isStandard = 0";
+
+                    using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@userId", userId);
+
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                int id = reader.GetInt32(reader.GetOrdinal("id"));
+                                string name = reader.GetString(reader.GetOrdinal("name"));
+                                bool isStandard = reader.GetBoolean(reader.GetOrdinal("isStandard"));
+
+                                CategoryDTO category = new CategoryDTO(id, name, isStandard);
+                                categories.Add(category);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error fetching categories by user ID from the database: " + ex.Message);
+            }
+            finally
+            {
+                await dbConnection.CloseConnectionAsync();
+            }
+
+            return categories;
+        }
     }
 }

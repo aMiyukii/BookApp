@@ -1,108 +1,107 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using BookApp.Core.DTO;
+﻿using BookApp.Core.DTO;
 using BookApp.Core.Interfaces;
 using BookApp.Models;
+using Microsoft.AspNetCore.Mvc;
 
-namespace BookApp.Controllers
+public class AddCategoryController : Controller
 {
-    public class AddCategoryController : Controller
+    private readonly ICategoryService _categoryServices;
+
+    public AddCategoryController(ICategoryService categoryServices)
     {
-        private readonly ICategoryService _categoryServices;
+        _categoryServices = categoryServices;
+    }
 
-        public AddCategoryController(ICategoryService categoryServices)
+    [HttpGet("/addcategory")]
+    public async Task<IActionResult> Index()
+    {
+        int? userId = HttpContext.Session.GetInt32("UserId");
+        if (!userId.HasValue)
         {
-            _categoryServices = categoryServices;
+            return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet("/addcategory")]
-        public async Task<IActionResult> Index()
+        var categoriesDto = await _categoryServices.GetCategoriesByUserIdAsync(userId.Value);
+        var viewModel = new AddCategoryViewModel
         {
-            var categoriesDto = await _categoryServices.GetAllCategoriesAsync();
-            var viewModel = new AddCategoryViewModel
-            {
-                Categories = categoriesDto
-            };
+            Categories = categoriesDto
+        };
 
-            return View(viewModel);
+        return View(viewModel);
+    }
+
+    [HttpPost("/AddCategory/AddCategoryName")]
+    public async Task<ActionResult> AddCategoryName(CategoryDTO category)
+    {
+        try
+        {
+            await _categoryServices.AddCategoryAsync(category);
+
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return Json(new { success = true });
+            }
+
+            return RedirectToAction("Index");
         }
-
-        [HttpPost("/AddCategory/AddCategoryName")]
-        public async Task<ActionResult> AddCategoryName(CategoryDTO category)
+        catch (ArgumentNullException ex)
         {
-            try
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
             {
-                await _categoryServices.AddCategoryAsync(category);
-
-                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
-                {
-                    return Json(new { success = true });
-                }
-
-                return RedirectToAction("Index");
+                return Json(new { success = false, message = ex.Message });
             }
-            catch (ArgumentNullException ex)
+
+            TempData["ErrorMessage"] = ex.Message;
+            return RedirectToAction("Index");
+        }
+        catch (InvalidOperationException ex)
+        {
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
             {
-                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
-                {
-                    return Json(new { success = false, message = ex.Message });
-                }
-
-                TempData["ErrorMessage"] = ex.Message;
-                return RedirectToAction("Index");
+                return Json(new { success = false, message = ex.Message });
             }
-            catch (InvalidOperationException ex)
-            {
-                if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
-                {
-                    return Json(new { success = false, message = ex.Message });
-                }
 
-                TempData["ErrorMessage"] = ex.Message;
-                return RedirectToAction("Index");
-            }
-    
+            TempData["ErrorMessage"] = ex.Message;
             return RedirectToAction("Index");
         }
 
-        [HttpPost("/AddCategory/UpdateCategoryName")]
-        public async Task<ActionResult> UpdateCategoryName(int id, string newName)
+        return RedirectToAction("Index");
+    }
+
+    [HttpPost("/AddCategory/UpdateCategoryName")]
+    public async Task<ActionResult> UpdateCategoryName(int id, string newName)
+    {
+        try
         {
-            try
-            {
-                await _categoryServices.UpdateCategoryNameAsync(id, newName);
-                return Json(new { success = true });
-            }
-            catch (ArgumentNullException ex)
-            {
-                // Handle specific exceptions
-                return Json(new { success = false, message = ex.Message });
-            }
-            catch (InvalidOperationException ex)
-            {
-                // Handle specific exceptions
-                return Json(new { success = false, message = ex.Message });
-            }
-            catch (Exception ex)
-            {
-                // Handle general exceptions
-                return Json(new { success = false, message = ex.Message });
-            }
+            await _categoryServices.UpdateCategoryNameAsync(id, newName);
+            return Json(new { success = true });
         }
-
-
-        [HttpPost("/AddCategory/DeleteCategory")]
-        public async Task<ActionResult> DeleteCategory(int id)
+        catch (ArgumentNullException ex)
         {
-            try
-            {
-                await _categoryServices.DeleteCategoryAsync(id);
-                return RedirectToAction("Index");
-            }
-            catch (ArgumentException ex)
-            {
-                TempData["ErrorMessage"] = ex.Message;
-                return RedirectToAction("Index");
-            }
+            return Json(new { success = false, message = ex.Message });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Json(new { success = false, message = ex.Message });
+        }
+        catch (Exception ex)
+        {
+            return Json(new { success = false, message = ex.Message });
+        }
+    }
+
+    [HttpPost("/AddCategory/DeleteCategory")]
+    public async Task<ActionResult> DeleteCategory(int id)
+    {
+        try
+        {
+            await _categoryServices.DeleteCategoryAsync(id);
+            return RedirectToAction("Index");
+        }
+        catch (ArgumentException ex)
+        {
+            TempData["ErrorMessage"] = ex.Message;
+            return RedirectToAction("Index");
         }
     }
 }
