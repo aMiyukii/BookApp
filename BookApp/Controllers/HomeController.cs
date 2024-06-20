@@ -19,6 +19,11 @@ namespace BookApp.Controllers
             return View();
         }
 
+        public IActionResult CreateAccount()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Login(string Emailaddress, string Password)
         {

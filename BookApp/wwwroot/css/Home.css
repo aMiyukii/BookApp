@@ -15,6 +15,16 @@ body {
     margin-top: 15%;
 }
 
+.welcomeCreate {
+    font-size: 32px;
+    font-weight: 600;
+    display: flex;
+    align-content: center;
+    margin-left: 41.5%;
+    margin-right: 35%;
+    margin-top: 15%;
+}
+
 .Login {
     text-align: center;
     margin-top: 2%;
@@ -44,7 +54,21 @@ body {
 }
 
 .loginButton{
-    margin-top: 2em;
+    margin-top: 3em;
+    margin-left: -5%;
+    width: 10%;
+    height: 40px;
+    background-color: #efeff6;
+    border-radius: 8px;
+    border-color: transparent;
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.createaccountButton{
+    margin-top: 3em;
     margin-left: -5%;
     width: 10%;
     height: 40px;
@@ -68,6 +92,19 @@ body {
 
 .PasswordInput {
     position: relative;
+}
+
+.logintText{
+    color: #030303;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    margin-left: 43%;
+}
+.createaccountText{
+    color: #030303;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    margin-left: 44%;
 }
 
 

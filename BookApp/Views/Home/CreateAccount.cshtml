@@ -14,15 +14,10 @@
 <body>
 <div>
     <div class="image"><img src="~/Images/BookLogo.png"/></div>
-    <div class="welcome">Welcome to Reading Realm!</div>
+    <div class="welcomeCreate">Create your account</div>
 </div> 
 
-@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
-{
-    <div class="error-message">@ViewBag.ErrorMessage</div>
-}
-
-<form method="post" action="/Home/Login">
+<form method="post" action="/Home/CreateAccount">
     <div class="Login">
         <h1 class="Username">Enter your emailaddress here</h1>
         <input class="UsernameInput" name="Emailaddress" placeholder="Enter username here">
@@ -36,13 +31,12 @@
         </div>
         
         <div class="loginButtonDiv">
-            <button type="submit" class="loginButton">Login</button>
+            <button type="submit" class="createaccountButton">Create account</button>
         </div>
     </div>
 </form>
 
-    <p class="createaccountText">Not registered? <a asp-area="" asp-controller="Home" asp-action="CreateAccount">Create an account.</a></p>
-
+<p class="logintText">Already registered? <a asp-area="" asp-controller="Home" asp-action="Index">log into your account.</a></p>
 
 <script>
     function togglePasswordVisibility(element) {
