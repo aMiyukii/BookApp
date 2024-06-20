@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using BookApp.Core.Interfaces;
-using System.Threading.Tasks;
 
 namespace BookApp.Controllers
 {

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using BookApp.Core.DTO;
 
 namespace BookApp.Core.Interfaces

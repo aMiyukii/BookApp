@@ -1,8 +1,6 @@
 using BookApp.Core.Interfaces;
 using DAL;
-using System;
 using System.Data.SqlClient;
-using System.Threading.Tasks;
 
 namespace BookApp.Data
 {

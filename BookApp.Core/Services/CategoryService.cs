@@ -1,8 +1,5 @@
 ﻿using BookApp.Core.DTO;
 using BookApp.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace BookApp.Core.Services
 {

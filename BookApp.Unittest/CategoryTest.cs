@@ -1,5 +1,3 @@
-using System.Linq;
-using System.Threading.Tasks;
 using BookApp.Core.DTO;
 using BookApp.Core.Services;
 using BookApp.Unittest.Fake_Repositories;

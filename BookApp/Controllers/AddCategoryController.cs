@@ -2,8 +2,6 @@
 using BookApp.Core.DTO;
 using BookApp.Core.Interfaces;
 using BookApp.Models;
-using System;
-using System.Threading.Tasks;
 
 namespace BookApp.Controllers
 {

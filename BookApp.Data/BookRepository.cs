@@ -1,15 +1,7 @@
 ﻿using DAL;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using static System.Net.Mime.MediaTypeNames;
 using BookApp.Core.DTO;
 using BookApp.Core.Interfaces;
-using BookApp.Core.Services;
 
 namespace BookApp.Data
 {

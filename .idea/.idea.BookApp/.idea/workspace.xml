@@ -10,7 +10,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ddb3a06-5db6-4567-a199-9c738edfdec0" name="Changes" comment="" />
+    <list default="true" id="9ddb3a06-5db6-4567-a199-9c738edfdec0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/Interfaces/IBookService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Interfaces/IBookService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/Interfaces/ILoginManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/Interfaces/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Interfaces/IUserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/Interfaces/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Interfaces/IUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/LoginManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/Services/BookService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Services/BookService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/Services/CategoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Services/CategoryService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Core/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/Services/UserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Data/BookRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Data/BookRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Data/DatabaseConnection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Data/DatabaseConnection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Data/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Data/UserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/BookTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/BookTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/CategoryTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/CategoryTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeBookRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeBookRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeCategoryRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeCategoryRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeUserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/UserTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/UserTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/Controllers/AddCategoryController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Controllers/AddCategoryController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Controllers/HomeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp/Models/AddBookViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp/Models/AddBookViewModel.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -205,9 +227,9 @@
   </component>
   <component name="UnitTestsCoverage.Settings">
     <option name="coveragePercentColumnWidth" value="150" />
-    <option name="sortOrder" value="DESCENDING" />
+    <option name="sortOrder" value="ASCENDING" />
     <option name="sortedColumn" value="1" />
-    <option name="symbolColumnWidth" value="152" />
+    <option name="symbolColumnWidth" value="180" />
     <coverage-tree-state>
       <expand />
       <select />

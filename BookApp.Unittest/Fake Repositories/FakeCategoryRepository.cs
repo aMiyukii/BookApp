@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BookApp.Core.DTO;
+﻿using BookApp.Core.DTO;
 using BookApp.Core.Interfaces;
 
 namespace BookApp.Unittest.Fake_Repositories
