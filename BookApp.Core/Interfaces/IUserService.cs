@@ -4,6 +4,9 @@ namespace BookApp.Core.Interfaces
     {
         Task<bool> LoginAsync(string emailAddress, string password);
         Task<int> GetUserIdAsync(string emailAddress);
+        Task<bool> CreateUserAsync(string name, string emailAddress, string password);
+        Task<bool> UserExistsAsync(string emailAddress);
     }
+
 }
 

@@ -36,10 +36,8 @@ namespace BookApp.Controllers
             var isValidUser = await _userService.LoginAsync(Emailaddress, Password);
             if (isValidUser)
             {
-                // Retrieve user ID from database or some service method
                 var userId = await _userService.GetUserIdAsync(Emailaddress);
 
-                // Store user ID in session
                 HttpContext.Session.SetInt32("UserId", userId);
 
                 return RedirectToAction("Index", "Library");
@@ -53,9 +51,44 @@ namespace BookApp.Controllers
 
         public IActionResult Logout()
         {
-            // Clear user ID from session on logout
             HttpContext.Session.Remove("UserId");
             return RedirectToAction("Index", "Home");
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> CreateAccount(string Name, string Emailaddress, string Password)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Emailaddress) || string.IsNullOrWhiteSpace(Password))
+                {
+                    ViewBag.ErrorMessage = "Name, email, and password are required.";
+                    return View();
+                }
+
+                bool userExists = await _userService.UserExistsAsync(Emailaddress);
+                if (userExists)
+                {
+                    ViewBag.ErrorMessage = "User with this email address already exists.";
+                    return View();
+                }
+
+                bool createUserResult = await _userService.CreateUserAsync(Name, Emailaddress, Password);
+                if (createUserResult)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Failed to create user account. Please try again.";
+                    return View();
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = "Error creating user account: " + ex.Message;
+                return View();
+            }
         }
     }
 }

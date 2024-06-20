@@ -39,7 +39,18 @@ body {
     margin-top: 2em;
 }
 
-.UsernameInput,
+.UsernameInput{
+    border-radius: 10px;
+    padding: 10px;
+    text-align: left;
+    border: 0px;
+    width: 15%;
+    height: 1.5em;
+    box-shadow: 0 0 10px rgba(0, 42, 43, 0.2);
+    margin-top: 0.5em;
+    padding-left: 1%;
+    font-size: 16px;
+}
 .PasswordInput {
     border-radius: 10px;
     padding: 10px;
@@ -51,6 +62,23 @@ body {
     margin-top: 0.2em;
     padding-left: 1%;
     font-size: 16px;
+}
+.NameInput {
+    border-radius: 10px;
+    padding: 10px;
+    text-align: left;
+    border: 0px;
+    width: 15%;
+    height: 1.5em;
+    box-shadow: 0 0 10px rgba(0, 42, 43, 0.2);
+    margin-top: 0.2em;
+    padding-left: 1%;
+    font-size: 16px;
+}   
+.Name{
+    margin-top: 1em;
+}.email{
+    margin-top: 2em;
 }
 
 .loginButton{
