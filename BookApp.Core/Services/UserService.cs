@@ -20,8 +20,6 @@ namespace BookApp.Core.Services
 
         public async Task<int> GetUserIdAsync(string emailAddress)
         {
-            // Implement logic to retrieve user ID by email address from database
-            // Example implementation assuming UserRepository has a method for this
             return await _userRepository.GetUserIdByEmailAsync(emailAddress);
         }
     }

@@ -10,9 +10,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ddb3a06-5db6-4567-a199-9c738edfdec0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeUserRepository.cs" afterDir="false" />
-    </list>
+    <list default="true" id="9ddb3a06-5db6-4567-a199-9c738edfdec0" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,7 +77,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors",
+    "settings.editor.selected.configurable": "RiderDotCoverFilteringPageId",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
