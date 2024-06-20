@@ -23,10 +23,11 @@ namespace BookApp.Core.Services
             return await _bookRepository.GetBookTitleByIdAsync(bookId);
         }
 
-        public async Task<IEnumerable<CategoryDTO>> GetCategoriesByBookIdAsync(int bookId)
+        public async Task<IEnumerable<CategoryDTO>> GetCategoriesByBookIdAsync(int userId, int bookId)
         {
+            if (userId <= 0) throw new ArgumentException("Invalid user ID", nameof(userId));
             if (bookId <= 0) throw new ArgumentException("Invalid book ID", nameof(bookId));
-            return await _bookRepository.GetCategoriesByBookIdAsync(bookId);
+            return await _bookRepository.GetCategoriesByBookIdAsync(userId, bookId);
         }
 
         public async Task AddBookToUserCollectionAsync(int userId, int bookId, int categoryId1, int? categoryId2 = null)
@@ -40,7 +41,7 @@ namespace BookApp.Core.Services
                 throw new InvalidOperationException("The book is already added to the library.");
             }
 
-            await _bookRepository.AddBookToUserCollectionAsync( userId, bookId, categoryId1, categoryId2);
+            await _bookRepository.AddBookToUserCollectionAsync(userId, bookId, categoryId1, categoryId2);
         }
 
         public async Task<BookDTO> GetBookByTitleAsync(string title)
@@ -70,7 +71,7 @@ namespace BookApp.Core.Services
         {
             return await _bookRepository.GetBooksInLibraryAsync();
         }
-        
+
         public async Task<List<BookDTO>> GetBooksByUserIdAsync(int userId)
         {
             return await _bookRepository.GetBooksByUserIdAsync(userId);

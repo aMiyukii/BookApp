@@ -289,7 +289,7 @@ namespace BookApp.Data
             }
         }
 
-        public async Task<IEnumerable<CategoryDTO>> GetCategoriesByBookIdAsync(int bookId)
+        public async Task<IEnumerable<CategoryDTO>> GetCategoriesByBookIdAsync(int userId, int bookId)
         {
             List<CategoryDTO> categories = new List<CategoryDTO>();
             DatabaseConnection dbConnection = new DatabaseConnection();
@@ -299,14 +299,17 @@ namespace BookApp.Data
             {
                 using (SqlConnection connection = dbConnection.GetSqlConnection())
                 {
-                    string selectQuery = "SELECT c.id, c.name FROM category c " +
-                                         "INNER JOIN user_book_category ubc ON c.id = ubc.category_id OR c.id = ubc.category_id_2 " +
-                                         "INNER JOIN user_book ub ON ubc.user_book_id = ub.id " +
-                                         "WHERE ub.book_id = @bookId";
+                    string selectQuery = @"
+                SELECT c.id, c.name 
+                FROM category c
+                INNER JOIN user_book_category ubc ON c.id = ubc.category_id OR c.id = ubc.category_id_2
+                INNER JOIN user_book ub ON ubc.user_book_id = ub.id
+                WHERE ub.book_id = @bookId AND ub.user_id = @userId";
 
                     using (SqlCommand cmd = new SqlCommand(selectQuery, connection))
                     {
                         cmd.Parameters.AddWithValue("@bookId", bookId);
+                        cmd.Parameters.AddWithValue("@userId", userId);
 
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
@@ -332,39 +335,6 @@ namespace BookApp.Data
             }
 
             return categories;
-        }
-
-        public async Task SaveCategoryAsync(int userBookId, int categoryId1, int categoryId2)
-        {
-            DatabaseConnection dbConnection = new DatabaseConnection();
-            await dbConnection.OpenConnectionAsync();
-
-            try
-            {
-                using (SqlConnection connection = dbConnection.GetSqlConnection())
-                {
-                    string updateQuery =
-                        "UPDATE user_book_category SET category_id = @categoryId1, category_id_2 = @categoryId2 WHERE user_book_id = @userBookId";
-
-                    using (SqlCommand cmd = new SqlCommand(updateQuery, connection))
-                    {
-                        cmd.Parameters.AddWithValue("@categoryId1", categoryId1);
-                        cmd.Parameters.AddWithValue("@categoryId2", categoryId2);
-                        cmd.Parameters.AddWithValue("@userBookId", userBookId);
-
-                        await cmd.ExecuteNonQueryAsync();
-                        Console.WriteLine("Categories saved successfully.");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error saving categories: " + ex.Message);
-            }
-            finally
-            {
-                await dbConnection.CloseConnectionAsync();
-            }
         }
 
         public async Task<bool> IsBookInUserCollectionAsync(int userId, int bookId)

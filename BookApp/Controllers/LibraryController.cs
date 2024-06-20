@@ -61,6 +61,12 @@ namespace BookApp.Controllers
                 return BadRequest("Book title cannot be null or empty.");
             }
 
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (!userId.HasValue)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             var book = await _bookService.GetBookByTitleAsync(title);
 
             if (book == null)
@@ -68,7 +74,7 @@ namespace BookApp.Controllers
                 return NotFound("Book not found.");
             }
 
-            var bookCategories = await _bookService.GetCategoriesByBookIdAsync(book.Id);
+            var bookCategories = await _bookService.GetCategoriesByBookIdAsync(userId.Value, book.Id);
             var allCategories = await _categoryService.GetAllCategoriesAsync();
 
             var bookViewModel = new BookViewModel
