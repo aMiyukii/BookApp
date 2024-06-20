@@ -1,4 +1,7 @@
 using BookApp.Core.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BookApp.Unittest.Fake_Repositories
 {
@@ -25,6 +28,17 @@ namespace BookApp.Unittest.Fake_Repositories
         {
             var user = _fakeUsers.FirstOrDefault(u => u.EmailAddress == emailAddress);
             return Task.FromResult(user?.UserId ?? 0);
+        }
+
+        public Task<bool> CreateUserAsync(string name, string emailAddress, string password)
+        {
+            return Task.FromResult(true);
+        }
+
+        public Task<bool> UserExistsAsync(string emailAddress)
+        {
+            var userExists = _fakeUsers.Any(u => u.EmailAddress == emailAddress);
+            return Task.FromResult(userExists);
         }
 
         private class FakeUser

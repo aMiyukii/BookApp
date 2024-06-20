@@ -39,10 +39,12 @@ public class FakeBookRepository : IBookRepository
         return Task.FromResult(book?.Title ?? string.Empty);
     }
 
-    public Task<IEnumerable<CategoryDTO>> GetCategoriesByBookIdAsync(int bookId)
+    public Task<IEnumerable<CategoryDTO>> GetCategoriesByBookIdAsync(int userId, int bookId)
     {
-        return Task.FromResult(_categories.AsEnumerable());
+        var categoriesForBook = _categories.Where(c => c.Id == 1 || c.Id == 2).ToList();
+        return Task.FromResult(categoriesForBook.AsEnumerable());
     }
+
 
     public Task AddBookToUserCollectionAsync(int userId, int bookId, int categoryId1, int? categoryId2 = null)
     {

@@ -8,6 +8,7 @@
         public string Genre { get; set; }
         public string Serie { get; set; }
         public string ImageUrl { get; set; }
+        public int UserId { get; set; }
 
         public BookDTO()
         {

@@ -1,5 +1,11 @@
+using BookApp.Core.DTO;
 using BookApp.Core.Services;
+using BookApp.Unittest.Fake_Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace UnitTests
 {
@@ -28,11 +34,8 @@ namespace UnitTests
         [TestMethod]
         public async Task GetBookTitleByIdAsync_ValidId_ShouldReturnTitle()
         {
-            // Arrange
-            var bookId = 1;
-
             // Act
-            var title = await _bookService.GetBookTitleByIdAsync(bookId);
+            var title = await _bookService.GetBookTitleByIdAsync(1);
 
             // Assert
             Assert.AreEqual("Test Book 1", title);
@@ -41,81 +44,120 @@ namespace UnitTests
         [TestMethod]
         public async Task GetBookTitleByIdAsync_InvalidId_ShouldReturnEmptyString()
         {
-            // Arrange
-            var bookId = 99;
-
             // Act
-            var title = await _bookService.GetBookTitleByIdAsync(bookId);
+            var title = await _bookService.GetBookTitleByIdAsync(99);
 
             // Assert
             Assert.AreEqual(string.Empty, title);
         }
 
         [TestMethod]
-        public async Task GetCategoriesByBookIdAsync_ValidId_ShouldReturnCategories()
+        public async Task GetBookTitleByIdAsync_NegativeId_ShouldThrowArgumentException()
         {
-            // Arrange
-            var bookId = 1;
+            // Act & Assert
+            await Assert.ThrowsExceptionAsync<ArgumentException>(() =>
+                _bookService.GetBookTitleByIdAsync(-1));
+        }
 
+        [TestMethod]
+        public async Task GetCategoriesByBookIdAsync_ValidIds_ShouldReturnCategories()
+        {
             // Act
-            var categories = await _bookService.GetCategoriesByBookIdAsync(bookId);
+            var categories = await _bookService.GetCategoriesByBookIdAsync(1, 1);
 
             // Assert
             Assert.AreEqual(2, categories.Count());
         }
 
         [TestMethod]
+        public async Task GetCategoriesByBookIdAsync_InvalidBookId_ShouldThrowArgumentException()
+        {
+            // Act & Assert
+            await Assert.ThrowsExceptionAsync<ArgumentException>(() =>
+                _bookService.GetCategoriesByBookIdAsync(1, -1));
+        }
+
+        [TestMethod]
         public async Task AddBookToUserCollectionAsync_ValidIds_ShouldNotThrowException()
         {
-            // Arrange
-            var userId = 1;
-            var bookId = 2;
-            var categoryId1 = 1;
-            int? categoryId2 = 2;
-
             // Act & Assert
-            await _bookService.AddBookToUserCollectionAsync(userId, bookId, categoryId1, categoryId2);
+            await _bookService.AddBookToUserCollectionAsync(1, 2, 1, 2);
+        }
+
+        [TestMethod]
+        public async Task AddBookToUserCollectionAsync_InvalidBookId_ShouldThrowArgumentException()
+        {
+            // Act & Assert
+            await Assert.ThrowsExceptionAsync<ArgumentException>(() =>
+                _bookService.AddBookToUserCollectionAsync(1, -1, 1, 2));
+        }
+
+        [TestMethod]
+        public async Task AddBookToUserCollectionAsync_BookAlreadyInCollection_ShouldThrowInvalidOperationException()
+        {
+            // Act & Assert
+            await Assert.ThrowsExceptionAsync<InvalidOperationException>(() =>
+                _bookService.AddBookToUserCollectionAsync(1, 1, 1, 2));
         }
 
         [TestMethod]
         public async Task GetBookByTitleAsync_ValidTitle_ShouldReturnBook()
         {
-            // Arrange
-            var title = "Test Book 1";
-
             // Act
-            var book = await _bookService.GetBookByTitleAsync(title);
+            var book = await _bookService.GetBookByTitleAsync("Test Book 1");
 
             // Assert
             Assert.IsNotNull(book);
-            Assert.AreEqual(title, book.Title);
+            Assert.AreEqual("Test Book 1", book.Title);
+        }
+
+        [TestMethod]
+        public async Task GetBookByTitleAsync_NullTitle_ShouldThrowArgumentException()
+        {
+            // Act & Assert
+            await Assert.ThrowsExceptionAsync<ArgumentException>(() =>
+                _bookService.GetBookByTitleAsync(null));
         }
 
         [TestMethod]
         public async Task DeleteBookByTitleAsync_ValidTitle_ShouldRemoveBook()
         {
             // Arrange
-            var title = "Test Book 1";
-            var userId = 1;
+            string titleToDelete = "Test Book 1";
+            int userId = 1;
 
             // Act
-            await _bookService.DeleteBookByTitleAsync(title, userId);
-            var books = await _bookService.GetAllAsync();
+            await _bookService.DeleteBookByTitleAsync(titleToDelete, userId);
 
             // Assert
+            var books = await _bookService.GetAllAsync();
             Assert.AreEqual(1, books.Count);
+            Assert.IsFalse(books.Any(b => b.Title == titleToDelete));
+        }
+
+        [TestMethod]
+        public async Task DeleteBookByTitleAsync_NullTitle_ShouldThrowArgumentException()
+        {
+            // Act & Assert
+            await Assert.ThrowsExceptionAsync<ArgumentException>(() =>
+                _bookService.DeleteBookByTitleAsync(null, 1));
         }
 
         [TestMethod]
         public async Task DeleteUserBookByBookIdAsync_ValidId_ShouldNotThrowException()
         {
-            // Arrange
-            var bookId = 1;
-            var userId = 1;
-
             // Act & Assert
-            await _bookService.DeleteUserBookByBookIdAsync(bookId, userId);
+            await _bookService.DeleteUserBookByBookIdAsync(1, 1);
         }
+
+        [TestMethod]
+        public async Task DeleteUserBookByBookIdAsync_InvalidBookId_ShouldThrowArgumentException()
+        {
+            // Act & Assert
+            await Assert.ThrowsExceptionAsync<ArgumentException>(() =>
+                _bookService.DeleteUserBookByBookIdAsync(-1, 1));
+        }
+
 
         [TestMethod]
         public async Task GetBooksInLibraryAsync_ShouldReturnBooksInLibrary()
@@ -128,16 +170,30 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public async Task GetBooksByUserIdAsync_ShouldReturnUserBooks()
+        public async Task GetBooksByUserIdAsync_InvalidUserId_ShouldReturnEmptyList()
         {
-            // Arrange
-            var userId = 1;
-
             // Act
-            var books = await _bookService.GetBooksByUserIdAsync(userId);
+            var books = await _bookService.GetBooksByUserIdAsync(-1);
 
             // Assert
-            Assert.AreEqual(1, books.Count);
+            Assert.AreEqual(0, books.Count);
+        }
+        
+        [TestClass]
+        public class BookDTOTest
+        {
+            [TestMethod]
+            public void BookDTO_Constructor_ValidInitialization()
+            {
+                // Arrange & Act
+                var bookDto = new BookDTO(1, "Test Book", "Author", "ImageUrl");
+
+                // Assert
+                Assert.AreEqual(1, bookDto.Id);
+                Assert.AreEqual("Test Book", bookDto.Title);
+                Assert.AreEqual("Author", bookDto.Author);
+                Assert.AreEqual("ImageUrl", bookDto.ImageUrl);
+            }
         }
     }
 }
