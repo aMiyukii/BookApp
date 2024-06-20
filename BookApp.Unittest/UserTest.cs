@@ -1,11 +1,12 @@
 using BookApp.Core.Services;
 using BookApp.Unittest.Fake_Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading.Tasks;
 
 namespace UnitTests
 {
     [TestClass]
-    public class UserServiceTest
+    public class UserTest
     {
         private UserService _userService;
 
@@ -20,8 +21,8 @@ namespace UnitTests
         public async Task LoginAsync_ValidCredentials_ShouldReturnTrue()
         {
             // Arrange
-            string validEmail = "test@example.com";
-            string validPassword = "password";
+            string validEmail = "test1@example.com";
+            string validPassword = "password1";
 
             // Act
             bool result = await _userService.LoginAsync(validEmail, validPassword);
@@ -48,7 +49,7 @@ namespace UnitTests
         public async Task GetUserIdAsync_ExistingEmail_ShouldReturnUserId()
         {
             // Arrange
-            string existingEmail = "test@example.com";
+            string existingEmail = "test1@example.com";
             int expectedUserId = 1;
 
             // Act

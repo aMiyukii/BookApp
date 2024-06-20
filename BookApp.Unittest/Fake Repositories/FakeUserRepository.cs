@@ -1,27 +1,40 @@
 using BookApp.Core.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BookApp.Unittest.Fake_Repositories
 {
     public class FakeUserRepository : IUserRepository
     {
-        private readonly bool _loginResult;
-        private readonly int _userId;
+        private readonly List<FakeUser> _fakeUsers;
 
-        public FakeUserRepository(bool loginResult = true, int userId = 1)
+        public FakeUserRepository()
         {
-            _loginResult = loginResult;
-            _userId = userId;
+            _fakeUsers = new List<FakeUser>
+            {
+                new FakeUser { EmailAddress = "test1@example.com", Password = "password1", UserId = 1 },
+                new FakeUser { EmailAddress = "test2@example.com", Password = "password2", UserId = 2 }
+            };
         }
 
         public Task<bool> LoginAsync(string emailAddress, string password)
         {
-            return Task.FromResult(_loginResult);
+            var user = _fakeUsers.FirstOrDefault(u => u.EmailAddress == emailAddress && u.Password == password);
+            return Task.FromResult(user != null);
         }
 
         public Task<int> GetUserIdByEmailAsync(string emailAddress)
         {
-            return Task.FromResult(_userId);
+            var user = _fakeUsers.FirstOrDefault(u => u.EmailAddress == emailAddress);
+            return Task.FromResult(user?.UserId ?? 0);
+        }
+
+        private class FakeUser
+        {
+            public string EmailAddress { get; set; }
+            public string Password { get; set; }
+            public int UserId { get; set; }
         }
     }
 }

@@ -11,8 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ddb3a06-5db6-4567-a199-9c738edfdec0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/CategoryTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/CategoryTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeCategoryRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeCategoryRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeUserRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +49,7 @@
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/d0ca5a8d20ac50a33d5451e998a5d411a810c8d7/src/Razor/Razor.Runtime/src/Runtime/TagHelpers/TagHelperExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/dff486f2d78d3f932d0f9bfa38043f85e358fb8c/src/libraries/System.Linq/src/System/Linq/Select.SpeedOpt.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b8b10b8247cb413eab5175c26a5956a755a8/8c/6825c058/ITestMethod.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ef3dd66cb7df469480c673010598f1bd11778/0d/a20bf4cf/Assert.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
@@ -204,6 +204,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnitTestsCoverage.Settings">
+    <option name="coveragePercentColumnWidth" value="150" />
+    <option name="sortOrder" value="DESCENDING" />
+    <option name="sortedColumn" value="1" />
+    <option name="symbolColumnWidth" value="152" />
+    <coverage-tree-state>
+      <expand />
+      <select />
+    </coverage-tree-state>
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="Vcs.Log.Tabs.Properties">
