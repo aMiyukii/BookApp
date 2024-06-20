@@ -8,6 +8,7 @@ public class FakeBookRepository : IBookRepository
 {
     private List<BookDTO> _books;
     private List<CategoryDTO> _categories;
+    private List<(int userId, int bookId)> _userBooks;
 
     public FakeBookRepository()
     {
@@ -21,6 +22,12 @@ public class FakeBookRepository : IBookRepository
         {
             new CategoryDTO(1, "Category 1"),
             new CategoryDTO(2, "Category 2")
+        };
+
+        _userBooks = new List<(int userId, int bookId)>
+        {
+            (1, 1),
+            (2, 2)
         };
     }
 
@@ -40,8 +47,9 @@ public class FakeBookRepository : IBookRepository
         return Task.FromResult(_categories.AsEnumerable());
     }
 
-    public Task AddBookToUserCollectionAsync(int bookId, int categoryId1, int? categoryId2 = null)
+    public Task AddBookToUserCollectionAsync(int userId, int bookId, int categoryId1, int? categoryId2 = null)
     {
+        _userBooks.Add((userId, bookId));
         return Task.CompletedTask;
     }
 
@@ -51,13 +59,7 @@ public class FakeBookRepository : IBookRepository
         return Task.FromResult(book);
     }
 
-    public Task<BookDTO> GetBookByIdAsync(int bookId)
-    {
-        var book = _books.FirstOrDefault(b => b.Id == bookId);
-        return Task.FromResult(book);
-    }
-
-    public Task DeleteBookByTitleAsync(string title)
+    public Task DeleteBookByTitleAsync(string title, int userId)
     {
         var book = _books.FirstOrDefault(b => b.Title == title);
         if (book != null)
@@ -67,24 +69,40 @@ public class FakeBookRepository : IBookRepository
         return Task.CompletedTask;
     }
 
-    public Task DeleteUserBookByBookIdAsync(int bookId)
-    {   
+    public Task DeleteUserBookByBookIdAsync(int bookId, int userId)
+    {
+        var userBook = _userBooks.FirstOrDefault(ub => ub.userId == userId && ub.bookId == bookId);
+        if (userBook != default)
+        {
+            _userBooks.Remove(userBook);
+        }
         return Task.CompletedTask;
     }
 
     public Task<List<BookDTO>> GetBooksInLibraryAsync()
     {
-        return Task.FromResult(_books);
+        var booksInLibrary = _userBooks.Select(ub => _books.FirstOrDefault(b => b.Id == ub.bookId)).ToList();
+        return Task.FromResult(booksInLibrary);
     }
 
     public Task SaveCategoryAsync(int userBookId, int categoryId1, int categoryId2)
     {
+        // Not relevant for the FakeRepository implementation for now.
         return Task.CompletedTask;
     }
 
-    public Task<bool> IsBookInUserCollectionAsync(int bookId)
+    public Task<bool> IsBookInUserCollectionAsync(int userId, int bookId)
     {
-        var isInCollection = _books.Any(b => b.Id == bookId);
+        var isInCollection = _userBooks.Any(ub => ub.userId == userId && ub.bookId == bookId);
         return Task.FromResult(isInCollection);
+    }
+
+    public Task<List<BookDTO>> GetBooksByUserIdAsync(int userId)
+    {
+        var booksByUser = _userBooks
+            .Where(ub => ub.userId == userId)
+            .Select(ub => _books.FirstOrDefault(b => b.Id == ub.bookId))
+            .ToList();
+        return Task.FromResult(booksByUser);
     }
 }

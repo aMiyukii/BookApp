@@ -70,12 +70,13 @@ namespace UnitTests
         public async Task AddBookToUserCollectionAsync_ValidIds_ShouldNotThrowException()
         {
             // Arrange
-            var bookId = 1;
+            var userId = 1;
+            var bookId = 2;
             var categoryId1 = 1;
             int? categoryId2 = 2;
 
             // Act & Assert
-            await _bookService.AddBookToUserCollectionAsync(bookId, categoryId1, categoryId2);
+            await _bookService.AddBookToUserCollectionAsync(userId, bookId, categoryId1, categoryId2);
         }
 
         [TestMethod]
@@ -97,9 +98,10 @@ namespace UnitTests
         {
             // Arrange
             var title = "Test Book 1";
+            var userId = 1;
 
             // Act
-            await _bookService.DeleteBookByTitleAsync(title);
+            await _bookService.DeleteBookByTitleAsync(title, userId);
             var books = await _bookService.GetAllAsync();
 
             // Assert
@@ -111,9 +113,10 @@ namespace UnitTests
         {
             // Arrange
             var bookId = 1;
+            var userId = 1;
 
             // Act & Assert
-            await _bookService.DeleteUserBookByBookIdAsync(bookId);
+            await _bookService.DeleteUserBookByBookIdAsync(bookId, userId);
         }
 
         [TestMethod]
@@ -124,6 +127,19 @@ namespace UnitTests
 
             // Assert
             Assert.AreEqual(2, books.Count);
+        }
+
+        [TestMethod]
+        public async Task GetBooksByUserIdAsync_ShouldReturnUserBooks()
+        {
+            // Arrange
+            var userId = 1;
+
+            // Act
+            var books = await _bookService.GetBooksByUserIdAsync(userId);
+
+            // Assert
+            Assert.AreEqual(1, books.Count);
         }
     }
 }
