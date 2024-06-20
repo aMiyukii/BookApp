@@ -11,8 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ddb3a06-5db6-4567-a199-9c738edfdec0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/BookTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/BookTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeBookRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeBookRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/CategoryTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/CategoryTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeCategoryRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeCategoryRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

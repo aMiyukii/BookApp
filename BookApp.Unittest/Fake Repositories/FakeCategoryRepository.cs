@@ -1,21 +1,22 @@
-﻿using BookApp.Core.DTO;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BookApp.Core.DTO;
 using BookApp.Core.Interfaces;
 
 namespace BookApp.Unittest.Fake_Repositories
 {
     public class FakeCategoryRepository : ICategoryRepository
     {
-        private readonly List<CategoryDTO> _categories;
+        private readonly List<CategoryDTO> _categories = new List<CategoryDTO>();
 
         public FakeCategoryRepository()
         {
-            _categories = new List<CategoryDTO>
-            {
-                new CategoryDTO(1, "Fiction", true),
-                new CategoryDTO(2, "Non-Fiction", true),
-                new CategoryDTO(3, "Science Fiction", false),
-                new CategoryDTO(4, "Mystery", false)
-            };
+            _categories.Add(new CategoryDTO(1, "Fiction", true));
+            _categories.Add(new CategoryDTO(2, "Non-Fiction", true));
+            _categories.Add(new CategoryDTO(3, "Science", false));
+            _categories.Add(new CategoryDTO(4, "Fantasy", false));
         }
 
         public Task<List<CategoryDTO>> GetAllCategoriesAsync()
@@ -23,20 +24,32 @@ namespace BookApp.Unittest.Fake_Repositories
             return Task.FromResult(_categories);
         }
 
-        public Task<CategoryDTO> GetCategoryByIdAsync(int id)
-        {
-            return Task.FromResult(_categories.Find(c => c.Id == id));
-        }
-
         public Task AddCategoryAsync(CategoryDTO category)
         {
+            category.Id = _categories.Max(c => c.Id) + 1;
             _categories.Add(category);
             return Task.CompletedTask;
         }
 
+        public Task DeleteCategoryAsync(int id)
+        {
+            var category = _categories.FirstOrDefault(c => c.Id == id);
+            if (category != null)
+            {
+                _categories.Remove(category);
+            }
+            return Task.CompletedTask;
+        }
+
+        public Task<CategoryDTO> GetCategoryByIdAsync(int id)
+        {
+            var category = _categories.FirstOrDefault(c => c.Id == id);
+            return Task.FromResult(category);
+        }
+
         public Task UpdateCategoryAsync(CategoryDTO category)
         {
-            var existingCategory = _categories.Find(c => c.Id == category.Id);
+            var existingCategory = _categories.FirstOrDefault(c => c.Id == category.Id);
             if (existingCategory != null)
             {
                 existingCategory.Name = category.Name;
@@ -45,10 +58,15 @@ namespace BookApp.Unittest.Fake_Repositories
             return Task.CompletedTask;
         }
 
-        public Task DeleteCategoryAsync(int id)
+        public Task SaveCategoryAsync(int userBookId, int categoryId1, int categoryId2)
         {
-            _categories.RemoveAll(c => c.Id == id);
             return Task.CompletedTask;
+        }
+
+        public Task<CategoryDTO> GetCategoryByNameAsync(string name)
+        {
+            var category = _categories.FirstOrDefault(c => c.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            return Task.FromResult(category);
         }
     }
 }
