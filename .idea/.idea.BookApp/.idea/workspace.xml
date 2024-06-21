@@ -11,14 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ddb3a06-5db6-4567-a199-9c738edfdec0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BookApp.Unittest/DTOtest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BookApp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Core/DTO/BookDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Core/DTO/BookDTO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/BookTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/BookTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/CategoryTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/CategoryTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeBookRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeBookRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/Fake Repositories/FakeUserRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BookApp.Unittest/UserTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BookApp.Unittest/UserTest.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +71,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.9147541&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;createaccount&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -207,7 +200,10 @@
       <workItem from="1718697137412" duration="660000" />
       <workItem from="1718808651592" duration="1184000" />
       <workItem from="1718891719330" duration="1222000" />
-      <workItem from="1718914135800" duration="5472000" />
+      <workItem from="1718914135800" duration="5708000" />
+      <workItem from="1718961473661" duration="34000" />
+      <workItem from="1718966878657" duration="745000" />
+      <workItem from="1718969890629" duration="355000" />
     </task>
     <servers />
   </component>
@@ -218,7 +214,7 @@
     <option name="coveragePercentColumnWidth" value="150" />
     <option name="sortOrder" value="ASCENDING" />
     <option name="sortedColumn" value="1" />
-    <option name="symbolColumnWidth" value="232" />
+    <option name="symbolColumnWidth" value="278" />
     <coverage-tree-state>
       <expand />
       <select />

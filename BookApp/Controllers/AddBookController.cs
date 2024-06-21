@@ -65,15 +65,16 @@ namespace BookApp.Controllers
             }
             catch (InvalidOperationException ex)
             {
-                TempData["ErrorMessage"] = ex.Message;                _logger.LogError(ex, "An error occurred while saving the book.");
-                                                                      TempData["ErrorMessage"] = "An error occurred while saving the book.";
-
+                TempData["ErrorMessage"] = ex.Message;
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "An error occurred while saving the book.");
+                TempData["ErrorMessage"] = "An error occurred while saving the book.";
                 return RedirectToAction("Index");
             }
         }
+
     }
 }

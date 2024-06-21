@@ -35,14 +35,15 @@ namespace BookApp.Core.Services
             if (bookId <= 0) throw new ArgumentException("Invalid book ID", nameof(bookId));
             if (categoryId1 <= 0) throw new ArgumentException("The required category is empty");
 
-            bool isInCollection = await _bookRepository.IsBookInUserCollectionAsync(bookId, userId);
+            bool isInCollection = await _bookRepository.IsBookInUserCollectionAsync(userId, bookId);
             if (isInCollection)
             {
-                throw new InvalidOperationException("The book is already added to the library.");
+                throw new InvalidOperationException("The book is already added to the user's library.");
             }
 
             await _bookRepository.AddBookToUserCollectionAsync(userId, bookId, categoryId1, categoryId2);
         }
+
 
         public async Task<BookDTO> GetBookByTitleAsync(string title)
         {
